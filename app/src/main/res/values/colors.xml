@@ -12,5 +12,7 @@
     <color name="bottom_nav_color_2">#a8a39d</color>
     <color name="bottom_nav_color_3">#d8c8b8</color>
     <color name="bottom_nav_color_4">#e2ddd9</color>
+    <color name="in_search_color">#F8F7F6</color>
     <color name="bottom_nav_color_5">#f8f1e9</color>
+    <color name="background_muasam">#DFDBD6</color>
 </resources>
