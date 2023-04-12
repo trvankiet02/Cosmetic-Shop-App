@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Mua sắm"
+        android:icon="@drawable/bottom_nav_home"
+        android:id="@+id/muasam"/>
+    <item android:title="Danh mục"
+        android:icon="@drawable/bottom_nav_danhmuc"
+        android:id="@+id/danhmuc"/>
+    <item android:title="Mới"
+        android:icon="@drawable/bottom_nav_new"
+        android:id="@+id/moi"/>
+    <item android:title="Gals"
+        android:icon="@drawable/bottom_nav_glas"
+        android:id="@+id/gals"/>
+    <item android:title="Tôi"
+        android:icon="@drawable/bottom_nav_person"
+        android:id="@+id/toi"/>
+</menu>
