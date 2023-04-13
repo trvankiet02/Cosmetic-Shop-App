@@ -6,60 +6,84 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import vn.iotstar.cosmeticshopapp.MainActivity;
 import vn.iotstar.cosmeticshopapp.R;
+import vn.iotstar.cosmeticshopapp.adapter.CategorySideBarAdapter;
+import vn.iotstar.cosmeticshopapp.adapter.StyleSideBarAdapter;
+import vn.iotstar.cosmeticshopapp.model.Category;
+import vn.iotstar.cosmeticshopapp.model.Style;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DanhmucFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class DanhmucFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DanhmucFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DanhmucFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DanhmucFragment newInstance(String param1, String param2) {
-        DanhmucFragment fragment = new DanhmucFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+    View view;
+    RecyclerView rvCategory;
+    RecyclerView rvStyle;
+    List<Category> categoryList;
+    List<Style> styleList;
+    CategorySideBarAdapter categorySideBarAdapter;
+    StyleSideBarAdapter styleSideBarAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_danhmuc, container, false);
+        view = inflater.inflate(R.layout.fragment_danhmuc, container, false);
+
+        AnhXa();
+        demoData();
+        setRvCategory();
+        setRvStyle();
+
+        return view;
+
+    }
+    private void setRvCategory(){
+        //nhan mang
+
+        //khoi tao adapter
+        categorySideBarAdapter = new CategorySideBarAdapter(getContext()
+        , categoryList);
+        rvCategory.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
+                RecyclerView.VERTICAL, false);
+        rvCategory.setLayoutManager(layoutManager);
+        rvCategory.setAdapter(categorySideBarAdapter);
+        categorySideBarAdapter.notifyDataSetChanged();
+    }
+    private void setRvStyle(){
+        //nhan mang
+
+        //khoi tao adapter
+        styleSideBarAdapter = new StyleSideBarAdapter(getContext()
+                , styleList);
+        rvStyle.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        rvStyle.setLayoutManager(layoutManager);
+        rvStyle.setAdapter(categorySideBarAdapter);
+        styleSideBarAdapter.notifyDataSetChanged();
+    }
+    private void AnhXa(){
+        rvCategory = (RecyclerView) view.findViewById(R.id.rvCategory);
+        rvStyle = (RecyclerView) view.findViewById(R.id.rvStyle);
+
+    }
+    private void demoData(){
+        categoryList = new ArrayList<>();
+        categoryList.add(new Category(1, "cate 1", "image 1", null, null));
+        categoryList.add(new Category(2, "cate 2", "image 2", null, null));
+        categoryList.add(new Category(3, "cate 3", "image 3", null, null));
+        categoryList.add(new Category(4, "cate 4", "image 4", null, null));
+
+        styleList = new ArrayList<>();
+        styleList.add(new Style(1, "style 1", "image 1", 1, null, null));
+        styleList.add(new Style(2, "style 2", "image 2", 1, null, null));
+        styleList.add(new Style(3, "style 3", "image 3", 2, null, null));
+        styleList.add(new Style(4, "style 4", "image 4", 2, null, null));
+        styleList.add(new Style(5, "style 5", "image 5", 3, null, null));
     }
 }

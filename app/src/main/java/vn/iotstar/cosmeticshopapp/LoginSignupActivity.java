@@ -26,12 +26,12 @@ public class LoginSignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_signup);
 
         AnhXa();
+        setTabLayout();
 
-        tabLayout.setupWithViewPager(viewPager);
-        viewPager.setAdapter(loginSignupAdapter);
 
 
     }
+
     private void AnhXa(){
         //component
         tabLayout = (TabLayout) findViewById(R.id.tlLoginSignup);
@@ -40,5 +40,11 @@ public class LoginSignupActivity extends AppCompatActivity {
         loginSignupAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         loginSignupAdapter.addFragment(new LoginFragment(), "Login");
         loginSignupAdapter.addFragment(new SignupFragment(), "Signup");
+    }
+
+    private void setTabLayout(){
+        tabLayout.setupWithViewPager(viewPager);
+        viewPager.setAdapter(loginSignupAdapter);
+        loginSignupAdapter.notifyDataSetChanged();
     }
 }

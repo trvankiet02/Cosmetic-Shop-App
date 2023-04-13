@@ -5,13 +5,16 @@
     tools:context=".fragment_home.ToiFragment"
     android:background="@color/bottom_nav_color_5">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="@color/white"
-        android:textSize="50sp"
-        android:text="Tôi" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="301dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="382dp"
+        android:text="Login" />
 
 </RelativeLayout>

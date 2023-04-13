@@ -8,7 +8,7 @@
     android:background="@color/background_muasam">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="395dp"
+        android:layout_width="match_parent"
         android:layout_height="725dp"
         android:background="@color/white">
 
@@ -324,12 +324,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="3">
 
                 <LinearLayout
-                    android:layout_width="130dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -360,12 +362,14 @@
                         android:textColor="#2b2b2b"
                         android:layout_marginStart="3dp"
                         android:textSize="11.5dp"
-                        android:text="CHO ĐH TỪ 400.000đ" />
+                        android:text="CHO ĐH TỪ 400.000đ"
+                        android:layout_gravity="center_horizontal"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="130dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -396,12 +400,14 @@
                         android:textColor="#2b2b2b"
                         android:layout_marginStart="3dp"
                         android:textSize="11.5dp"
-                        android:text="CHO ĐH TỪ 1.200.000đ" />
+                        android:text="CHO ĐH TỪ 1.200.000đ"
+                        android:layout_gravity="center_horizontal"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="130dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -432,7 +438,8 @@
                         android:textColor="#2b2b2b"
                         android:layout_marginStart="3dp"
                         android:textSize="11.5dp"
-                        android:text="CHO ĐH TỪ 2.000.000đ" />
+                        android:text="CHO ĐH TỪ 2.000.000đ"
+                        android:layout_gravity="center_horizontal"/>
                 </LinearLayout>
             </LinearLayout>
 
