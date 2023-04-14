@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    />
+
+    <item
+        android:title=""
+        android:icon="@drawable/img_icon_search"
+        android:id="@+id/search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always|collapseActionView"
+        android:orderInCategory="1"/>
+
+    <item
+        android:title=""
+        android:icon="@drawable/heart_24"
+        android:id="@+id/favourite"
+        app:showAsAction="always"
+        android:orderInCategory="3"/>
+
+    <item android:title=""
+        android:icon="@drawable/bag_24"
+        android:id="@+id/cart"
+        app:showAsAction="always"
+        android:orderInCategory="4"/>
+
+
+</menu>

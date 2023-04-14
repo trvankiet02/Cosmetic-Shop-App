@@ -2,10 +2,12 @@ package vn.iotstar.cosmeticshopapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.SearchView;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,10 +32,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         AnhXa();
         viewPager.setAdapter(viewPagerAdapter);
         setBottomNavigationView();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search_layout, menu);
+
+        MenuItem searchIcon = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) searchIcon.getActionView();
+        searchView.setQueryHint("Nhập nội dung tìm kiếm");
+
+        MenuItem favouriteIcon = menu.findItem(R.id.favourite);
+        MenuItem cartIcon = menu.findItem(R.id.cart);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     private void AnhXa(){
         //component
         viewPager = (ViewPager) findViewById(R.id.viewPager);
