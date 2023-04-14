@@ -16,444 +16,53 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:orientation="vertical">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="6">
 
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:weightSum="6">
+                android:layout_height="wrap_content"
+                android:layout_weight="4">
 
-
-                <RelativeLayout
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4">
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/search_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@color/in_search_color"
-                        android:iconifiedByDefault="true"
-                        app:queryHint="Nhập từ khoá đề tìm kiếm">
+                    android:layout_gravity="center"
+                    android:background="@color/in_search_color"
+                    android:iconifiedByDefault="true"
+                    app:queryHint="Nhập từ khoá đề tìm kiếm">
 
 
-                    </androidx.appcompat.widget.SearchView>
-                </RelativeLayout>
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:background="@color/white"
-                    android:src="@drawable/img_icon_favorite"
-                    android:layout_weight="1"/>
-
-                <ImageView
-                    android:layout_width="57dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:src="@drawable/img_icon_bag"
-                    android:paddingRight="5dp"
-                    android:layout_weight="1"/>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/white"
-                android:overScrollMode="always"
-                android:scrollbarSize="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="105dp"
-                        android:layout_height="53dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@color/background_muasam"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/img_icon_sale_tag" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="GIẢM THÊM 15%"
-                            android:textColor="#2b2b2b"
-                            android:textSize="9dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="-3dp"
-                            android:text="ĐƠN HÀNG ĐẦU TIÊN"
-                            android:textColor="#2b2b2b"
-                            android:textSize="6dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="105dp"
-                        android:layout_height="53dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@color/background_muasam"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/img_icon_accept" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="ĐĂNG NHẬP"
-                            android:textColor="#2b2b2b"
-                            android:textSize="9dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="105dp"
-                        android:layout_height="53dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@color/background_muasam"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/img_icon_flash" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="FLASH SALE"
-                            android:textColor="#2b2b2b"
-                            android:textSize="9dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="105dp"
-                        android:layout_height="53dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@color/background_muasam"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/img_icon_cash" />
-
-                        <TextView
-                            android:layout_width="75dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="THANH TOÁN KHI NHẬN HÀNG"
-                            android:textColor="#2b2b2b"
-                            android:textSize="8dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="105dp"
-                        android:layout_height="53dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@color/background_muasam"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/img_icon_transit" />
-
-                        <TextView
-                            android:layout_width="95dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center"
-                            android:text="THÔNG TIN VẬN CHUYỂN"
-                            android:textColor="#2b2b2b"
-                            android:textSize="8dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="105dp"
-                        android:layout_height="53dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@color/background_muasam"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:background="@drawable/img_icon_gift_card" />
-
-                        <TextView
-                            android:layout_width="95dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center"
-                            android:text="THẺ QUÀ TẶNG"
-                            android:textColor="#2b2b2b"
-                            android:textSize="8dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-                </LinearLayout>
-            </HorizontalScrollView>
+                </androidx.appcompat.widget.SearchView>
+            </RelativeLayout>
 
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="match_parent"
-                android:layout_height="160.885dp"
-                android:background="@drawable/img_baner_muasamngay"/>
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:src="@drawable/img_icon_favorite" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="57dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginStart="18dp"
-                            android:src="@drawable/giam" />
-                        <TextView
-                            android:layout_width="42dp"
-                            android:layout_height="26dp"
-                            android:layout_marginStart="5dp"
-                            android:textStyle="bold"
-                            android:textColor="#2b2b2b"
-                            android:textSize="22dp"
-                            android:text="10%" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#2b2b2b"
-                        android:layout_marginStart="3dp"
-                        android:textSize="11.5dp"
-                        android:text="CHO ĐH TỪ 400.000đ"
-                        android:layout_gravity="center_horizontal"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginStart="18dp"
-                            android:src="@drawable/giam" />
-                        <TextView
-                            android:layout_width="42dp"
-                            android:layout_height="26dp"
-                            android:layout_marginStart="5dp"
-                            android:textStyle="bold"
-                            android:textColor="#2b2b2b"
-                            android:textSize="22dp"
-                            android:text="15%" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#2b2b2b"
-                        android:layout_marginStart="3dp"
-                        android:textSize="11.5dp"
-                        android:text="CHO ĐH TỪ 1.200.000đ"
-                        android:layout_gravity="center_horizontal"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginStart="18dp"
-                            android:src="@drawable/giam" />
-                        <TextView
-                            android:layout_width="42dp"
-                            android:layout_height="26dp"
-                            android:layout_marginStart="5dp"
-                            android:textStyle="bold"
-                            android:textColor="#2b2b2b"
-                            android:textSize="22dp"
-                            android:text="20%" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#2b2b2b"
-                        android:layout_marginStart="3dp"
-                        android:textSize="11.5dp"
-                        android:text="CHO ĐH TỪ 2.000.000đ"
-                        android:layout_gravity="center_horizontal"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="195dp"
-                android:layout_height="33.7dp"
-                android:layout_marginHorizontal="110dp"
-                android:layout_marginVertical="10dp"
-                android:background="@color/black"
-                android:gravity="center"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:textSize="15dp"
-                    android:textColor="#fff"
-                    android:text="MÃ GIẢM GIÁ: "/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="18dp"
-                    android:textColor="#fff"
-                    android:text=" VYEAH"/>
-            </LinearLayout>
+            <ImageView
+                android:layout_width="57dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:paddingRight="5dp"
+                android:src="@drawable/img_icon_bag" />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="125dp"
-                    android:textColor="#000"
-                    android:text="Mua theo thể loại"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginStart="40dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12dp"
-                        android:textColor="#000"
-                        android:text="Xem tất cả>"/>
-                    <ImageView
-                        android:layout_width="63dp"
-                        android:layout_height="0.6dp"
-                        android:background="@color/black"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="210dp"
-                android:orientation="vertical"
-                android:background="@color/black">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="2TKShop"
-                    android:textColor="#000"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="5dp"
-                    android:background="@color/black" />
-            </LinearLayout>
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="725dp"
             android:background="@color/white">
 
             <LinearLayout
@@ -464,39 +73,37 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="46.65dp"
-                    android:background="@drawable/imageview_background1"
-                    android:centerColor="@color/red"
                     android:endColor="@color/black"
+                    android:centerColor="@color/red"
                     android:startColor="@color/white"
-                    android:type="linear">
+                    android:type="linear"
+                    android:background="@drawable/imageview_background1">
 
                     <ImageView
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="12dp"
-                        android:background="@drawable/img_icon_shipping" />
-
+                        android:background="@drawable/img_icon_shipping"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="12dp"
-                        android:text="MIỄN PHÍ VẬN CHUYỂN"
                         android:textColor="#ffffffff"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginStart="8dp"
+                        android:textStyle="bold"
                         android:textSize="18dp"
-                        android:textStyle="bold" />
-
+                        android:text="MIỄN PHÍ VẬN CHUYỂN" />
                     <TextView
                         android:layout_width="130dp"
                         android:layout_height="20dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/white"
-                        android:text="  ĐẶT HÀNG TỪ 230K"
                         android:textColor="#2b2b2b"
+                        android:background="@color/white"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="8dp"
+                        android:textStyle="bold"
                         android:textSize="13dp"
-                        android:textStyle="bold" />
+                        android:text="  ĐẶT HÀNG TỪ 230K" />
                 </LinearLayout>
 
                 <HorizontalScrollView
@@ -680,7 +287,7 @@
                     android:id="@+id/imageView3"
                     android:layout_width="match_parent"
                     android:layout_height="160.885dp"
-                    android:background="@drawable/img_baner_muasamngay" />
+                    android:background="@drawable/img_baner_muasamngay"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -691,8 +298,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_weight="1">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -703,36 +310,34 @@
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="20dp"
-                                android:layout_marginStart="18dp"
                                 android:layout_marginTop="6dp"
+                                android:layout_marginStart="18dp"
                                 android:src="@drawable/giam" />
-
                             <TextView
                                 android:layout_width="42dp"
                                 android:layout_height="26dp"
                                 android:layout_marginStart="5dp"
-                                android:text="10%"
+                                android:textStyle="bold"
                                 android:textColor="#2b2b2b"
                                 android:textSize="22dp"
-                                android:textStyle="bold" />
+                                android:text="10%" />
 
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
+                            android:textColor="#2b2b2b"
                             android:layout_marginStart="3dp"
+                            android:textSize="11.5dp"
                             android:text="CHO ĐH TỪ 400.000đ"
-                            android:textColor="#2b2b2b"
-                            android:textSize="11.5dp" />
+                            android:layout_gravity="center_horizontal"/>
                     </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_weight="1">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -743,36 +348,34 @@
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="20dp"
-                                android:layout_marginStart="18dp"
                                 android:layout_marginTop="6dp"
+                                android:layout_marginStart="18dp"
                                 android:src="@drawable/giam" />
-
                             <TextView
                                 android:layout_width="42dp"
                                 android:layout_height="26dp"
                                 android:layout_marginStart="5dp"
-                                android:text="15%"
+                                android:textStyle="bold"
                                 android:textColor="#2b2b2b"
                                 android:textSize="22dp"
-                                android:textStyle="bold" />
+                                android:text="15%" />
 
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
+                            android:textColor="#2b2b2b"
                             android:layout_marginStart="3dp"
+                            android:textSize="11.5dp"
                             android:text="CHO ĐH TỪ 1.200.000đ"
-                            android:textColor="#2b2b2b"
-                            android:textSize="11.5dp" />
+                            android:layout_gravity="center_horizontal"/>
                     </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_weight="1">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -783,70 +386,96 @@
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="20dp"
-                                android:layout_marginStart="18dp"
                                 android:layout_marginTop="6dp"
+                                android:layout_marginStart="18dp"
                                 android:src="@drawable/giam" />
-
                             <TextView
                                 android:layout_width="42dp"
                                 android:layout_height="26dp"
                                 android:layout_marginStart="5dp"
-                                android:text="20%"
+                                android:textStyle="bold"
                                 android:textColor="#2b2b2b"
                                 android:textSize="22dp"
-                                android:textStyle="bold" />
+                                android:text="20%" />
 
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginStart="3dp"
-                            android:text="CHO ĐH TỪ 2.000.000đ"
                             android:textColor="#2b2b2b"
-                            android:textSize="11.5dp" />
+                            android:layout_marginStart="3dp"
+                            android:textSize="11.5dp"
+                            android:text="CHO ĐH TỪ 2.000.000đ"
+                            android:layout_gravity="center_horizontal"/>
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="195dp"
                     android:layout_height="33.7dp"
-                    android:layout_marginHorizontal="100dp"
-                    android:layout_marginVertical="20dp"
+                    android:layout_marginHorizontal="110dp"
+                    android:layout_marginVertical="10dp"
                     android:background="@color/black"
                     android:gravity="center"
                     android:orientation="horizontal">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="MÃ GIẢM GIÁ: "
+                        android:textSize="15dp"
                         android:textColor="#fff"
-                        android:textSize="15dp" />
-
+                        android:text="MÃ GIẢM GIÁ: "/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text=" VYEAH"
-                        android:textColor="#fff"
+                        android:textStyle="bold"
                         android:textSize="18dp"
-                        android:textStyle="bold" />
+                        android:textColor="#fff"
+                        android:text=" VYEAH"/>
                 </LinearLayout>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="33.3dp"
-                    android:orientation="horizontal"></LinearLayout>
+                    android:layout_height="35dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="125dp"
+                        android:textColor="#000"
+                        android:text="Mua theo thể loại"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginStart="40dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12dp"
+                            android:textColor="#000"
+                            android:text="Xem tất cả>"/>
+                        <ImageView
+                            android:layout_width="63dp"
+                            android:layout_height="0.6dp"
+                            android:background="@color/black"/>
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="315dp"
-                    android:orientation="vertical">
+                    android:layout_height="210dp"
+                    android:orientation="vertical"
+                    android:background="@color/black">
 
                     <ScrollView
                         android:layout_width="match_parent"
@@ -858,7 +487,6 @@
                             android:orientation="horizontal" />
 
                     </ScrollView>
-
                     <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="105dp">
@@ -869,7 +497,6 @@
                             android:orientation="horizontal" />
 
                     </ScrollView>
-
                     <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="105dp">
