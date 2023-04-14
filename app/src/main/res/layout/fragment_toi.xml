@@ -206,7 +206,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginTop="10dp"
-                                android:src="@drawable/img_icon_calendar"/>
+                                android:src="@drawable/img_icon_purchase_order"/>
                             <TextView
                                 android:layout_width="80dp"
                                 android:layout_height="wrap_content"
@@ -226,7 +226,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginTop="10dp"
-                                android:src="@drawable/img_icon_calendar"/>
+                                android:src="@drawable/img_icon_processing"/>
                             <TextView
                                 android:layout_width="80dp"
                                 android:layout_height="wrap_content"
@@ -246,7 +246,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginTop="10dp"
-                                android:src="@drawable/img_icon_calendar"/>
+                                android:src="@drawable/img_icon_delivery"/>
                             <TextView
                                 android:layout_width="80dp"
                                 android:layout_height="wrap_content"
@@ -266,7 +266,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginTop="10dp"
-                                android:src="@drawable/img_icon_calendar"/>
+                                android:src="@drawable/img_icon_feedback"/>
                             <TextView
                                 android:layout_width="80dp"
                                 android:layout_height="wrap_content"
@@ -286,7 +286,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginTop="10dp"
-                                android:src="@drawable/img_icon_calendar"/>
+                                android:src="@drawable/img_icon_return"/>
                             <TextView
                                 android:layout_width="80dp"
                                 android:layout_height="wrap_content"
@@ -335,7 +335,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginTop="10dp"
-                                android:src="@drawable/img_icon_calendar"/>
+                                android:src="@drawable/img_icon_customer_service"/>
                             <TextView
                                 android:layout_width="80dp"
                                 android:layout_height="wrap_content"
@@ -355,7 +355,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginTop="10dp"
-                                android:src="@drawable/img_icon_calendar"/>
+                                android:src="@drawable/img_icon_survey"/>
                             <TextView
                                 android:layout_width="80dp"
                                 android:layout_height="wrap_content"
