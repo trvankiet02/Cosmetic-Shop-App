@@ -30,7 +30,7 @@ public class CategorySideBarAdapter extends RecyclerView.Adapter<CategorySideBar
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.category_sidebar_layout, null);
+                .inflate(R.layout.recycler_item_danhmuc, null);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }

@@ -34,7 +34,7 @@ public class StyleSideBarAdapter extends RecyclerView.Adapter<StyleSideBarAdapte
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.category_sidebar_layout, null);
+                .inflate(R.layout.recycler_item_danhmuc_style, null);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
@@ -64,8 +64,8 @@ public class StyleSideBarAdapter extends RecyclerView.Adapter<StyleSideBarAdapte
         public TextView styleName;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            styleName = (TextView) itemView.findViewById(R.id.tvCategoryName);
-            styleImage = (ImageView) itemView.findViewById(R.id.ivStyleImage);
+            styleName = (TextView) itemView.findViewById(R.id.tvStyleName);
+            styleImage = (ImageView) itemView.findViewById(R.id.imgStyleImage);
         }
     }
 }
