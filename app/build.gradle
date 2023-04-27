@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "vn.iotstar.cosmeticshopapp"
-        minSdk 21
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -55,4 +55,8 @@ dependencies {
 
     //imageslider
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
+    //bo tròn ảnh
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //pl.droidsonroids.gif.GifImageView
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.25'
 }

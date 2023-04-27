@@ -17,7 +17,7 @@ import java.util.Map;
 
 import vn.iotstar.cosmeticshopapp.adapter.ViewPagerAdapter;
 import vn.iotstar.cosmeticshopapp.fragment_home.DanhmucFragment;
-import vn.iotstar.cosmeticshopapp.fragment_home.GalsFragment;
+import vn.iotstar.cosmeticshopapp.fragment_home.TinNhanFragment;
 import vn.iotstar.cosmeticshopapp.fragment_home.MoiFragment;
 import vn.iotstar.cosmeticshopapp.fragment_home.MuasamFragment;
 import vn.iotstar.cosmeticshopapp.fragment_home.ToiFragment;
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(new MuasamFragment(), "Mua sắm");
         viewPagerAdapter.addFragment(new DanhmucFragment(), "Danh mục");
         viewPagerAdapter.addFragment(new MoiFragment(), "Mới");
-        viewPagerAdapter.addFragment(new GalsFragment(), "Bộ sưu tập");
+        viewPagerAdapter.addFragment(new TinNhanFragment(), "Bộ sưu tập");
         viewPagerAdapter.addFragment(new ToiFragment(), "Tôi");
         //map menu item
         menuItemMap = new HashMap<>();

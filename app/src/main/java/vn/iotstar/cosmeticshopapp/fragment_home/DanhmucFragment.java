@@ -84,7 +84,7 @@ public class DanhmucFragment extends Fragment {
         categoryList.add(new Category(8, "NHÀ VÀ VẬT NUÔI", "image 4", null, null));
 
         styleList = new ArrayList<>();
-        styleList.add(new Style(1, "Bộ bikini 3 mảnh", "https://res.cloudinary.com/dl0vbutga/image/upload/v1681572523/glpx839wv3bqnbgyhdvi.jpg", 1, null, null));
+        styleList.add(new Style(1, "Bộ bikini 3 mảnh", "https://cf.shopee.vn/file/6f8628c37eafc691a218703500f57fef", 1, null, null));
         styleList.add(new Style(2, "Trang phục đi biển mới", "https://vn-test-11.slatic.net/p/a6b8bbca9dc6afd5637913a4bb8bd3cc.jpg", 1, null, null));
         styleList.add(new Style(3, "một mảnh", "https://vn-test-11.slatic.net/p/f073de69dbf435d63f27251ca00382b8.jpg", 1, null, null));
         styleList.add(new Style(4, "áo bikini", "https://cf.shopee.vn/file/sg-11134201-23020-1ulk4qxxz0mvc5", 1, null, null));

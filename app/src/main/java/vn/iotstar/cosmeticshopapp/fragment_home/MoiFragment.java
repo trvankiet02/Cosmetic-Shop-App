@@ -6,60 +6,67 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import vn.iotstar.cosmeticshopapp.R;
+import vn.iotstar.cosmeticshopapp.adapter.ProductHomeAdapter;
+import vn.iotstar.cosmeticshopapp.model.Category;
+import vn.iotstar.cosmeticshopapp.model.Product;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MoiFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class MoiFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MoiFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MoiFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MoiFragment newInstance(String param1, String param2) {
-        MoiFragment fragment = new MoiFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    View view;
+    RecyclerView rvProduct;
+    ProductHomeAdapter productHomeAdapter;
+    List<Product> products;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_moi, container, false);
+        view =  inflater.inflate(R.layout.fragment_moi, container, false);
+        AnhXa();
+        demoData();
+        setRvProduct();
+        return view;
+    }
+
+    private void AnhXa() {
+        rvProduct = (RecyclerView) view.findViewById(R.id.rvProduct);
+    }
+
+    private void demoData(){
+        products = new ArrayList<>();
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
+    }
+    private void setRvProduct(){
+        productHomeAdapter = new ProductHomeAdapter(getContext(), products);
+        rvProduct.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        rvProduct.setLayoutManager(layoutManager);
+        rvProduct.setAdapter(productHomeAdapter);
+        productHomeAdapter.notifyDataSetChanged();
     }
 }
