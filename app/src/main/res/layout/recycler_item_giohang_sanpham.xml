@@ -55,8 +55,13 @@
                         android:maxLines="1"
                         android:paddingStart="10dp"
                         android:text="DAZY Áo cổ lọ màu trơnDAZY Áo cổ lọ màu trơn"
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         android:textColor="#000"/>
+                    <ImageView
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/img_icon_favorite" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="290dp"

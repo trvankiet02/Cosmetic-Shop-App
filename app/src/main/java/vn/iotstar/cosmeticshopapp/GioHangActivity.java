@@ -60,18 +60,14 @@ public class GioHangActivity extends AppCompatActivity {
         SwipeHelper swipeHelper = new SwipeHelper(this, rvProductGioHang, false) {
             @Override
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
-                Typeface typeface = Typeface.create("sans-serif-condensed", Typeface.BOLD);
+                Typeface typeface = Typeface.create("sans-serif", Typeface.SANS_SERIF.getStyle());
                 // Button Xóa
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
                         "Xóa",
                         null, // icon set to null to remove image
-                        Color.parseColor("#FF0000"), Color.parseColor("#FFFFFF"),
+                        Color.parseColor("#FF0000"),
+                        Color.parseColor("#FFFFFF"),
                         typeface,
-                        24, // font size in sp
-                        0, // left padding in pixels
-                        32, // top padding in pixels
-                        0, // right padding in pixels
-                        0, // bottom padding in pixels
                         new UnderlayButtonClickListener() {
                             @Override
                             public void onClick(int pos) {

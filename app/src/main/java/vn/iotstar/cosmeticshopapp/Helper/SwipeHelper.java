@@ -29,7 +29,7 @@ import java.util.Queue;
 
 public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
 
-    public static final int BUTTON_WIDTH = 200;
+    public static final int BUTTON_WIDTH = 150;
     private RecyclerView recyclerView;
     private List<UnderlayButton> buttons;
     private GestureDetector gestureDetector;
@@ -212,7 +212,7 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
         private RectF clickRegion;
         private UnderlayButtonClickListener clickListener;
 
-        public UnderlayButton(String text, Drawable imageResId, int buttonBackgroundcolor, int textColor, Typeface typeface, int i, int i1, int i2, int i3, int i4, UnderlayButtonClickListener clickListener) {
+        public UnderlayButton(String text, Drawable imageResId, int buttonBackgroundcolor, int textColor, Typeface typeface, UnderlayButtonClickListener clickListener) {
             this.text = text;
             this.imageResId = imageResId;
             this.buttonBackgroundcolor = buttonBackgroundcolor;
@@ -240,7 +240,7 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
                 // Draw Text
 //                p.setColor(Color.BLACK);
                 p.setColor(textColor);
-                p.setTextSize(40);
+                p.setTextSize(50);
                 Rect r = new Rect();
                 float cHeight = rect.height();
                 float cWidth = rect.width();

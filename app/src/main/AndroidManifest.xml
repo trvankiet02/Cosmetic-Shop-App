@@ -26,6 +26,9 @@
             android:name=".GioHangActivity"
             android:exported="false" />
         <activity
+            android:name=".ChiTietSanPhamActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             >
