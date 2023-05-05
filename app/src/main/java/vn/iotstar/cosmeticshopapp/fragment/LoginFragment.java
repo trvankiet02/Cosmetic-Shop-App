@@ -40,24 +40,5 @@ public class LoginFragment extends Fragment {
         btnLogin = (Button) view.findViewById(R.id.btnLogin);
         tvForgotPassword = (TextView) view.findViewById(R.id.tvForgotPassword);
     }
-    private void configEdtEmail(){
-        edtEmail.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (edtEmail.getText().toString().equals("")){
-                    return ;
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-    }
 }

@@ -25,6 +25,8 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
         this.context = context;
         this.array = array;
     }
+
+
     @NonNull
     @Override
     public ProductHomeAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,7 +42,7 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
         holder.ProductName.setText(product.getName());
         holder.ProductPrice.setText(product.getPrice());
         Glide.with(context)
-                .load(product.getImage())
+                .load(product.getProductImages().get(0))
                 .into(holder.ProductImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

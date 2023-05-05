@@ -1,43 +1,57 @@
 package vn.iotstar.cosmeticshopapp.model;
 
-import java.io.Serializable;
+import java.util.List;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-public class Product implements Serializable {
-    private int id;
+
+public class Product {
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
     private String name;
-    private String price;
-    private String image;
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
+    @SerializedName("price")
+    @Expose
+    private Integer price;
+    @SerializedName("promotionalPrice")
+    @Expose
     private Integer promotionalPrice;
+    @SerializedName("description")
+    @Expose
     private String description;
+    @SerializedName("madeOf")
+    @Expose
     private String madeOf;
+    @SerializedName("color")
+    @Expose
     private String color;
+    @SerializedName("madeIn")
+    @Expose
     private String madeIn;
-    private Style style;
-    private Category category;
-    //private Store store;
+    @SerializedName("isSelling")
+    @Expose
     private Boolean isSelling;
+    @SerializedName("createAt")
+    @Expose
+    private String createAt;
+    @SerializedName("updateAt")
+    @Expose
+    private String updateAt;
+    @SerializedName("productImages")
+    @Expose
+    private List<ProductImage> productImages;
+    @SerializedName("productQuantities")
+    @Expose
+    private List<ProductQuantity> productQuantities;
 
-    public Product(int id, String name, String price, String image) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.image = image;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -49,12 +63,92 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Integer getPromotionalPrice() {
+        return promotionalPrice;
+    }
+
+    public void setPromotionalPrice(Integer promotionalPrice) {
+        this.promotionalPrice = promotionalPrice;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getMadeOf() {
+        return madeOf;
+    }
+
+    public void setMadeOf(String madeOf) {
+        this.madeOf = madeOf;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getMadeIn() {
+        return madeIn;
+    }
+
+    public void setMadeIn(String madeIn) {
+        this.madeIn = madeIn;
+    }
+
+    public Boolean getIsSelling() {
+        return isSelling;
+    }
+
+    public void setIsSelling(Boolean isSelling) {
+        this.isSelling = isSelling;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(String updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public List<ProductImage> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(List<ProductImage> productImages) {
+        this.productImages = productImages;
+    }
+
+    public List<ProductQuantity> getProductQuantities() {
+        return productQuantities;
+    }
+
+    public void setProductQuantities(List<ProductQuantity> productQuantities) {
+        this.productQuantities = productQuantities;
     }
 
 }

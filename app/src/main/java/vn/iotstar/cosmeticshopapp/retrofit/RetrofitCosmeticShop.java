@@ -3,7 +3,7 @@ package vn.iotstar.cosmeticshopapp.retrofit;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitSheinShop {
+public class RetrofitCosmeticShop {
     private static Retrofit retrofit;
 
     public static Retrofit getRetrofit(){

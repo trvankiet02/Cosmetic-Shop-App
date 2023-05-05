@@ -1,40 +1,45 @@
 package vn.iotstar.cosmeticshopapp.model;
 
-import java.io.Serializable;
-import java.sql.Time;
-import java.sql.Timestamp;
 
-public class Style implements Serializable {
-    private int id;
-    private String styleName;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+
+public class Style {
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("styleImage")
+    @Expose
     private String styleImage;
-    private int categoryId;
-    private Timestamp createAt;
-    private Timestamp updateAt;
+    @SerializedName("isSelling")
+    @Expose
+    private Boolean isSelling;
+    @SerializedName("createAt")
+    @Expose
+    private String createAt;
+    @SerializedName("updateAt")
+    @Expose
+    private String updateAt;
 
-    public Style(int id, String styleName, String styleImage, int categoryId, Timestamp createAt, Timestamp updateAt) {
-        this.id = id;
-        this.styleName = styleName;
-        this.styleImage = styleImage;
-        this.categoryId = categoryId;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getStyleName() {
-        return styleName;
+    public String getName() {
+        return name;
     }
 
-    public void setStyleName(String styleName) {
-        this.styleName = styleName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStyleImage() {
@@ -45,27 +50,28 @@ public class Style implements Serializable {
         this.styleImage = styleImage;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public Boolean getIsSelling() {
+        return isSelling;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setIsSelling(Boolean isSelling) {
+        this.isSelling = isSelling;
     }
 
-    public Timestamp getCreateAt() {
+    public String getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Timestamp createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
 
-    public Timestamp getUpdateAt() {
+    public String getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(Timestamp updateAt) {
+    public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
     }
+
 }

@@ -18,9 +18,7 @@ import java.util.List;
 
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.adapter.CategoryHomeAdapter;
-import vn.iotstar.cosmeticshopapp.adapter.CategorySideBarAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.ProductHomeAdapter;
-import vn.iotstar.cosmeticshopapp.adapter.StyleSideBarAdapter;
 import vn.iotstar.cosmeticshopapp.model.Category;
 import vn.iotstar.cosmeticshopapp.model.Product;
 
@@ -48,7 +46,6 @@ public class MuasamFragment extends Fragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_muasam, container, false);
         AnhXa();
-        demoData();
         setRvProductDeNghi();
         setRvCategoryHome();
         return view;
@@ -78,36 +75,7 @@ public class MuasamFragment extends Fragment {
         rvCategoryHome = (RecyclerView) view.findViewById(R.id.rcCategory);
 
     }
-    private void demoData(){
-        products = new ArrayList<>();
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
-        products.add(new Product(1,"DAZY Áo cổ lọ màu trơn", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp" ));
 
-        categoryList = new ArrayList<>();
-        categoryList.add(new Category(1, "Áo", "https://res.cloudinary.com/dl0vbutga/image/upload/v1681638010/ytyhnvdwp0xnel15knif.png", null, null));
-        categoryList.add(new Category(2, "Quần", "https://res.cloudinary.com/dl0vbutga/image/upload/v1681638081/fxzbcjdm3xcgpvxctrjw.png", null, null));
-        categoryList.add(new Category(3, "Đồ biển", "https://res.cloudinary.com/dl0vbutga/image/upload/v1681638109/mtu58mltdobdesvtfjm2.png", null, null));
-        categoryList.add(new Category(4, "Giày", "https://res.cloudinary.com/dl0vbutga/image/upload/v1681638134/jfzn0x9of0c5ospubdoo.png", null, null));
-        categoryList.add(new Category(5, "Phụ kiện", "https://res.cloudinary.com/dl0vbutga/image/upload/v1681638162/bkunmpgcyevfcvn6um9g.png", null, null));
-        categoryList.add(new Category(6, "TÚI", "https://res.cloudinary.com/dl0vbutga/image/upload/v1681638428/zgxfuzcyct51bpnqnm8h.png", null, null));
-    }
     private void setRvProductDeNghi(){
         productHomeAdapter = new ProductHomeAdapter(getContext(), products);
         rvProductDeNghi.setHasFixedSize(true);

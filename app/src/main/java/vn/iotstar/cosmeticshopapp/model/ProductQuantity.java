@@ -1,16 +1,21 @@
 package vn.iotstar.cosmeticshopapp.model;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Address {
+
+public class ProductQuantity {
 
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("address")
+    @SerializedName("size")
     @Expose
-    private String address;
+    private String size;
+    @SerializedName("quantity")
+    @Expose
+    private Integer quantity;
     @SerializedName("createAt")
     @Expose
     private String createAt;
@@ -26,12 +31,20 @@ public class Address {
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public String getSize() {
+        return size;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public String getCreateAt() {

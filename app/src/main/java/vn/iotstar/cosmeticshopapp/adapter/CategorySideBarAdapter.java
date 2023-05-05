@@ -25,6 +25,8 @@ public class CategorySideBarAdapter extends RecyclerView.Adapter<CategorySideBar
         this.array = array;
     }
 
+
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

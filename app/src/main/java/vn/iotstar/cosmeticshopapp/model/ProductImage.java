@@ -1,16 +1,17 @@
 package vn.iotstar.cosmeticshopapp.model;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Address {
+public class ProductImage {
 
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("address")
+    @SerializedName("image")
     @Expose
-    private String address;
+    private String image;
     @SerializedName("createAt")
     @Expose
     private String createAt;
@@ -26,12 +27,12 @@ public class Address {
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public String getImage() {
+        return image;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getCreateAt() {
