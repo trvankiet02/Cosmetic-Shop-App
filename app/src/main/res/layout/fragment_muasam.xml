@@ -51,6 +51,7 @@
                 android:src="@drawable/img_icon_favorite" />
 
             <ImageView
+                android:id="@+id/icon_bag"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_weight="1"

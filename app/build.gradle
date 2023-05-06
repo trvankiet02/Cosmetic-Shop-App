@@ -59,4 +59,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //pl.droidsonroids.gif.GifImageView
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.25'
+    //vuốt ngang hiện nút xóa
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    //implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
 }

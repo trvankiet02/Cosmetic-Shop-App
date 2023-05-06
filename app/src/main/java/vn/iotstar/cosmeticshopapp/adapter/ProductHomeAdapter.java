@@ -1,6 +1,7 @@
 package vn.iotstar.cosmeticshopapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import vn.iotstar.cosmeticshopapp.ChiTietSanPhamActivity;
+import vn.iotstar.cosmeticshopapp.GioHangActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.Product;
 
@@ -48,6 +51,8 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Ban dang nhan vao " + product.getName(), Toast.LENGTH_SHORT).show();
+                Intent chitiet = new Intent(context, ChiTietSanPhamActivity.class);
+                context.startActivity(chitiet);
             }
         });
     }

@@ -1,10 +1,12 @@
 package vn.iotstar.cosmeticshopapp.fragment_home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import vn.iotstar.cosmeticshopapp.GioHangActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.adapter.CategoryHomeAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.ProductHomeAdapter;
@@ -39,6 +42,7 @@ public class MuasamFragment extends Fragment {
     RecyclerView rvCategoryHome;
     List<Category> categoryList;
     CategoryHomeAdapter categoryHomeAdapter;
+    ImageView GioHang;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +52,13 @@ public class MuasamFragment extends Fragment {
         AnhXa();
         setRvProductDeNghi();
         setRvCategoryHome();
+        GioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gioHang = new Intent(getActivity(), GioHangActivity.class);
+                startActivity(gioHang);
+            }
+        });
         return view;
 
     }
@@ -73,7 +84,7 @@ public class MuasamFragment extends Fragment {
     private void AnhXa(){
         rvProductDeNghi = (RecyclerView) view.findViewById(R.id.rvProduct2);
         rvCategoryHome = (RecyclerView) view.findViewById(R.id.rcCategory);
-
+        GioHang = (ImageView) view.findViewById(R.id.icon_bag);
     }
 
     private void setRvProductDeNghi(){
