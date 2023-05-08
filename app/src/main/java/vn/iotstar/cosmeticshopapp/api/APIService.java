@@ -9,6 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import vn.iotstar.cosmeticshopapp.model.CategoryAndStyleResponse;
 import vn.iotstar.cosmeticshopapp.model.LoginSignupResponse;
+import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductResponse;
 
 public interface APIService {
@@ -26,5 +27,9 @@ public interface APIService {
 
     @GET("product")
     Call<ProductResponse> getAllProduct();
+
+    @POST("product/getProduct")
+    @FormUrlEncoded
+    Call<ProductDetailResponse> getProductDetail(@Field("id") Integer id);
 }
 

@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.List;
 
@@ -44,10 +45,12 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
     public void onBindViewHolder(@NonNull ProductHomeAdapter.MyViewHolder holder, int position) {
         Product product = array.get(position);
         holder.ProductName.setText(product.getName());
-        String primaryImage = product.getProductImages().get(0).getImage();
-        Glide.with(context)
-                .load(primaryImage)
-                .into(holder.ProductImage);
+        SliderAdapter sliderAdapter = new SliderAdapter(context.getApplicationContext(), product.getProductImages());
+        holder.sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
+        holder.sliderView.setSliderAdapter(sliderAdapter);
+        holder.sliderView.setScrollTimeInSec(3);
+        holder.sliderView.setAutoCycle(false);
+        holder.sliderView.startAutoCycle();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,13 +71,13 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView ProductName, ProductPrice;
-        public ImageView ProductImage;
+        public SliderView sliderView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             ProductPrice = (TextView) itemView.findViewById(R.id.txtPriceProduct);
             ProductName = (TextView) itemView.findViewById(R.id.txtNameProduct);
-            ProductImage = (ImageView) itemView.findViewById(R.id.imgProduct);
+            sliderView = (SliderView) itemView.findViewById(R.id.slider);
         }
     }
 }
