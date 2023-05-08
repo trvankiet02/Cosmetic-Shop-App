@@ -3,6 +3,7 @@ package vn.iotstar.cosmeticshopapp.fragment_home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,6 +53,7 @@ private static final String TAG = MuasamFragment.class.getName();
     ImageView GioHang;
     APIService apiService;
     SharedPrefManager sharedPrefManager;
+    Boolean isLoading = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,7 +102,7 @@ private static final String TAG = MuasamFragment.class.getName();
     }
 
     private void setRvProductDeNghi(){
-        apiService.getRandomProduct(5).enqueue(new Callback<ProductResponse>() {
+        apiService.getRandomProduct(4).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()){
