@@ -99,7 +99,7 @@ private static final String TAG = MuasamFragment.class.getName();
     }
 
     private void setRvProductDeNghi(){
-        apiService.getRandomProduct(10).enqueue(new Callback<ProductResponse>() {
+        apiService.getRandomProduct(5).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()){
@@ -108,10 +108,10 @@ private static final String TAG = MuasamFragment.class.getName();
                         Log.e(TAG, "onResponse: " + "NULL" );
                     }
                     productHomeAdapter = new ProductHomeAdapter(getContext(), products);
-                    rvFlashSale.setHasFixedSize(true);
-                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, false);
-                    rvFlashSale.setLayoutManager(layoutManager);
-                    rvFlashSale.setAdapter(productHomeAdapter);
+                    rvProductDeNghi.setHasFixedSize(true);
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
+                    rvProductDeNghi.setLayoutManager(layoutManager);
+                    rvProductDeNghi.setAdapter(productHomeAdapter);
                     productHomeAdapter.notifyDataSetChanged();
                 } else {
                     Log.e(TAG, "onResponse: " + response.message());

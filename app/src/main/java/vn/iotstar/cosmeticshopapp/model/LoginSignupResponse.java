@@ -4,7 +4,9 @@ package vn.iotstar.cosmeticshopapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginSignupResponse {
+import java.io.Serializable;
+
+public class LoginSignupResponse implements Serializable {
 
     @SerializedName("status")
     @Expose

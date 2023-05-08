@@ -1,4 +1,6 @@
 package vn.iotstar.cosmeticshopapp.model;
 
-public class Feedback {
+import java.io.Serializable;
+
+public class Feedback implements Serializable {
 }

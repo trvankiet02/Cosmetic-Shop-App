@@ -37,8 +37,8 @@ public class LoginSignupActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.vpLoginSignup);
         //adapter
         loginSignupAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        loginSignupAdapter.addFragment(new LoginFragment(), "Login");
-        loginSignupAdapter.addFragment(new SignupFragment(), "Signup");
+        loginSignupAdapter.addFragment(new LoginFragment(), "Đăng nhập");
+        loginSignupAdapter.addFragment(new SignupFragment(), "Đăng ký");
     }
 
     private void setTabLayout(){

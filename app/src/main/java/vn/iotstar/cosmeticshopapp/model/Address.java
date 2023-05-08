@@ -3,7 +3,9 @@ package vn.iotstar.cosmeticshopapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
 
     @SerializedName("id")
     @Expose
