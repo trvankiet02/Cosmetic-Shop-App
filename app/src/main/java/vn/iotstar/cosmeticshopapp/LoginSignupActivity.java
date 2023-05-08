@@ -4,15 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 
 import vn.iotstar.cosmeticshopapp.adapter.ViewPagerAdapter;
-import vn.iotstar.cosmeticshopapp.fragment.LoginFragment;
-import vn.iotstar.cosmeticshopapp.fragment.SignupFragment;
+import vn.iotstar.cosmeticshopapp.fragment_login_signup.LoginFragment;
+import vn.iotstar.cosmeticshopapp.fragment_login_signup.SignupFragment;
 
 public class LoginSignupActivity extends AppCompatActivity {
     TabLayout tabLayout;

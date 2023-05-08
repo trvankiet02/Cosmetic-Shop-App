@@ -2,6 +2,7 @@ package vn.iotstar.cosmeticshopapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,15 +44,18 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
     public void onBindViewHolder(@NonNull ProductHomeAdapter.MyViewHolder holder, int position) {
         Product product = array.get(position);
         holder.ProductName.setText(product.getName());
-        holder.ProductPrice.setText(product.getPrice());
+        String primaryImage = product.getProductImages().get(0).getImage();
         Glide.with(context)
-                .load(product.getProductImages().get(0))
+                .load(primaryImage)
                 .into(holder.ProductImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Ban dang nhan vao " + product.getName(), Toast.LENGTH_SHORT).show();
                 Intent chitiet = new Intent(context, ChiTietSanPhamActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("product", product);
+                chitiet.putExtras(bundle);
                 context.startActivity(chitiet);
             }
         });

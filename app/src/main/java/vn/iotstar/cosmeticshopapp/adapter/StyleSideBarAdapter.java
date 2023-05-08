@@ -27,6 +27,10 @@ public class StyleSideBarAdapter extends RecyclerView.Adapter<StyleSideBarAdapte
         this.context = context;
         this.array = array;
     }
+    public void updateStyles(List<Style> styles) {
+        array = styles;
+        notifyDataSetChanged();
+    }
 
 
     @NonNull

@@ -26,7 +26,6 @@ public class GioHangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_giohang);
         AnhXa();
-        demoData();
         setRvProductGioHang();
         btnXoa();
     }
@@ -44,18 +43,7 @@ public class GioHangActivity extends AppCompatActivity {
         rvProductGioHang = (RecyclerView) findViewById(R.id.rvProduct_gioHang);
 
     }
-    private void demoData() {
-        products = new ArrayList<>();
-        products.add(new Product(1, "DAZY Áo cổ lọ màu trơn1", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp"));
-        products.add(new Product(2, "DAZY Áo cổ lọ màu trơn2", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp"));
-        products.add(new Product(3, "DAZY Áo cổ lọ màu trơn3", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp"));
-        products.add(new Product(4, "DAZY Áo cổ lọ màu trơn4", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp"));
-        products.add(new Product(5, "DAZY Áo cổ lọ màu trơn5", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp"));
-        products.add(new Product(6, "DAZY Áo cổ lọ màu trơn6", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp"));
-        products.add(new Product(7, "DAZY Áo cổ lọ màu trơn7", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp"));
-        products.add(new Product(8, "DAZY Áo cổ lọ màu trơn8", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp"));
-        products.add(new Product(9, "DAZY Áo cổ lọ màu trơn9", "148000", "https://img.ltwebstatic.com/images3_pi/2023/02/01/167523143976e639d6203da40f200da8bba360ed66.webp"));
-    }
+
     private void btnXoa(){
         SwipeHelper swipeHelper = new SwipeHelper(this, rvProductGioHang, false) {
             @Override

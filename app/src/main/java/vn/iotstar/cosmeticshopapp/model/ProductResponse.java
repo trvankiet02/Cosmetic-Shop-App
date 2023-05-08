@@ -13,9 +13,9 @@ public class ProductResponse {
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("product")
+    @SerializedName("body")
     @Expose
-    private List<Product> product;
+    private List<Product> body;
 
     public Boolean getStatus() {
         return status;
@@ -33,12 +33,12 @@ public class ProductResponse {
         this.message = message;
     }
 
-    public List<Product> getProduct() {
-        return product;
+    public List<Product> getBody() {
+        return body;
     }
 
-    public void setProduct(List<Product> product) {
-        this.product = product;
+    public void setBody(List<Product> body) {
+        this.body = body;
     }
 
 }

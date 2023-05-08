@@ -1,4 +1,4 @@
-package vn.iotstar.cosmeticshopapp.fragment;
+package vn.iotstar.cosmeticshopapp.fragment_login_signup;
 
 import android.os.Bundle;
 

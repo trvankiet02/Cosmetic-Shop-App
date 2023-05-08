@@ -1,6 +1,7 @@
 package vn.iotstar.cosmeticshopapp.model;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -14,9 +15,9 @@ public class User {
     @SerializedName("email")
     @Expose
     private String email;
-    @SerializedName("password")
+    /*@SerializedName("password")
     @Expose
-    private String password;
+    private String password;*/
     @SerializedName("firstName")
     @Expose
     private String firstName;
@@ -31,7 +32,7 @@ public class User {
     private String profileImage;
     @SerializedName("role")
     @Expose
-    private Boolean role;
+    private Integer role;
     @SerializedName("createAt")
     @Expose
     private String createAt;
@@ -64,13 +65,13 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
+    /*public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
+    }*/
 
     public String getFirstName() {
         return firstName;
@@ -104,11 +105,11 @@ public class User {
         this.profileImage = profileImage;
     }
 
-    public Boolean getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(Boolean role) {
+    public void setRole(Integer role) {
         this.role = role;
     }
 
@@ -152,4 +153,21 @@ public class User {
         this.ewallet = ewallet;
     }
 
+    public User(Integer id, String email, String firstName,
+                String lastName, String phone, String profileImage,
+                Integer role, String createAt, String updateAt,
+                String lastLogin, List<Address> addresses, Integer ewallet) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.profileImage = profileImage;
+        this.role = role;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+        this.lastLogin = lastLogin;
+        this.addresses = addresses;
+        this.ewallet = ewallet;
+    }
 }

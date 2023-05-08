@@ -26,17 +26,19 @@
             android:layout_height="247dp"
             android:background="@color/bottom_nav_color_3"/>
         <LinearLayout
+            android:padding="10px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/txtPriceProduct"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
-                android:textSize="18dp"
+                android:text="427.000"
                 android:textColor="#000"
-                android:text="427.000"/>
+                android:textSize="18dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textSize="13dp"
-            android:text="Quần jean nữ"/>
+            android:text="Quần jean nữ"
+            android:padding="5px"/>
     </LinearLayout>
     <ImageView
         android:layout_width="5dp"

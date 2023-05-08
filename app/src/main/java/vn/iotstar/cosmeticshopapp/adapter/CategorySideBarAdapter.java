@@ -19,12 +19,18 @@ public class CategorySideBarAdapter extends RecyclerView.Adapter<CategorySideBar
 
     Context context;
     List<Category> array;
+    public interface OnItemClickListener {
+        void onItemClick(Category category);
+    }
+    private OnItemClickListener listener;
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public CategorySideBarAdapter(Context context, List<Category> array) {
         this.context = context;
         this.array = array;
     }
-
 
 
     @NonNull
@@ -44,6 +50,9 @@ public class CategorySideBarAdapter extends RecyclerView.Adapter<CategorySideBar
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Ban dang nhan vao " + category.getName(), Toast.LENGTH_SHORT).show();
+                if (listener != null) {
+                    listener.onItemClick(category);
+                }
             }
         });
     }
