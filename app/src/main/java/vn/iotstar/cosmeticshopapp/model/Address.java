@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Address implements Serializable {
+public class Address implements Serializable
+{
 
     @SerializedName("id")
     @Expose
@@ -19,6 +20,7 @@ public class Address implements Serializable {
     @SerializedName("updateAt")
     @Expose
     private String updateAt;
+    private final static long serialVersionUID = -1898234438330355848L;
 
     public Integer getId() {
         return id;

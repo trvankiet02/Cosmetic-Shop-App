@@ -1,6 +1,9 @@
 package vn.iotstar.cosmeticshopapp.adapter;
 
+import static java.lang.Float.parseFloat;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,22 +17,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.Feedback;
 import vn.iotstar.cosmeticshopapp.model.Product;
+import vn.iotstar.cosmeticshopapp.model.Review;
+import vn.iotstar.cosmeticshopapp.model.ReviewImage;
 
 public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyViewHolder>{
     Context context;
-    List<Feedback> array;
+    List<Review> array;
 
-    public FeedbackAdapter(Context context, List<Feedback> array) {
+    public FeedbackAdapter(Context context, List<Review> array) {
         this.context = context;
         this.array = array;
     }
-    public  List<Feedback> getModelList() {
+    public  List<Review> getModelList() {
         return array;
     }
 
@@ -44,7 +51,31 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull FeedbackAdapter.MyViewHolder holder, int position) {
-
+    Review review = array.get(position);
+        holder.tvNameUser.setText(review.getUser().getFirstName() + " " + review.getUser().getLastName());
+        try {
+            holder.tvDateFeedback.setText(holder.outputFormat.format(holder.inputFormat.parse(review.getCreateAt())));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        holder.tvColorProduct.setText("Thieu");
+        holder.tvSizeProduct.setText("Thieu");
+        holder.tvFeedback.setText(review.getContent());
+        holder.tvLike.setText("Thieu");
+        holder.rate.setRating(parseFloat(String.valueOf(review.getRating())));
+        List<String> listImages = new ArrayList<>();
+        for ( ReviewImage image : review.getReviewImages()) {
+            listImages.add(image.getImage());
+        }
+        Glide.with(context)
+                .load(listImages.get(0))
+                .into(holder.imgFeedback1);
+        /*Glide.with(context)
+                .load(review.getReviewImages().get(1))
+                .into(holder.imgFeedback2);
+        Glide.with(context)
+                .load(review.getReviewImages().get(2))
+                .into(holder.imgFeedback3);*/
     }
 
     @Override
@@ -56,7 +87,8 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
         TextView tvNameUser, tvDateFeedback, tvColorProduct, tvSizeProduct, tvFeedback, tvLike;
         ImageView imgFeedback1, imgFeedback2, imgFeedback3, imgLike;
         RatingBar rate;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
         boolean isLiked = false;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

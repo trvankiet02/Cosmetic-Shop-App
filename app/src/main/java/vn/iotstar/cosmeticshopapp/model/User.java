@@ -8,7 +8,8 @@ import com.google.gson.annotations.SerializedName;
 
 import vn.iotstar.cosmeticshopapp.model.Address;
 
-public class User implements Serializable {
+public class User implements Serializable
+{
 
     @SerializedName("id")
     @Expose
@@ -16,9 +17,6 @@ public class User implements Serializable {
     @SerializedName("email")
     @Expose
     private String email;
-    /*@SerializedName("password")
-    @Expose
-    private String password;*/
     @SerializedName("firstName")
     @Expose
     private String firstName;
@@ -49,6 +47,7 @@ public class User implements Serializable {
     @SerializedName("ewallet")
     @Expose
     private Integer ewallet;
+    private final static long serialVersionUID = 1997451940403294055L;
 
     public Integer getId() {
         return id;
@@ -65,14 +64,6 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    /*public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }*/
 
     public String getFirstName() {
         return firstName;

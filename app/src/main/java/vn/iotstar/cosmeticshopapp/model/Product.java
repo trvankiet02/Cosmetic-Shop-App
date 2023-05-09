@@ -5,8 +5,8 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
-public class Product implements Serializable {
+public class Product implements Serializable
+{
 
     @SerializedName("id")
     @Expose
@@ -40,13 +40,14 @@ public class Product implements Serializable {
     private String createAt;
     @SerializedName("updateAt")
     @Expose
-    private String updateAt;
+    private Object updateAt;
     @SerializedName("productImages")
     @Expose
     private List<ProductImage> productImages;
     @SerializedName("productQuantities")
     @Expose
     private List<ProductQuantity> productQuantities;
+    private final static long serialVersionUID = -7755904172316078232L;
 
     public Integer getId() {
         return id;
@@ -128,11 +129,11 @@ public class Product implements Serializable {
         this.createAt = createAt;
     }
 
-    public String getUpdateAt() {
+    public Object getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(String updateAt) {
+    public void setUpdateAt(Object updateAt) {
         this.updateAt = updateAt;
     }
 

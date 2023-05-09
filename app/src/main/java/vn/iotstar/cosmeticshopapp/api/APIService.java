@@ -8,9 +8,12 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import vn.iotstar.cosmeticshopapp.model.CategoryAndStyleResponse;
+import vn.iotstar.cosmeticshopapp.model.FollowProductResponse;
 import vn.iotstar.cosmeticshopapp.model.LoginSignupResponse;
+import vn.iotstar.cosmeticshopapp.model.OrderResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductResponse;
+import vn.iotstar.cosmeticshopapp.model.ReviewResponse;
 
 public interface APIService {
 
@@ -31,5 +34,20 @@ public interface APIService {
     @POST("product/getProduct")
     @FormUrlEncoded
     Call<ProductDetailResponse> getProductDetail(@Field("id") Integer id);
+
+    @POST("review/getReview")
+    @FormUrlEncoded
+    Call<ReviewResponse> getReview(@Field("productId") Integer productId);
+
+    @GET("order")
+    Call<OrderResponse> getAllOrder();
+
+    @POST("userFollowProduct/getFollowProduct")
+    @FormUrlEncoded
+    Call<FollowProductResponse> getFollowProduct(@Field("userId") Integer userId);
+
+    @POST("userFollowProduct/followOrUnfollow")
+    @FormUrlEncoded
+    Call<FollowProductResponse> followOrUnfollow(@Field("userId") Integer userId, @Field("productId") Integer productId);
 }
 
