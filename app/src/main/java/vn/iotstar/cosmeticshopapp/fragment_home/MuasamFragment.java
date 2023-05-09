@@ -12,10 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -112,7 +115,8 @@ private static final String TAG = MuasamFragment.class.getName();
                     }
                     productHomeAdapter = new ProductHomeAdapter(getContext(), products);
                     rvProductDeNghi.setHasFixedSize(true);
-                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
+                    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL);
+
                     rvProductDeNghi.setLayoutManager(layoutManager);
                     rvProductDeNghi.setAdapter(productHomeAdapter);
                     productHomeAdapter.notifyDataSetChanged();

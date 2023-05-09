@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ChiTietSanPhamActivity">
 
+    <ImageView
+        android:id="@+id/viewAnimation"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:visibility="invisible"
+        tools:ignore="MissingConstraints"
+        android:src="@drawable/bag_24"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -72,7 +79,7 @@
                 <com.smarteist.autoimageslider.SliderView
                     android:id="@+id/slider"
                     android:layout_width="match_parent"
-                    android:layout_height="560dp"
+                    android:layout_height="530dp"
                     app:sliderAnimationDuration="600"
                     app:sliderAutoCycleDirection="back_and_forth"
                     app:sliderIndicatorAnimationDuration="600"
@@ -664,6 +671,7 @@
             android:background="@drawable/img_icon_favorite" />
 
         <TextView
+            android:id="@+id/addToCart"
             android:layout_width="330dp"
             android:layout_height="40dp"
             android:background="@color/black"

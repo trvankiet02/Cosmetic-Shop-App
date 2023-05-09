@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
@@ -33,8 +35,10 @@ import vn.iotstar.cosmeticshopapp.model.Feedback;
 import vn.iotstar.cosmeticshopapp.model.Product;
 import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
+import vn.iotstar.cosmeticshopapp.util.AnimationUtil;
 
 public class ChiTietSanPhamActivity extends AppCompatActivity {
+    ImageView viewAnimation;
     Spinner sizeSpinner;
     TextView txtSize;
     RecyclerView rvProducGoiY;
@@ -48,6 +52,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     FeedbackAdapter feedbackAdapter;
     SliderView sliderView;
     SliderAdapter sliderAdapter;
+    TextView addToCart;
+    ImageView img_icon_bag;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +67,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         //set2Feedback();
         getProductId();
         getProductDetail();
+        addToCart();
         GioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,6 +94,31 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         GioHang = (ImageView) findViewById(R.id.img_icon_bag);
         apiService = RetrofitCosmeticShop.getRetrofit().create(APIService.class);
         sliderView = findViewById(R.id.slider);
+        viewAnimation = findViewById(R.id.viewAnimation);
+        addToCart = findViewById(R.id.addToCart);
+        img_icon_bag = findViewById(R.id.img_icon_bag);
+    }
+    private void addToCart(){
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AnimationUtil.translateAnimation(viewAnimation, addToCart, img_icon_bag, new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+            }
+        });
     }
     private void getProductDetail(){
         apiService.getProductDetail(product.getId()).enqueue(new Callback<ProductDetailResponse>() {
@@ -93,11 +126,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             public void onResponse(Call<ProductDetailResponse> call, Response<ProductDetailResponse> response) {
                 sliderAdapter = new SliderAdapter(getApplicationContext(), response.body().getBody().getProductImages());
                 sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
+                Glide.with(getApplicationContext()).load(response.body().getBody().getProductImages().get(0).getImage()).into(viewAnimation);
                 sliderView.setSliderAdapter(sliderAdapter);
                 sliderView.setScrollTimeInSec(3);
                 sliderView.setAutoCycle(true);
                 sliderView.startAutoCycle();
-                Toast.makeText(ChiTietSanPhamActivity.this, "okeeeeeeee", Toast.LENGTH_SHORT).show();
             }
 
             @Override
