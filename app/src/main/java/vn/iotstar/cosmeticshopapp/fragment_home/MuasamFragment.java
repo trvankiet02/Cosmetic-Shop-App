@@ -30,6 +30,7 @@ import retrofit2.Response;
 import vn.iotstar.cosmeticshopapp.GioHangActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.adapter.CategoryHomeAdapter;
+import vn.iotstar.cosmeticshopapp.adapter.ProductFlashSaleAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.ProductHomeAdapter;
 import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.Category;
@@ -41,7 +42,7 @@ import vn.iotstar.cosmeticshopapp.sharedPref.SharedPrefManager;
 
 
 public class MuasamFragment extends Fragment {
-private static final String TAG = MuasamFragment.class.getName();
+    private static final String TAG = MuasamFragment.class.getName();
     private TextView txtTimer;
 
     CountDownTimer Timer;
@@ -57,6 +58,8 @@ private static final String TAG = MuasamFragment.class.getName();
     APIService apiService;
     SharedPrefManager sharedPrefManager;
     Boolean isLoading = false;
+    ProductFlashSaleAdapter productFlashSaleAdapter;
+    List<Product> productFlashSaleList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +69,8 @@ private static final String TAG = MuasamFragment.class.getName();
         AnhXa();
         setRvProductDeNghi();
         setRvCategoryHome();
+        setRvProductSale();
+
         GioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +81,9 @@ private static final String TAG = MuasamFragment.class.getName();
         return view;
 
     }
+
+
+
     @Override
     public void onStart() {
         super.onStart();
@@ -150,6 +158,39 @@ private static final String TAG = MuasamFragment.class.getName();
             @Override
             public void onFailure(Call<CategoryAndStyleResponse> call, Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+    }
+    private void setRvProductSale() {
+        apiService.getRandomProduct(5).enqueue(new Callback<ProductResponse>() {
+            @Override
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                if  (response.isSuccessful()) {
+                    List<Product> productFlashSaleList1 = response.body().getBody();
+                    for (Product product : productFlashSaleList1) {
+                        if(product.getPrice() > product.getPromotionalPrice())
+                        {
+                            productFlashSaleList.add(product);
+                        }
+                    }
+                    if (productFlashSaleList == null) {
+                        Log.e(TAG, "onResponse: " + "NULLSale" );
+                    } else {
+                        Log.e(TAG, "onResponse: " + "CoSale" );
+                        productFlashSaleAdapter = new ProductFlashSaleAdapter(getContext(), productFlashSaleList);
+                        rvFlashSale.setHasFixedSize(true);
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, false);
+                        rvFlashSale.setLayoutManager(layoutManager);
+                        rvFlashSale.setAdapter(productFlashSaleAdapter);
+                        productFlashSaleAdapter.notifyDataSetChanged();
+                    }
+                }else {
+                    Log.e(TAG, "onResponse: " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
+
             }
         });
     }
