@@ -34,6 +34,7 @@ import com.smarteist.autoimageslider.SliderView;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -47,6 +48,7 @@ import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.Feedback;
 import vn.iotstar.cosmeticshopapp.model.Product;
 import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
+import vn.iotstar.cosmeticshopapp.model.ProductQuantity;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.util.AnimationUtil;
 
@@ -56,7 +58,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     SearchView searchView;
     ImageView GioHang, imgFavorite;
     LinearLayout lnXemThem;
-    TextView txtSize, tv_name_product, tvPriceSale, tvPrice, tvPrice_d, tv_rate_sanpham_tren, tvAddress, tv_rate_sanpham_duoi, tvXemTatCa;
+    TextView txtSize, tv_name_product, tvPriceSale, tvPrice, tvPrice_d, txtsoluong, tv_rate_sanpham_tren, tvAddress, tv_rate_sanpham_duoi, tvXemTatCa;
     TextView tv_rate_num, tv_themVaoGio;
     RatingBar rate_sanpham_tren, rate_sanpham_duoi;
     ProgressBar progressBar_nho, progressBar_vua, progressBar_lon;
@@ -115,6 +117,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         tv_name_product = (TextView) findViewById(R.id.tv_name_product);
         tvPrice = (TextView) findViewById(R.id.tv_price);
         tvPrice_d = (TextView) findViewById(R.id.tv_d);
+        txtsoluong = (TextView) findViewById(R.id.txtsoluong);
 //        tv_rate_sanpham_tren = (TextView) findViewById(R.id.tv_rating);
 //        tvAddress = (TextView) findViewById(R.id.tv_address);
 //        tv_rate_sanpham_duoi = (TextView) findViewById(R.id.tv_rate1);
@@ -204,6 +207,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 String formattedNumber = formatter.format(promotionalPrice);
                 tvPriceSale.setText(formattedNumber);
                 tv_name_product.setText(response.body().getBody().getName());
+
+                SetSpinner(response.body().getBody());
+
             }
 
             @Override
@@ -214,10 +220,24 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
 
 
-    private void SetSpinner() {
-        String[] sizes = {"S", "M", "L", "XL", "XXL"};
+    private void SetSpinner(Product product) {
+        /*String[] sizes = new String[0];
+        String[] soluong = new String[10];
+        for(int i = 0; i < product.getProductQuantities().size(); i++){
+            sizes = Arrays.copyOf(sizes, sizes.length + 1);
+            sizes[sizes.length - 1] = product.getProductQuantities().get(i).getSize().toString();
 
-        ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sizes);
+            soluong = Arrays.copyOf(soluong, soluong.length + 1);
+            soluong[soluong.length - 1] = product.getProductQuantities().get(i).getQuantity().toString();
+        }*/
+        List<String> sizes = new ArrayList<>();
+        List<Integer> soluong = new ArrayList<>();
+        for (ProductQuantity productQuantity: product.getProductQuantities()) {
+            sizes.add(productQuantity.getSize().toString());
+            soluong.add(productQuantity.getQuantity());
+        }
+
+        ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(ChiTietSanPhamActivity.this, android.R.layout.simple_spinner_dropdown_item, sizes);
 
         sizeSpinner.setAdapter(sizeAdapter);
         sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -225,6 +245,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedOption = parent.getItemAtPosition(position).toString();
                 txtSize.setText(selectedOption);
+                txtsoluong.setText(soluong.get(position).toString());
             }
 
             @Override
