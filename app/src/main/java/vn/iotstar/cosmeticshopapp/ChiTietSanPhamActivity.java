@@ -218,7 +218,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                                 isLiked = true;
                             }
                         }
-
                         @Override
                         public void onFailure(Call<FollowProductResponse> call, Throwable t) {
                             progressDialog.dismiss();
