@@ -312,15 +312,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
 
     private void SetSpinner(Product product) {
-        /*String[] sizes = new String[0];
-        String[] soluong = new String[10];
-        for(int i = 0; i < product.getProductQuantities().size(); i++){
-            sizes = Arrays.copyOf(sizes, sizes.length + 1);
-            sizes[sizes.length - 1] = product.getProductQuantities().get(i).getSize().toString();
-
-            soluong = Arrays.copyOf(soluong, soluong.length + 1);
-            soluong[soluong.length - 1] = product.getProductQuantities().get(i).getQuantity().toString();
-        }*/
         List<String> sizes = new ArrayList<>();
         List<Integer> soluong = new ArrayList<>();
         for (ProductQuantity productQuantity: product.getProductQuantities()) {

@@ -23,6 +23,8 @@ public interface APIService {
 
     @GET("category")
     Call<CategoryAndStyleResponse> getCategory();
+    @GET("style")
+    Call<CategoryAndStyleResponse> getStyle();
 
     @POST("product/getRandomProduct")
     @FormUrlEncoded
