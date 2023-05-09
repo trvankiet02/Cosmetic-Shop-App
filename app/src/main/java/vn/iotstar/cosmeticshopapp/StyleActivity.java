@@ -89,7 +89,6 @@ public class StyleActivity extends AppCompatActivity {
                     Log.e("TAG", "onResponse: " + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
 
