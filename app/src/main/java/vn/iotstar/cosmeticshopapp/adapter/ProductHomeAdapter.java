@@ -81,7 +81,7 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         Product product = array.get(position);
         holder.ProductName.setText(product.getName());
         holder.ProductPrice.setText(String.valueOf(product.getPrice()));
-        SliderAdapter sliderAdapter = new SliderAdapter(context.getApplicationContext(), product.getProductImages());
+        SliderAdapter sliderAdapter = new SliderAdapter(context.getApplicationContext(), product.getProductImages(), 1);
         holder.sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
         holder.sliderView.setSliderAdapter(sliderAdapter);
 

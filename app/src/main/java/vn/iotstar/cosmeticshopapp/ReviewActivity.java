@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -106,6 +107,7 @@ public class ReviewActivity extends AppCompatActivity {
                 vuaCount++;
             }
         }
+        Log.e("TAG", "setRatingTable: " + nhoCount*100/reviewList.size() + " " + vuaCount*100/reviewList.size() + " " + lonCount*100/reviewList.size() + " " + reviewList.size());
         nho.setProgress(nhoCount*100/reviewList.size());
         tvNho.setText(String.valueOf(nhoCount*100/reviewList.size()));
         vua.setProgress(vuaCount*100/reviewList.size());

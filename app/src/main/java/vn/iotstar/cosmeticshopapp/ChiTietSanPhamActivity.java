@@ -59,6 +59,7 @@ import vn.iotstar.cosmeticshopapp.sharedPref.SharedPrefManager;
 import vn.iotstar.cosmeticshopapp.util.AnimationUtil;
 
 public class ChiTietSanPhamActivity extends AppCompatActivity {
+    public static final int REQUEST_CODE = 123;
     ImageView viewAnimation;
     SearchView searchView;
     ImageView GioHang, imgFavorite;
@@ -280,7 +281,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         apiService.getProductDetail(product.getId()).enqueue(new Callback<ProductDetailResponse>() {
             @Override
             public void onResponse(Call<ProductDetailResponse> call, Response<ProductDetailResponse> response) {
-                sliderAdapter = new SliderAdapter(getApplicationContext(), response.body().getBody().getProductImages());
+                sliderAdapter = new SliderAdapter(getApplicationContext(), response.body().getBody().getProductImages(), REQUEST_CODE);
                 sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
                 Glide.with(getApplicationContext()).load(response.body().getBody().getProductImages().get(0).getImage()).into(viewAnimation);
                 sliderView.setSliderAdapter(sliderAdapter);
@@ -364,7 +365,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                     }
                     productHomeAdapter = new ProductHomeAdapter(ChiTietSanPhamActivity.this, products);
                     rvProducGoiY.setHasFixedSize(true);
-                    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL);
+                    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, RecyclerView.HORIZONTAL);
 
                     rvProducGoiY.setLayoutManager(layoutManager);
                     rvProducGoiY.setAdapter(productHomeAdapter);

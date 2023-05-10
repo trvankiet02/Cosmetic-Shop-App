@@ -70,7 +70,9 @@
             android:layout_marginStart="10dp"
             android:textSize="13dp"
             android:text="Quần jean nữ"
-            android:padding="5px"/>
+            android:padding="5px"
+            android:ellipsize="end"
+            android:maxLines="1"/>
     </LinearLayout>
     <ImageView
         android:layout_width="5dp"
