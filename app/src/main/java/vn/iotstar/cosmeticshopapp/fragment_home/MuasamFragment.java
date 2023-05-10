@@ -174,9 +174,7 @@ public class MuasamFragment extends Fragment {
                         }
                     }
                     if (productFlashSaleList == null) {
-                        Log.e(TAG, "onResponse: " + "NULLSale" );
                     } else {
-                        Log.e(TAG, "onResponse: " + "CoSale" );
                         productFlashSaleAdapter = new ProductFlashSaleAdapter(getContext(), productFlashSaleList);
                         rvFlashSale.setHasFixedSize(true);
                         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, false);
