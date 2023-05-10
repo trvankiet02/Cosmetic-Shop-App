@@ -1,4 +1,4 @@
-package vn.iotstar.cosmeticshopapp.Helper;
+package vn.iotstar.cosmeticshopapp.helper;
 
 
 import android.content.Context;

@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Product implements Serializable
 {
-
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -32,6 +31,9 @@ public class Product implements Serializable
     @SerializedName("madeIn")
     @Expose
     private String madeIn;
+    @SerializedName("store")
+    @Expose
+    private Store store;
     @SerializedName("isSelling")
     @Expose
     private Boolean isSelling;
@@ -47,7 +49,7 @@ public class Product implements Serializable
     @SerializedName("productQuantities")
     @Expose
     private List<ProductQuantity> productQuantities;
-    private final static long serialVersionUID = -7755904172316078232L;
+    private final static long serialVersionUID = -8478122976543636160L;
 
     public Integer getId() {
         return id;
@@ -113,6 +115,14 @@ public class Product implements Serializable
         this.madeIn = madeIn;
     }
 
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
     public Boolean getIsSelling() {
         return isSelling;
     }
@@ -152,5 +162,4 @@ public class Product implements Serializable
     public void setProductQuantities(List<ProductQuantity> productQuantities) {
         this.productQuantities = productQuantities;
     }
-
 }

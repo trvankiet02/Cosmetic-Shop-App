@@ -12,12 +12,12 @@ import com.smarteist.autoimageslider.SliderView;
 
 import java.util.List;
 
-import vn.iotstar.cosmeticshopapp.adapter.SliderAdapter;
+import vn.iotstar.cosmeticshopapp.adapter.SliderProductImageAdapter;
 import vn.iotstar.cosmeticshopapp.model.ProductImage;
 
 public class FullScreenActivity extends AppCompatActivity {
     SliderView sliderView;
-    SliderAdapter sliderAdapter;
+    SliderProductImageAdapter sliderProductImageAdapter;
     TextView tvNum;
     ImageButton btnBack;
     @Override
@@ -32,9 +32,9 @@ public class FullScreenActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         List<ProductImage> imageList = (List<ProductImage>) bundle.getSerializable("image_url");
 
-        SliderAdapter sliderAdapter = new SliderAdapter(this, imageList, 1);
+        SliderProductImageAdapter sliderProductImageAdapter = new SliderProductImageAdapter(this, imageList, 1);
         sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
-        sliderView.setSliderAdapter(sliderAdapter);
+        sliderView.setSliderAdapter(sliderProductImageAdapter);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

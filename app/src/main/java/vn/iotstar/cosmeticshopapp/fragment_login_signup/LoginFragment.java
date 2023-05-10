@@ -18,13 +18,12 @@ import android.widget.Toast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import vn.iotstar.cosmeticshopapp.LoginSignupActivity;
 import vn.iotstar.cosmeticshopapp.MainActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.LoginSignupResponse;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
-import vn.iotstar.cosmeticshopapp.sharedPref.SharedPrefManager;
+import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 
 public class LoginFragment extends Fragment {

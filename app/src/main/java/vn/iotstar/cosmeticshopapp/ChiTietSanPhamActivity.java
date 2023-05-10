@@ -30,9 +30,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.smarteist.autoimageslider.SliderView;
 
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,7 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import vn.iotstar.cosmeticshopapp.adapter.FeedbackAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.ProductHomeAdapter;
-import vn.iotstar.cosmeticshopapp.adapter.SliderAdapter;
+import vn.iotstar.cosmeticshopapp.adapter.SliderProductImageAdapter;
 import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.FollowProductResponse;
 import vn.iotstar.cosmeticshopapp.model.Order;
@@ -55,11 +57,19 @@ import vn.iotstar.cosmeticshopapp.model.Review;
 import vn.iotstar.cosmeticshopapp.model.ReviewResponse;
 import vn.iotstar.cosmeticshopapp.model.UserFollowProduct;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
-import vn.iotstar.cosmeticshopapp.sharedPref.SharedPrefManager;
+import vn.iotstar.cosmeticshopapp.room.dao.CartDAO;
+import vn.iotstar.cosmeticshopapp.room.dao.CartItemDAO;
+import vn.iotstar.cosmeticshopapp.room.database.CartDatabase;
+import vn.iotstar.cosmeticshopapp.room.database.CartItemDatabase;
+import vn.iotstar.cosmeticshopapp.room.entity.CartEntity;
+import vn.iotstar.cosmeticshopapp.room.entity.CartItemEntity;
+import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 import vn.iotstar.cosmeticshopapp.util.AnimationUtil;
 
 public class ChiTietSanPhamActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 123;
+    public static final String TAG = "ChiTietSanPhamActivity";
+
     ImageView viewAnimation;
     SearchView searchView;
     ImageView GioHang, imgFavorite;
@@ -80,13 +90,15 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     List<Review> feedbacks;
     FeedbackAdapter feedbackAdapter;
     SliderView sliderView;
-    SliderAdapter sliderAdapter;
+    SliderProductImageAdapter sliderProductImageAdapter;
     TextView addToCart;
     ImageView img_icon_bag, imgLike;
     SharedPrefManager sharedPrefManager;
     ProgressDialog progressDialog;
     boolean isLiked;
     DecimalFormat df = new DecimalFormat("#.#");
+    CartDAO cartDao;
+    CartItemDAO cartItemDao;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -155,6 +167,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         setProgressDialog();
+
+        cartDao = CartDatabase.getInstance(this).cartDao();
+        cartItemDao = CartItemDatabase.getInstance(this).cartItemDao();
+
     }
 
     private void setProgressDialog() {
@@ -252,39 +268,59 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         product = (Product) bundle.getSerializable("product");
         Log.d("TAG", "getProductFromAdapter: " + product.getId());
+
+
     }
 
     private void addToCart(){
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AnimationUtil.translateAnimation(viewAnimation, addToCart, img_icon_bag, new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
+                Toast.makeText(ChiTietSanPhamActivity.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                if (sharedPrefManager.getUser().getId() == -1){
+                    addToCartDatabase(sharedPrefManager.getUser().getId(), product);
+                } else {
+                    addToCartAPI();
+                }
             }
         });
     }
+
+    private void addToCartAPI() {
+
+    }
+
+    private void addToCartDatabase(Integer userId, Product product) {
+        Timestamp now = new Timestamp(new Date(System.currentTimeMillis()).getTime());
+        CartEntity cartEntity = new CartEntity(userId, product.getStore().getId(), now.toString(), "");
+        CartItemEntity newCartItemEntity = new CartItemEntity(cartEntity.getId(), product.getId(), sizeSpinner.getSelectedItem().toString(), 1, now.toString(), "");
+        cartDao.insertCart(cartEntity);
+
+        CartItemEntity existingCartItem = cartItemDao.getCartItemByProductIdAndSize(newCartItemEntity.getProductId(), newCartItemEntity.getSize());
+        if (existingCartItem != null) {
+            existingCartItem.setQuantity(existingCartItem.getQuantity() + newCartItemEntity.getQuantity());
+            cartItemDao.updateCartItem(existingCartItem);
+        } else {
+            cartItemDao.insertCartItem(newCartItemEntity);
+        }
+
+        for (CartEntity cE: cartDao.getAllCart()){
+            Log.d("TAG", "CartEntity: " + cE.getId());
+        }
+        for (CartItemEntity ciE: cartItemDao.getAllCartItem()){
+            Log.d("TAG", "CartItemEntity: " + ciE.getId() + ciE.getSize() + ciE.getQuantity());
+        }
+    }
+
     private void getProductDetail(){
         NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
         apiService.getProductDetail(product.getId()).enqueue(new Callback<ProductDetailResponse>() {
             @Override
             public void onResponse(Call<ProductDetailResponse> call, Response<ProductDetailResponse> response) {
-                sliderAdapter = new SliderAdapter(getApplicationContext(), response.body().getBody().getProductImages(), REQUEST_CODE);
+                sliderProductImageAdapter = new SliderProductImageAdapter(getApplicationContext(), response.body().getBody().getProductImages(), REQUEST_CODE);
                 sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
                 Glide.with(getApplicationContext()).load(response.body().getBody().getProductImages().get(0).getImage()).into(viewAnimation);
-                sliderView.setSliderAdapter(sliderAdapter);
+                sliderView.setSliderAdapter(sliderProductImageAdapter);
                 sliderView.setScrollTimeInSec(3);
                 sliderView.setAutoCycle(true);
                 sliderView.startAutoCycle();

@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Store implements Serializable
 {
-
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -41,13 +40,10 @@ public class Store implements Serializable
     @SerializedName("userFollowStores")
     @Expose
     private List<Object> userFollowStores;
-    @SerializedName("products")
-    @Expose
-    private List<Object> products;
     @SerializedName("ewallet")
     @Expose
     private Integer ewallet;
-    private final static long serialVersionUID = 3897772031463162481L;
+    private final static long serialVersionUID = 8598772755526796830L;
 
     public Integer getId() {
         return id;
@@ -135,14 +131,6 @@ public class Store implements Serializable
 
     public void setUserFollowStores(List<Object> userFollowStores) {
         this.userFollowStores = userFollowStores;
-    }
-
-    public List<Object> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Object> products) {
-        this.products = products;
     }
 
     public Integer getEwallet() {

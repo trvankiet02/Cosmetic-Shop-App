@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,13 +13,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.List;
 
 import vn.iotstar.cosmeticshopapp.ChiTietSanPhamActivity;
-import vn.iotstar.cosmeticshopapp.GioHangActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.Product;
 
@@ -81,9 +78,9 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         Product product = array.get(position);
         holder.ProductName.setText(product.getName());
         holder.ProductPrice.setText(String.valueOf(product.getPrice()));
-        SliderAdapter sliderAdapter = new SliderAdapter(context.getApplicationContext(), product.getProductImages(), 1);
+        SliderProductImageAdapter sliderProductImageAdapter = new SliderProductImageAdapter(context.getApplicationContext(), product.getProductImages(), 1);
         holder.sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
-        holder.sliderView.setSliderAdapter(sliderAdapter);
+        holder.sliderView.setSliderAdapter(sliderProductImageAdapter);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

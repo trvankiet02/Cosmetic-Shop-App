@@ -1,4 +1,4 @@
-package vn.iotstar.cosmeticshopapp.sharedPref;
+package vn.iotstar.cosmeticshopapp.sharedPreferentManager;
 
 import android.content.Context;
 import android.content.SharedPreferences;

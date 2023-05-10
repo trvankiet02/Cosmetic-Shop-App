@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <!--Image we will display is our slider view-->
-    <ImageView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/myimage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

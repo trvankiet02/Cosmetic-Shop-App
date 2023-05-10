@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -24,7 +23,7 @@ import vn.iotstar.cosmeticshopapp.model.Category;
 import vn.iotstar.cosmeticshopapp.model.CategoryAndStyleResponse;
 import vn.iotstar.cosmeticshopapp.model.Style;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
-import vn.iotstar.cosmeticshopapp.sharedPref.SharedPrefManager;
+import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 
 public class DanhmucFragment extends Fragment {

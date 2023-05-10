@@ -3,7 +3,6 @@ package vn.iotstar.cosmeticshopapp.fragment_home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -38,7 +33,7 @@ import vn.iotstar.cosmeticshopapp.model.CategoryAndStyleResponse;
 import vn.iotstar.cosmeticshopapp.model.Product;
 import vn.iotstar.cosmeticshopapp.model.ProductResponse;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
-import vn.iotstar.cosmeticshopapp.sharedPref.SharedPrefManager;
+import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 
 public class MuasamFragment extends Fragment {

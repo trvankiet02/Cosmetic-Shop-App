@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import vn.iotstar.cosmeticshopapp.LoginSignupActivity;
 import vn.iotstar.cosmeticshopapp.R;
-import vn.iotstar.cosmeticshopapp.sharedPref.SharedPrefManager;
+import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 
 public class ToiFragment extends Fragment {
@@ -26,7 +25,7 @@ public class ToiFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_toi, container, false);
 
         anhXa();
-        if (sharedPrefManager.getUser() == null){
+        if (sharedPrefManager.getUser().getId() == -1){
             txtLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

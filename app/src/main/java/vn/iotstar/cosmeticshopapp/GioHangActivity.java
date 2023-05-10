@@ -10,10 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import vn.iotstar.cosmeticshopapp.Helper.SwipeHelper;
+import vn.iotstar.cosmeticshopapp.helper.SwipeHelper;
 import vn.iotstar.cosmeticshopapp.adapter.ProductGioHangAdapter;
 import vn.iotstar.cosmeticshopapp.model.Product;
 

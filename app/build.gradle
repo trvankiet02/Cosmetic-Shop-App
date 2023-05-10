@@ -62,4 +62,8 @@ dependencies {
     //vuốt ngang hiện nút xóa
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     //implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    implementation "androidx.room:room-runtime:2.4.1"
+    annotationProcessor "androidx.room:room-compiler:2.4.1"
 }

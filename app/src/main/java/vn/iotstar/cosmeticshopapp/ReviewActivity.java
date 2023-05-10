@@ -27,7 +27,7 @@ import vn.iotstar.cosmeticshopapp.model.Product;
 import vn.iotstar.cosmeticshopapp.model.Review;
 import vn.iotstar.cosmeticshopapp.model.ReviewResponse;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
-import vn.iotstar.cosmeticshopapp.sharedPref.SharedPrefManager;
+import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 public class ReviewActivity extends AppCompatActivity {
 
