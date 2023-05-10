@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,7 @@ import vn.iotstar.cosmeticshopapp.sharedPref.SharedPrefManager;
 
 public class MuasamFragment extends Fragment {
     private static final String TAG = MuasamFragment.class.getName();
-    private TextView txtTimer;
+    private TextView txtGio, txtPhut, txtGiay;
 
     CountDownTimer Timer;
     View view;
@@ -87,21 +88,45 @@ public class MuasamFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        txtTimer = (TextView) view.findViewById(R.id.txtGio);
-        Date date = new Date(System.currentTimeMillis());
-        Timer = new CountDownTimer(date.getTime()+60*60*1000, 1000) {
+        txtGio = (TextView) view.findViewById(R.id.txtGio);
+        txtPhut = (TextView) view.findViewById(R.id.txtPhut);
+        txtGiay = (TextView) view.findViewById(R.id.txtGiay);
+
+        long now = System.currentTimeMillis();
+        long midnight = getMidnight(now);
+        CountDownTimer timer = new CountDownTimer(midnight - now, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                int gio = (int) (millisUntilFinished / 720000) % 24;
-                int phut = (int) (millisUntilFinished / 60000) % 60;
-                int giay = (int) (millisUntilFinished / 1000) % 60;
-                txtTimer.setText(String.format("%02d:%02d:%02d", gio, phut, giay));
+                int hours = (int) (millisUntilFinished / (60 * 60 * 1000));
+                int minutes = (int) ((millisUntilFinished / (60 * 1000)) % 60);
+                int seconds = (int) ((millisUntilFinished / 1000) % 60);
+                String timeGio = String.format("%02d", hours);
+                String timePhut = String.format("%02d", minutes);
+                String timeGiay = String.format("%02d", seconds);
+
+                txtGio.setText(timeGio);
+                txtPhut.setText(timePhut);
+                txtGiay.setText(timeGiay);
             }
+
             @Override
             public void onFinish() {
-                txtTimer.setText("00:00:00");
+                txtGio.setText("00");
+                txtPhut.setText("00");
+                txtGiay.setText("00");
             }
-        }.start();
+        };
+        timer.start();
+    }
+
+    private long getMidnight(long time) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+        calendar.set(Calendar.HOUR_OF_DAY, 24);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTimeInMillis();
     }
     private void AnhXa(){
         rvProductDeNghi = (RecyclerView) view.findViewById(R.id.rvProduct2);

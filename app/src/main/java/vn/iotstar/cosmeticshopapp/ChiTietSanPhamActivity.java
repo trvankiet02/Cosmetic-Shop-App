@@ -18,6 +18,7 @@ import android.view.animation.Animation;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -60,11 +61,12 @@ import vn.iotstar.cosmeticshopapp.util.AnimationUtil;
 
 public class ChiTietSanPhamActivity extends AppCompatActivity {
     ImageView viewAnimation;
+    ImageButton imageButtonTru, imageButtonCong;
     SearchView searchView;
     ImageView GioHang, imgFavorite;
     LinearLayout lnReview, lnXemThem, lnXemTatCa;
     TextView txtSize, tv_name_product, tvPriceSale, tvPrice, tvPrice_d, txtsoluong, tv_rate_sanpham_tren, tvAddress, tv_rate_sanpham_duoi;
-    TextView tv_rate_num, tv_themVaoGio;
+    TextView count_product, tv_rate_num, tv_themVaoGio;
     RatingBar rate_sanpham_tren, rate_sanpham_duoi;
     ProgressBar progressBar_nho, progressBar_vua, progressBar_lon;
     TextView tv_nho, tv_vua, tv_lon;
@@ -86,6 +88,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     boolean isLiked;
     DecimalFormat df = new DecimalFormat("#.#");
+    int quantityMaxOfSize;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -101,6 +104,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         setFollowProduct();
         addToCart();
         set2Feedback();
+        setOnClick();
         GioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,10 +114,60 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         });
     }
 
+    private void setOnClick() {
+        lnXemThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent feedback = new Intent(ChiTietSanPhamActivity.this, ReviewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("product", product);
+                feedback.putExtras(bundle);
+                startActivity(feedback);
+            }
+        });
+        lnXemTatCa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent feedback = new Intent(ChiTietSanPhamActivity.this, ReviewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("product", product);
+                feedback.putExtras(bundle);
+                startActivity(feedback);
+            }
+        });
+        imageButtonTru.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int count = Integer.parseInt(count_product.getText().toString());
+                if (count > 1) {
+                    count--;
+                    count_product.setText(String.valueOf(count));
+                }else{
+                    Toast.makeText(ChiTietSanPhamActivity.this, "Số lượng phải lớn hơn 0", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        imageButtonCong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int count = Integer.parseInt(count_product.getText().toString());
+                if (count < quantityMaxOfSize) {
+                    count++;
+                    count_product.setText(String.valueOf(count));
+                }else{
+                    Toast.makeText(ChiTietSanPhamActivity.this, "Số lượng phải nhỏ hơn " + quantityMaxOfSize, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     private void AnhXa() {
         //       searchView = (SearchView) findViewById(R.id.search_view);
         sizeSpinner = (Spinner) findViewById(R.id.size_spinner);
         txtSize = findViewById(R.id.txtsize);
+        count_product = findViewById(R.id.count_product);
+        imageButtonTru = findViewById(R.id.imageButtonTru);
+        imageButtonCong = findViewById(R.id.imageButtonCong);
         rvProducGoiY = (RecyclerView) findViewById(R.id.rvProduct);
         rvFeedback = (RecyclerView) findViewById(R.id.rvFeedback);
         GioHang = (ImageView) findViewById(R.id.img_icon_bag);
@@ -184,26 +238,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<FollowProductResponse> call, Throwable t) {
 
-            }
-        });
-        lnXemThem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent feedback = new Intent(ChiTietSanPhamActivity.this, ReviewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("product", product);
-                feedback.putExtras(bundle);
-                startActivity(feedback);
-            }
-        });
-        lnXemTatCa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent feedback = new Intent(ChiTietSanPhamActivity.this, ReviewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("product", product);
-                feedback.putExtras(bundle);
-                startActivity(feedback);
             }
         });
         imgLike.setOnClickListener(new View.OnClickListener() {
@@ -345,6 +379,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 String selectedOption = parent.getItemAtPosition(position).toString();
                 txtSize.setText(selectedOption);
                 txtsoluong.setText(soluong.get(position).toString());
+                quantityMaxOfSize = soluong.get(position);
+                count_product.setText(String.valueOf(1));
             }
 
             @Override
