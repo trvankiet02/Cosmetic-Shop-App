@@ -8,11 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -51,31 +55,36 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull FeedbackAdapter.MyViewHolder holder, int position) {
-    Review review = array.get(position);
+        Review review = array.get(position);
         holder.tvNameUser.setText(review.getUser().getFirstName() + " " + review.getUser().getLastName());
         try {
             holder.tvDateFeedback.setText(holder.outputFormat.format(holder.inputFormat.parse(review.getCreateAt())));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        holder.tvColorProduct.setText("Thieu");
-        holder.tvSizeProduct.setText("Thieu");
+        //holder.tvColorProduct.setText("Thieu");
+        //holder.tvSizeProduct.setText("Thieu");
         holder.tvFeedback.setText(review.getContent());
-        holder.tvLike.setText("Thieu");
+        //holder.tvLike.setText("Thieu");
         holder.rate.setRating(parseFloat(String.valueOf(review.getRating())));
+
+        //xu ly hinh anh
         List<String> listImages = new ArrayList<>();
         for ( ReviewImage image : review.getReviewImages()) {
             listImages.add(image.getImage());
         }
-        Glide.with(context)
-                .load(listImages.get(0))
-                .into(holder.imgFeedback1);
-        /*Glide.with(context)
-                .load(review.getReviewImages().get(1))
-                .into(holder.imgFeedback2);
-        Glide.with(context)
-                .load(review.getReviewImages().get(2))
-                .into(holder.imgFeedback3);*/
+        if(listImages.size() == 0){
+            holder.imageLayout.setVisibility(View.GONE);
+        }else{
+            listImages.get(0);
+            holder.imageFeedbackAdapter = new ImageFeedbackAdapter(context.getApplicationContext(), review.getReviewImages());
+            holder.rcImageFeedback.setHasFixedSize(true);
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context.getApplicationContext(), 1, RecyclerView.HORIZONTAL, false);
+            holder.rcImageFeedback.setLayoutManager(layoutManager);
+            holder.rcImageFeedback.setAdapter(holder.imageFeedbackAdapter);
+            holder.imageFeedbackAdapter.notifyDataSetChanged();
+        }
+
     }
 
     @Override
@@ -85,7 +94,10 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvNameUser, tvDateFeedback, tvColorProduct, tvSizeProduct, tvFeedback, tvLike;
-        ImageView imgFeedback1, imgFeedback2, imgFeedback3, imgLike;
+        ImageView imgLike;
+        ImageFeedbackAdapter imageFeedbackAdapter;
+        LinearLayout imageLayout;
+        RecyclerView rcImageFeedback;
         RatingBar rate;
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -125,11 +137,10 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
             tvSizeProduct = itemView.findViewById(R.id.tvSizeProduct);
             tvFeedback = itemView.findViewById(R.id.tvFeedback);
             tvLike = itemView.findViewById(R.id.tvLike);
-            imgFeedback1 = itemView.findViewById(R.id.imgFeedback1);
-            imgFeedback2 = itemView.findViewById(R.id.imgFeedback2);
-            imgFeedback3 = itemView.findViewById(R.id.imgFeedback3);
             imgLike = itemView.findViewById(R.id.imgLike);
             rate = itemView.findViewById(R.id.rate);
+            imageLayout = itemView.findViewById(R.id.imageLayout);
+            rcImageFeedback = itemView.findViewById(R.id.rcImageFeedback);
         }
 
     }

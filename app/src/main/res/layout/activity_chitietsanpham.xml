@@ -477,6 +477,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/lnReview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
@@ -486,6 +487,7 @@
                     android:paddingEnd="10dp">
 
                     <LinearLayout
+                        android:id="@+id/lnXemTatCa"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:orientation="horizontal">
@@ -606,9 +608,9 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_width="110dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Hàng có vừa không"
+                                    android:text="Sản phẩm được người khác đánh giá"
                                     android:textColor="#000"
                                     android:textSize="11dp" />
 
@@ -625,9 +627,9 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_width="110dp"
+                                    android:layout_width="80dp"
                                     android:layout_height="wrap_content"
-                                    android:text="Nhỏ"
+                                    android:text="Rất tốt"
                                     android:textColor="#000"
                                     android:textSize="11dp" />
 
@@ -666,9 +668,9 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_width="110dp"
+                                    android:layout_width="80dp"
                                     android:layout_height="wrap_content"
-                                    android:text="Kích thước chính xác"
+                                    android:text="Dùng khá ổn"
                                     android:textColor="#000"
                                     android:textSize="11dp" />
 
@@ -707,9 +709,9 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_width="110dp"
+                                    android:layout_width="80dp"
                                     android:layout_height="wrap_content"
-                                    android:text="Lớn"
+                                    android:text="Khá tệ"
                                     android:textColor="#000"
                                     android:textSize="11dp" />
 

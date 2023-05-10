@@ -1,19 +1,16 @@
 package vn.iotstar.cosmeticshopapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextPaint;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.view.View;
@@ -33,9 +30,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.smarteist.autoimageslider.SliderView;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -46,7 +43,6 @@ import vn.iotstar.cosmeticshopapp.adapter.FeedbackAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.ProductHomeAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.SliderAdapter;
 import vn.iotstar.cosmeticshopapp.api.APIService;
-import vn.iotstar.cosmeticshopapp.model.Feedback;
 import vn.iotstar.cosmeticshopapp.model.FollowProductResponse;
 import vn.iotstar.cosmeticshopapp.model.Order;
 import vn.iotstar.cosmeticshopapp.model.OrderItem;
@@ -54,6 +50,7 @@ import vn.iotstar.cosmeticshopapp.model.OrderResponse;
 import vn.iotstar.cosmeticshopapp.model.Product;
 import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductQuantity;
+import vn.iotstar.cosmeticshopapp.model.ProductResponse;
 import vn.iotstar.cosmeticshopapp.model.Review;
 import vn.iotstar.cosmeticshopapp.model.ReviewResponse;
 import vn.iotstar.cosmeticshopapp.model.UserFollowProduct;
@@ -65,8 +62,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     ImageView viewAnimation;
     SearchView searchView;
     ImageView GioHang, imgFavorite;
-    LinearLayout lnXemThem;
-    TextView txtSize, tv_name_product, tvPriceSale, tvPrice, tvPrice_d, txtsoluong, tv_rate_sanpham_tren, tvAddress, tv_rate_sanpham_duoi, tvXemTatCa;
+    LinearLayout lnReview, lnXemThem, lnXemTatCa;
+    TextView txtSize, tv_name_product, tvPriceSale, tvPrice, tvPrice_d, txtsoluong, tv_rate_sanpham_tren, tvAddress, tv_rate_sanpham_duoi;
     TextView tv_rate_num, tv_themVaoGio;
     RatingBar rate_sanpham_tren, rate_sanpham_duoi;
     ProgressBar progressBar_nho, progressBar_vua, progressBar_lon;
@@ -88,6 +85,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     SharedPrefManager sharedPrefManager;
     ProgressDialog progressDialog;
     boolean isLiked;
+    DecimalFormat df = new DecimalFormat("#.#");
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -96,8 +94,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chitietsanpham);
         AnhXa();
         //SetSpinner();
-        //setRvProductGoiY();
-        //set2Feedback();
+        setRvProductGoiY();
         getProductId();
         getProductDetail();
         setSoldProduct();
@@ -114,7 +111,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
 
     private void AnhXa() {
- //       searchView = (SearchView) findViewById(R.id.search_view);
+        //       searchView = (SearchView) findViewById(R.id.search_view);
         sizeSpinner = (Spinner) findViewById(R.id.size_spinner);
         txtSize = findViewById(R.id.txtsize);
         rvProducGoiY = (RecyclerView) findViewById(R.id.rvProduct);
@@ -133,10 +130,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         txtsoluong = (TextView) findViewById(R.id.txtsoluong);
         tv_rate_sanpham_tren = (TextView) findViewById(R.id.tv_rating);
 //        tvAddress = (TextView) findViewById(R.id.tv_address);
-//        tv_rate_sanpham_duoi = (TextView) findViewById(R.id.tv_rate1);
-//        tvXemTatCa = (TextView) findViewById(R.id.tv_xemtatca);
+        tv_rate_sanpham_duoi = (TextView) findViewById(R.id.tv_rate1);
         tv_rate_num = (TextView) findViewById(R.id.tv_rate_num);
-//        lnXemThem = (LinearLayout) findViewById(R.id.ln_xemthem);
+        lnXemThem = (LinearLayout) findViewById(R.id.ln_xemthem);
+        lnXemTatCa = (LinearLayout) findViewById(R.id.lnXemTatCa);
+        lnReview = (LinearLayout) findViewById(R.id.lnReview);
 //        tv_themVaoGio = (TextView) findViewById(R.id.tv_them_vao_gio);
 //
         rate_sanpham_tren = (RatingBar) findViewById(R.id.rate_sanpham_tren);
@@ -186,6 +184,26 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<FollowProductResponse> call, Throwable t) {
 
+            }
+        });
+        lnXemThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent feedback = new Intent(ChiTietSanPhamActivity.this, ReviewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("product", product);
+                feedback.putExtras(bundle);
+                startActivity(feedback);
+            }
+        });
+        lnXemTatCa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent feedback = new Intent(ChiTietSanPhamActivity.this, ReviewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("product", product);
+                feedback.putExtras(bundle);
+                startActivity(feedback);
             }
         });
         imgLike.setOnClickListener(new View.OnClickListener() {
@@ -336,12 +354,31 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
 
     private void setRvProductGoiY(){
-        productHomeAdapter = new ProductHomeAdapter(this, products);
-        rvProducGoiY.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
-        rvProducGoiY.setLayoutManager(layoutManager);
-        rvProducGoiY.setAdapter(productHomeAdapter);
-        productHomeAdapter.notifyDataSetChanged();
+        apiService.getRandomProduct(5).enqueue(new Callback<ProductResponse>() {
+            @Override
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                if (response.isSuccessful()){
+                    products = response.body().getBody();
+                    if (products == null){
+                        Log.e("TAG", "onResponse: " + "NULL" );
+                    }
+                    productHomeAdapter = new ProductHomeAdapter(ChiTietSanPhamActivity.this, products);
+                    rvProducGoiY.setHasFixedSize(true);
+                    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL);
+
+                    rvProducGoiY.setLayoutManager(layoutManager);
+                    rvProducGoiY.setAdapter(productHomeAdapter);
+                    productHomeAdapter.notifyDataSetChanged();
+                } else {
+                    Log.e("TAG", "onResponse: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
+
+            }
+        });
     }
     private void setSoldProduct(){
         apiService.getAllOrder().enqueue(new Callback<OrderResponse>() {
@@ -354,7 +391,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                         List<OrderItem> orderItems = order.getOrderItems();
 
                     }
-                    tv_rate_sanpham_tren.setText(String.valueOf(soldProduct));
                 }
             }
 
@@ -376,9 +412,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
     private void setRatingTable(List<Review> reviewList, ProgressBar nho, ProgressBar vua, ProgressBar lon,
                                 TextView tvNho, TextView tvVua, TextView tvLon){
-        if (reviewList.size() == 0){
-            return;
-        }
         int nhoCount = 0;
         int vuaCount = 0;
         int lonCount = 0;
@@ -406,26 +439,32 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             public void onResponse(Call<ReviewResponse> call, Response<ReviewResponse> response) {
                 if (response.isSuccessful()){
                     feedbacks = response.body().getBody();
-                    setRatingTable(feedbacks, progressBar_nho, progressBar_vua, progressBar_lon,
-                            tv_nho, tv_vua, tv_lon);
-                    tv_rate_num.setText(String.valueOf(avgRating(feedbacks)));
-                    rate_sanpham_duoi.setRating(avgRating(feedbacks));
-                    rate_sanpham_tren.setRating(avgRating(feedbacks));
-
-                    List<Review> twoFeedbacks = new ArrayList<>();
-                    if (feedbacks.size() >= 2){
-                        twoFeedbacks = new ArrayList<>(feedbacks.subList(0, 2));
-                    } else {
-                        twoFeedbacks = feedbacks;
+                    if(feedbacks.size() == 0){
+                        lnReview.setVisibility(View.GONE);
                     }
+                    else {
+                        setRatingTable(feedbacks, progressBar_nho, progressBar_vua, progressBar_lon,
+                                tv_nho, tv_vua, tv_lon);
+                        tv_rate_num.setText(df.format(avgRating(feedbacks)));
+                        tv_rate_sanpham_tren.setText(String.valueOf(feedbacks.size()));
+                        tv_rate_sanpham_duoi.setText(String.valueOf(feedbacks.size()));
+                        rate_sanpham_duoi.setRating(avgRating(feedbacks));
+                        rate_sanpham_tren.setRating(avgRating(feedbacks));
 
+                        List<Review> twoFeedbacks = new ArrayList<>();
+                        if (feedbacks.size() >= 2) {
+                            twoFeedbacks = new ArrayList<>(feedbacks.subList(0, 2));
+                        } else {
+                            twoFeedbacks = feedbacks;
+                        }
 
-                    feedbackAdapter = new FeedbackAdapter(getApplicationContext(), twoFeedbacks);
-                    rvFeedback.setHasFixedSize(true);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
-                    rvFeedback.setLayoutManager(layoutManager);
-                    rvFeedback.setAdapter(feedbackAdapter);
-                    feedbackAdapter.notifyDataSetChanged();
+                        feedbackAdapter = new FeedbackAdapter(getApplicationContext(), twoFeedbacks);
+                        rvFeedback.setHasFixedSize(true);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
+                        rvFeedback.setLayoutManager(layoutManager);
+                        rvFeedback.setAdapter(feedbackAdapter);
+                        feedbackAdapter.notifyDataSetChanged();
+                    }
                 }
             }
 
