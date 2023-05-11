@@ -24,6 +24,12 @@
             android:name=".FullScreenActivity"
             android:exported="false" />
         <activity
+            android:name=".DiaChiCuaToiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ReviewActivity"
             android:exported="false" />
         <activity

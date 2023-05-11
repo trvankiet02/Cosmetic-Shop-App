@@ -68,7 +68,6 @@ public class ProductGioHangAdapter extends RecyclerView.Adapter<ProductGioHangAd
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView ProductName, ProductPrice, txtSize;
         Spinner sizeSpinner;
-        public Button btnRemove;
         public boolean isSwipeable;
         public ImageView ProductImage;
         public MyViewHolder(@NonNull View itemView) {
@@ -99,7 +98,6 @@ public class ProductGioHangAdapter extends RecyclerView.Adapter<ProductGioHangAd
             ProductPrice = (TextView) itemView.findViewById(R.id.txtPriceProduct);
             ProductName = (TextView) itemView.findViewById(R.id.txtNameProduct);
             ProductImage = (ImageView) itemView.findViewById(R.id.imgProduct);
-            //btnRemove = itemView.findViewById(R.id.btnRemove);
         }
     }
 }
