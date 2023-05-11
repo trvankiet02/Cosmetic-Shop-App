@@ -54,8 +54,14 @@ public class ToiFragment extends Fragment {
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), SettingActivity.class);
-                startActivity(intent);
+                if (sharedPrefManager.getUser().getId() == -1){
+                    Toast.makeText(getContext(), "Vui lòng đăng nhập để thực hiện dịch vụ này", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), LoginSignupActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getContext(), SettingActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

@@ -35,6 +35,7 @@ public class StyleSideBarAdapter extends RecyclerView.Adapter<StyleSideBarAdapte
     }
 
 
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

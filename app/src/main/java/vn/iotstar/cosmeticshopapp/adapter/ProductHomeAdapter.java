@@ -20,6 +20,7 @@ import java.util.List;
 import vn.iotstar.cosmeticshopapp.ChiTietSanPhamActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.Product;
+import vn.iotstar.cosmeticshopapp.model.Style;
 
 public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private final int VIEW_TYPE_ITEM = 0;
@@ -34,6 +35,10 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public ProductHomeAdapter(Context context, List<Product> array) {
         this.context = context;
         this.array = array;
+    }
+    public void updateProduct(List<Product> productList) {
+        array = productList;
+        notifyDataSetChanged();
     }
     public void setLoadMoreListener(LoadMoreListener loadMoreListener) {
         this.loadMoreListener = loadMoreListener;

@@ -28,6 +28,7 @@ public class Style implements Serializable {
     @Expose
     private String updateAt;
 
+
     public Integer getId() {
         return id;
     }

@@ -18,6 +18,7 @@ import vn.iotstar.cosmeticshopapp.model.OrderResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductResponse;
 import vn.iotstar.cosmeticshopapp.model.ReviewResponse;
+import vn.iotstar.cosmeticshopapp.model.StyleByCategoryResponse;
 
 public interface APIService {
 
@@ -64,5 +65,13 @@ public interface APIService {
     @POST("cart/getCart")
     @FormUrlEncoded
     Call<CartResponse> getCart(@Field("userId") Integer userId);
+
+    @POST("style/getStyleSelling")
+    @FormUrlEncoded
+    Call<StyleByCategoryResponse> getStyleSelling(@Field("styleId") Integer styleId);
+
+    @POST("product/getProductByStyle")
+    @FormUrlEncoded
+    Call<ProductResponse> getProductByStyle(@Field("styleId") Integer styleId, @Field("isSelling") Boolean isSelling);
 }
 

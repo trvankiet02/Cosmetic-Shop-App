@@ -27,9 +27,12 @@ public class StyleOfStyleAdapter extends RecyclerView.Adapter<StyleOfStyleAdapte
         this.context = context;
         this.array = array;
     }
-    public void updateStyles(List<Style> styles) {
-        array = styles;
-        notifyDataSetChanged();
+    public interface OnItemClickListener {
+        void onItemClick(Style style);
+    }
+    private StyleOfStyleAdapter.OnItemClickListener listener;
+    public void setOnItemClickListener(StyleOfStyleAdapter.OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -52,6 +55,9 @@ public class StyleOfStyleAdapter extends RecyclerView.Adapter<StyleOfStyleAdapte
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Ban dang nhan vao " + style.getName(), Toast.LENGTH_SHORT).show();
+                if (listener != null) {
+                    listener.onItemClick(style);
+                }
             }
         });
     }

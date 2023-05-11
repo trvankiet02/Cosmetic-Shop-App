@@ -145,6 +145,9 @@ public class User implements Serializable
         this.ewallet = ewallet;
     }
 
+    public User() {
+    }
+
     public User(Integer id, String email, String firstName,
                 String lastName, String phone, String profileImage,
                 Integer role, String createAt, String updateAt,
