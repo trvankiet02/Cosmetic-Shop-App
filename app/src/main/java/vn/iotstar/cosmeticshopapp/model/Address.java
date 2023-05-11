@@ -22,6 +22,7 @@ public class Address implements Serializable
     private String updateAt;
     private final static long serialVersionUID = -1898234438330355848L;
 
+
     public Integer getId() {
         return id;
     }

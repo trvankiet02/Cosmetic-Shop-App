@@ -43,6 +43,17 @@ public class SettingActivity extends AppCompatActivity {
     private void getUserFromShared() {
         user = sharedPrefManager.getUser();
         tvTenUser.setText(user.getFirstName() + " " + user.getLastName());
+        setClick();
+    }
+
+    private void setClick() {
+        lnSoDiaChi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingActivity.this, DiaChiCuaToiActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void anhXa() {
