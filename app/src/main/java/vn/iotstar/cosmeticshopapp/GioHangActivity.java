@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 
@@ -15,25 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.helper.SwipeHelper;
-import vn.iotstar.cosmeticshopapp.adapter.ProductGioHangAdapter;
+import vn.iotstar.cosmeticshopapp.adapter.Cart_itemAdapter;
 import vn.iotstar.cosmeticshopapp.model.Product;
-import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
-import vn.iotstar.cosmeticshopapp.model.ProductResponse;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.room.dao.CartDAO;
 import vn.iotstar.cosmeticshopapp.room.dao.CartItemDAO;
 import vn.iotstar.cosmeticshopapp.room.database.CartDatabase;
 import vn.iotstar.cosmeticshopapp.room.database.CartItemDatabase;
-import vn.iotstar.cosmeticshopapp.room.entity.CartItemEntity;
 
 public class GioHangActivity extends AppCompatActivity {
     List<Product> products;
-    ProductGioHangAdapter productGioHangAdapter;
+    Cart_itemAdapter productGioHangAdapter;
     RecyclerView rvProductGioHang;
     CartDAO cartDao;
     CartItemDAO cartItemDao;

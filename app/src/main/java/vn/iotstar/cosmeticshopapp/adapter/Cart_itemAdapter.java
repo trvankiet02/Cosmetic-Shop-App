@@ -6,30 +6,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import vn.iotstar.cosmeticshopapp.R;
-import vn.iotstar.cosmeticshopapp.model.Cart;
 import vn.iotstar.cosmeticshopapp.model.CartItem;
-import vn.iotstar.cosmeticshopapp.model.Product;
-import vn.iotstar.cosmeticshopapp.model.ProductQuantity;
 
-public class ProductGioHangAdapter extends RecyclerView.Adapter<ProductGioHangAdapter.MyViewHolder>{
+public class Cart_itemAdapter extends RecyclerView.Adapter<Cart_itemAdapter.MyViewHolder>{
     Context context;
     List<CartItem> array;
-    public ProductGioHangAdapter(Context context, List<CartItem> array) {
+    public Cart_itemAdapter(Context context, List<CartItem> array) {
         this.context = context;
         this.array = array;
     }
@@ -41,15 +34,15 @@ public class ProductGioHangAdapter extends RecyclerView.Adapter<ProductGioHangAd
 
     @NonNull
     @Override
-    public ProductGioHangAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Cart_itemAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_item_giohang_sanpham, null);
-        ProductGioHangAdapter.MyViewHolder myViewHolder = new ProductGioHangAdapter.MyViewHolder(view);
+                .inflate(R.layout.recycler_item_cart_item, null);
+        Cart_itemAdapter.MyViewHolder myViewHolder = new Cart_itemAdapter.MyViewHolder(view);
         return myViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductGioHangAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Cart_itemAdapter.MyViewHolder holder, int position) {
         List<String> sizes = new ArrayList<>();
 
         ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, sizes);
@@ -102,7 +95,6 @@ public class ProductGioHangAdapter extends RecyclerView.Adapter<ProductGioHangAd
             storeName = itemView.findViewById(R.id.storeName);
             storeImage = itemView.findViewById(R.id.storeImage);
             txtQuantity = itemView.findViewById(R.id.count_product);
-            //btnRemove = itemView.findViewById(R.id.btnRemove);
         }
     }
 }
