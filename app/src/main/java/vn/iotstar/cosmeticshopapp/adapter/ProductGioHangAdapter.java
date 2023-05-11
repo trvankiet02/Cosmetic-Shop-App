@@ -17,22 +17,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.iotstar.cosmeticshopapp.R;
+import vn.iotstar.cosmeticshopapp.model.Cart;
+import vn.iotstar.cosmeticshopapp.model.CartItem;
 import vn.iotstar.cosmeticshopapp.model.Product;
+import vn.iotstar.cosmeticshopapp.model.ProductQuantity;
 
 public class ProductGioHangAdapter extends RecyclerView.Adapter<ProductGioHangAdapter.MyViewHolder>{
     Context context;
-    List<Product> array;
-    public ProductGioHangAdapter(Context context, List<Product> array) {
+    List<CartItem> array;
+    public ProductGioHangAdapter(Context context, List<CartItem> array) {
         this.context = context;
         this.array = array;
     }
 
-    public  List<Product> getModelList() {
+    public  List<CartItem> getModelList() {
         return array;
     }
+
 
     @NonNull
     @Override
@@ -45,16 +50,26 @@ public class ProductGioHangAdapter extends RecyclerView.Adapter<ProductGioHangAd
 
     @Override
     public void onBindViewHolder(@NonNull ProductGioHangAdapter.MyViewHolder holder, int position) {
-        Product product = array.get(position);
-        holder.ProductName.setText(product.getName());
-        holder.ProductPrice.setText(product.getPrice());
-        Glide.with(context)
-                .load(product.getProductImages().get(0))
-                .into(holder.ProductImage);
+        List<String> sizes = new ArrayList<>();
+
+        ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, sizes);
+
+        holder.sizeSpinner.setAdapter(sizeAdapter);
+        holder.sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedOption = parent.getItemAtPosition(position).toString();
+                holder.txtSize.setText(selectedOption);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Ban dang nhan vao " + product.getName(), Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -66,31 +81,17 @@ public class ProductGioHangAdapter extends RecyclerView.Adapter<ProductGioHangAd
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView ProductName, ProductPrice, txtSize;
+        public TextView ProductName, ProductPrice, txtSize, storeName, txtQuantity;
         Spinner sizeSpinner;
         public Button btnRemove;
         public boolean isSwipeable;
-        public ImageView ProductImage;
+        public ImageView ProductImage, storeImage;
+        public Integer quantity;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             isSwipeable = true;
             anhXa();
-            String[] sizes = {"S", "M", "L", "XL", "XXL"};
-
-            ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, sizes);
-
-            sizeSpinner.setAdapter(sizeAdapter);
-            sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String selectedOption = parent.getItemAtPosition(position).toString();
-                    txtSize.setText(selectedOption);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
         }
 
         private void anhXa() {
@@ -99,6 +100,9 @@ public class ProductGioHangAdapter extends RecyclerView.Adapter<ProductGioHangAd
             ProductPrice = (TextView) itemView.findViewById(R.id.txtPriceProduct);
             ProductName = (TextView) itemView.findViewById(R.id.txtNameProduct);
             ProductImage = (ImageView) itemView.findViewById(R.id.imgProduct);
+            storeName = itemView.findViewById(R.id.storeName);
+            storeImage = itemView.findViewById(R.id.storeImage);
+            txtQuantity = itemView.findViewById(R.id.count_product);
             //btnRemove = itemView.findViewById(R.id.btnRemove);
         }
     }

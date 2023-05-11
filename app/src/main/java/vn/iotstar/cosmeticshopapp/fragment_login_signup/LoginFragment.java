@@ -1,5 +1,7 @@
 package vn.iotstar.cosmeticshopapp.fragment_login_signup;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;

@@ -94,14 +94,16 @@
         android:gravity="center"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="4">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="20">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -111,12 +113,14 @@
                 android:ellipsize="end"
                 android:textColor="#000"
                 android:textStyle="bold"
-                android:text="Phân loại  "/>
+                android:text="Phân loại "
+                android:layout_weight="1"/>
             <Spinner
                 android:id="@+id/size_spinner_phanloai"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center" />
+                android:gravity="center"
+                android:layout_weight="19"/>
 
         </LinearLayout>
         <LinearLayout
@@ -124,7 +128,8 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="20">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -134,12 +139,14 @@
                 android:ellipsize="end"
                 android:textColor="#000"
                 android:textStyle="bold"
-                android:text="Kích thước  "/>
+                android:text="Kích thước "
+                android:layout_weight="1"/>
             <Spinner
                 android:id="@+id/size_spinner_kichthuoc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center" />
+                android:gravity="center"
+                android:layout_weight="19"/>
 
         </LinearLayout>
         <LinearLayout
@@ -147,7 +154,8 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="20">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -157,12 +165,14 @@
                 android:ellipsize="end"
                 android:textColor="#000"
                 android:textStyle="bold"
-                android:text="Màu sắc  "/>
+                android:text="Màu sắc "
+                android:layout_weight="1"/>
             <Spinner
                 android:id="@+id/size_spinner_mausac"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center" />
+                android:gravity="center"
+                android:layout_weight="19"/>
 
         </LinearLayout>
         <LinearLayout
@@ -170,7 +180,8 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="20">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -180,11 +191,13 @@
                 android:ellipsize="end"
                 android:textColor="#000"
                 android:textStyle="bold"
-                android:text="Sàng lọc  "/>
+                android:text="Sàng lọc "
+                android:layout_weight="1"/>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_weight="19"/>
 
         </LinearLayout>
     </LinearLayout>

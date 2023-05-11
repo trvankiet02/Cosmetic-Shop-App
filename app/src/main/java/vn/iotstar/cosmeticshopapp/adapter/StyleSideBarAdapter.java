@@ -56,7 +56,7 @@ public class StyleSideBarAdapter extends RecyclerView.Adapter<StyleSideBarAdapte
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Ban dang nhan vao " + style.getName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, StyleActivity.class);
-//              intent.putExtra("style", style);
+                intent.putExtra("style", style);
                 context.startActivity(intent);
             }
         });

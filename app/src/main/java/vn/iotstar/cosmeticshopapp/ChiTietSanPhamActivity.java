@@ -1,11 +1,13 @@
 package vn.iotstar.cosmeticshopapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.view.animation.Animation;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -45,6 +48,8 @@ import vn.iotstar.cosmeticshopapp.adapter.FeedbackAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.ProductHomeAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.SliderProductImageAdapter;
 import vn.iotstar.cosmeticshopapp.api.APIService;
+import vn.iotstar.cosmeticshopapp.fragment_login_signup.LoginFragment;
+import vn.iotstar.cosmeticshopapp.model.AddToCartResponse;
 import vn.iotstar.cosmeticshopapp.model.FollowProductResponse;
 import vn.iotstar.cosmeticshopapp.model.Order;
 import vn.iotstar.cosmeticshopapp.model.OrderItem;
@@ -71,11 +76,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     public static final String TAG = "ChiTietSanPhamActivity";
 
     ImageView viewAnimation;
+    ImageButton imageButtonTru, imageButtonCong;
     SearchView searchView;
     ImageView GioHang, imgFavorite;
     LinearLayout lnReview, lnXemThem, lnXemTatCa;
     TextView txtSize, tv_name_product, tvPriceSale, tvPrice, tvPrice_d, txtsoluong, tv_rate_sanpham_tren, tvAddress, tv_rate_sanpham_duoi;
-    TextView tv_rate_num, tv_themVaoGio;
+    TextView count_product, tv_rate_num, tv_themVaoGio;
     RatingBar rate_sanpham_tren, rate_sanpham_duoi;
     ProgressBar progressBar_nho, progressBar_vua, progressBar_lon;
     TextView tv_nho, tv_vua, tv_lon;
@@ -99,8 +105,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     DecimalFormat df = new DecimalFormat("#.#");
     CartDAO cartDao;
     CartItemDAO cartItemDao;
+    int quantityMaxOfSize;
 
-    @SuppressLint("MissingInflatedId")
+    //@SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +121,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         setFollowProduct();
         addToCart();
         set2Feedback();
+        setOnClick();
         GioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,10 +131,60 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         });
     }
 
+    private void setOnClick() {
+        lnXemThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent feedback = new Intent(ChiTietSanPhamActivity.this, ReviewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("product", product);
+                feedback.putExtras(bundle);
+                startActivity(feedback);
+            }
+        });
+        lnXemTatCa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent feedback = new Intent(ChiTietSanPhamActivity.this, ReviewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("product", product);
+                feedback.putExtras(bundle);
+                startActivity(feedback);
+            }
+        });
+        imageButtonTru.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int count = Integer.parseInt(count_product.getText().toString());
+                if (count > 1) {
+                    count--;
+                    count_product.setText(String.valueOf(count));
+                }else{
+                    Toast.makeText(ChiTietSanPhamActivity.this, "Số lượng phải lớn hơn 0", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        imageButtonCong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int count = Integer.parseInt(count_product.getText().toString());
+                if (count < quantityMaxOfSize) {
+                    count++;
+                    count_product.setText(String.valueOf(count));
+                }else{
+                    Toast.makeText(ChiTietSanPhamActivity.this, "Số lượng phải nhỏ hơn " + quantityMaxOfSize, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     private void AnhXa() {
         //       searchView = (SearchView) findViewById(R.id.search_view);
         sizeSpinner = (Spinner) findViewById(R.id.size_spinner);
         txtSize = findViewById(R.id.txtsize);
+        count_product = findViewById(R.id.count_product);
+        imageButtonTru = findViewById(R.id.imageButtonTru);
+        imageButtonCong = findViewById(R.id.imageButtonCong);
         rvProducGoiY = (RecyclerView) findViewById(R.id.rvProduct);
         rvFeedback = (RecyclerView) findViewById(R.id.rvFeedback);
         GioHang = (ImageView) findViewById(R.id.img_icon_bag);
@@ -203,26 +261,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
             }
         });
-        lnXemThem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent feedback = new Intent(ChiTietSanPhamActivity.this, ReviewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("product", product);
-                feedback.putExtras(bundle);
-                startActivity(feedback);
-            }
-        });
-        lnXemTatCa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent feedback = new Intent(ChiTietSanPhamActivity.this, ReviewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("product", product);
-                feedback.putExtras(bundle);
-                startActivity(feedback);
-            }
-        });
         imgLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -276,40 +314,30 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ChiTietSanPhamActivity.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                progressDialog.show();
                 if (sharedPrefManager.getUser().getId() == -1){
-                    addToCartDatabase(sharedPrefManager.getUser().getId(), product);
+                    //addToCartDatabase(sharedPrefManager.getUser().getId(), product);
+                    Toast.makeText(ChiTietSanPhamActivity.this, "Vui lòng đăng nhập để thực hiện hành động này", Toast.LENGTH_SHORT).show();
+                    Intent loginIntent = new Intent(ChiTietSanPhamActivity.this, LoginSignupActivity.class);
+                    progressDialog.dismiss();
+                    startActivityForResult(loginIntent, REQUEST_CODE);
                 } else {
-                    addToCartAPI();
+                    apiService.addToCart(sharedPrefManager.getUser().getId(), product.getId(), sizeSpinner.getSelectedItem().toString(), Integer.parseInt(count_product.getText().toString())).enqueue(new Callback<AddToCartResponse>() {
+                        @Override
+                        public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
+                            if (response.isSuccessful()){
+                                Toast.makeText(ChiTietSanPhamActivity.this, "Thêm vào giỏ hàng thành công", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<AddToCartResponse> call, Throwable t) {
+                            Log.e(TAG, "onFailure: " + t.getMessage() );
+                        }
+                    });
                 }
             }
         });
-    }
-
-    private void addToCartAPI() {
-
-    }
-
-    private void addToCartDatabase(Integer userId, Product product) {
-        Timestamp now = new Timestamp(new Date(System.currentTimeMillis()).getTime());
-        CartEntity cartEntity = new CartEntity(userId, product.getStore().getId(), now.toString(), "");
-        CartItemEntity newCartItemEntity = new CartItemEntity(cartEntity.getId(), product.getId(), sizeSpinner.getSelectedItem().toString(), 1, now.toString(), "");
-        cartDao.insertCart(cartEntity);
-
-        CartItemEntity existingCartItem = cartItemDao.getCartItemByProductIdAndSize(newCartItemEntity.getProductId(), newCartItemEntity.getSize());
-        if (existingCartItem != null) {
-            existingCartItem.setQuantity(existingCartItem.getQuantity() + newCartItemEntity.getQuantity());
-            cartItemDao.updateCartItem(existingCartItem);
-        } else {
-            cartItemDao.insertCartItem(newCartItemEntity);
-        }
-
-        for (CartEntity cE: cartDao.getAllCart()){
-            Log.d("TAG", "CartEntity: " + cE.getId());
-        }
-        for (CartItemEntity ciE: cartItemDao.getAllCartItem()){
-            Log.d("TAG", "CartItemEntity: " + ciE.getId() + ciE.getSize() + ciE.getQuantity());
-        }
     }
 
     private void getProductDetail(){
@@ -321,9 +349,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
                 Glide.with(getApplicationContext()).load(response.body().getBody().getProductImages().get(0).getImage()).into(viewAnimation);
                 sliderView.setSliderAdapter(sliderProductImageAdapter);
-                sliderView.setScrollTimeInSec(3);
-                sliderView.setAutoCycle(true);
-                sliderView.startAutoCycle();
 
                 int promotionalPrice = response.body().getBody().getPromotionalPrice();
                 int price = response.body().getBody().getPrice();
@@ -382,6 +407,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 String selectedOption = parent.getItemAtPosition(position).toString();
                 txtSize.setText(selectedOption);
                 txtsoluong.setText(soluong.get(position).toString());
+                quantityMaxOfSize = soluong.get(position);
+                count_product.setText(String.valueOf(1));
             }
 
             @Override

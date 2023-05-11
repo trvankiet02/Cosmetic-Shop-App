@@ -69,10 +69,12 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp">
                     <ImageView
+                        android:id="@+id/storeImage"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:background="@drawable/img_icon_shop" />
                     <TextView
+                        android:id="@+id/storeName"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="15dp"

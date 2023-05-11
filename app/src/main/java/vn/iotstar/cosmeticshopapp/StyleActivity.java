@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -30,13 +31,15 @@ public class StyleActivity extends AppCompatActivity {
     ProductHomeAdapter productHomeAdapter;
     List<Product> products;
     StyleOfStyleAdapter styleOfStyleAdapter;
-    List<Style> styles;
+    List<Style> styleList;
+    Style style;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_style);
         anhXa();
+        getStyleFromAdapter();
         //set 2 recycler view
         setStyleRecyclerView();
         setProductRecyclerView();
@@ -45,6 +48,12 @@ public class StyleActivity extends AppCompatActivity {
         rcStyle = findViewById(R.id.rcStyle);
         rvProduct = findViewById(R.id.rvProduct);
         apiService = RetrofitCosmeticShop.getRetrofit().create(APIService.class);
+    }
+    private void getStyleFromAdapter(){
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        style = (Style) bundle.getSerializable("style");
+        Log.d("TAG", "getProductFromAdapter: " + style.getId());
     }
 
     private void setStyleRecyclerView() {

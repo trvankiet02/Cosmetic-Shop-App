@@ -1,4 +1,6 @@
 package vn.iotstar.cosmeticshopapp.api;
+import androidx.core.content.pm.PermissionInfoCompat;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -7,6 +9,8 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import vn.iotstar.cosmeticshopapp.model.AddToCartResponse;
+import vn.iotstar.cosmeticshopapp.model.CartResponse;
 import vn.iotstar.cosmeticshopapp.model.CategoryAndStyleResponse;
 import vn.iotstar.cosmeticshopapp.model.FollowProductResponse;
 import vn.iotstar.cosmeticshopapp.model.LoginSignupResponse;
@@ -51,5 +55,14 @@ public interface APIService {
     @POST("userFollowProduct/followOrUnfollow")
     @FormUrlEncoded
     Call<FollowProductResponse> followOrUnfollow(@Field("userId") Integer userId, @Field("productId") Integer productId);
+
+    @POST("cartItem/addCartItem")
+    @FormUrlEncoded
+    Call<AddToCartResponse> addToCart(@Field("userId") Integer userId, @Field("productId") Integer productId,
+                                      @Field("size") String size, @Field("quantity") Integer quantity);
+
+    @POST("cart/getCart")
+    @FormUrlEncoded
+    Call<CartResponse> getCart(@Field("userId") Integer userId);
 }
 
