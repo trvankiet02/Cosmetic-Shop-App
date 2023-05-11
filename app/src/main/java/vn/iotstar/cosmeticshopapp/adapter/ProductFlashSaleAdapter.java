@@ -38,7 +38,7 @@ public class ProductFlashSaleAdapter extends RecyclerView.Adapter<ProductFlashSa
     @Override
     public ProductFlashSaleAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_item_danhmuc_flashsale, null);
+                .inflate(R.layout.recycler_item_muasam_flashsale, null);
         ProductFlashSaleAdapter.MyViewHolder myViewHolder = new ProductFlashSaleAdapter.MyViewHolder(view);
         return myViewHolder;
     }
