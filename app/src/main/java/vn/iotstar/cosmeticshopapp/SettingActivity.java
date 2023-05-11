@@ -2,7 +2,9 @@ package vn.iotstar.cosmeticshopapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +21,17 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         anhXa();
+        setClick();
+    }
+
+    private void setClick() {
+        lnSoDiaChi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingActivity.this, DiaChiCuaToiActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void anhXa() {

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvHoTen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thiện Nguyễn"
+                android:textColor="#000"
+                android:textSize="17dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tvSoDienThoai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="0336532585"
+                android:textColor="#000"
+                android:textSize="15dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvDiaChi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:text="abc Đ. só 12, An Bình, Thủ Đức, Quận Thủ Đức Thành Phố Hồ Chí Minh Viet Nam 7205"
+                android:textSize="17dp" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/next" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/radio_button"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="10dp"/>
+            <TextView
+                android:id="@+id/tvMacDinh"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:text="Mặc định"
+                android:textColor="#000"
+                android:textSize="16dp" />
+            <ImageView
+                android:id="@+id/ImgXoa"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/img_icon_bin" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
