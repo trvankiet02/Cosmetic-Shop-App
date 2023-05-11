@@ -268,7 +268,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
                             android:text="Chọn số lượng thêm vào giỏ"
                             android:textColor="#000"
                             android:textSize="17dp" />
@@ -277,13 +277,15 @@
                             android:id="@+id/imageButtonTru"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:background="#8d7966"
+                            android:background="#f8f1e9"
                             app:srcCompat="@drawable/icon_tru" />
 
                         <TextView
                             android:id="@+id/count_product"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
                             android:text="1"
                             android:textColor="#000"
                             android:textStyle="bold"
@@ -295,13 +297,10 @@
                             android:id="@+id/imageButtonCong"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:background="#8d7966"
+                            android:layout_marginEnd="25dp"
+                            android:background="#f8f1e9"
                             app:srcCompat="@drawable/icon_cong" />
 
-                        <View
-                            android:layout_width="35dp"
-                            android:layout_height="25dp"
-                            android:layout_weight="1" />
 
                     </LinearLayout>
 

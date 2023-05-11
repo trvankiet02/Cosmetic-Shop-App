@@ -49,7 +49,7 @@ public class GioHangActivity extends AppCompatActivity {
     }
 
     private void setRvProductGioHang() {
-        productGioHangAdapter = new ProductGioHangAdapter(GioHangActivity.this, products);
+        //productGioHangAdapter = new ProductGioHangAdapter(GioHangActivity.this, products);
         rvProductGioHang.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GioHangActivity.this, RecyclerView.VERTICAL, false);
         rvProductGioHang.setLayoutManager(layoutManager);

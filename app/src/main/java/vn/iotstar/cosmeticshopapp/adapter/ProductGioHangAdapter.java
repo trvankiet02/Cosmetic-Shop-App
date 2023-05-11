@@ -83,7 +83,6 @@ public class ProductGioHangAdapter extends RecyclerView.Adapter<ProductGioHangAd
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView ProductName, ProductPrice, txtSize, storeName, txtQuantity;
         Spinner sizeSpinner;
-        public Button btnRemove;
         public boolean isSwipeable;
         public ImageView ProductImage, storeImage;
         public Integer quantity;
