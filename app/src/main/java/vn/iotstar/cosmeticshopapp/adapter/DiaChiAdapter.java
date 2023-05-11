@@ -1,6 +1,7 @@
 package vn.iotstar.cosmeticshopapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import vn.iotstar.cosmeticshopapp.R;
+import vn.iotstar.cosmeticshopapp.ThemSuaDiaChiActivity;
 import vn.iotstar.cosmeticshopapp.model.Address;
 import vn.iotstar.cosmeticshopapp.model.Category;
 
@@ -35,7 +37,14 @@ public class DiaChiAdapter extends RecyclerView.Adapter<DiaChiAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull DiaChiAdapter.MyViewHolder holder, int position) {
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //chuyển qua ThemSuaDiaChiActivity
+                Intent intert = new Intent(view.getContext(), ThemSuaDiaChiActivity.class);
+                view.getContext().startActivity(intert);
+            }
+        });
     }
 
     @Override
