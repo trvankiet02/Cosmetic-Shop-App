@@ -1,0 +1,163 @@
+package vn.iotstar.cosmeticshopapp.adapter;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.Handler;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import vn.iotstar.cosmeticshopapp.R;
+import vn.iotstar.cosmeticshopapp.api.APIService;
+import vn.iotstar.cosmeticshopapp.model.AddToCartResponse;
+import vn.iotstar.cosmeticshopapp.model.CartItem;
+import vn.iotstar.cosmeticshopapp.model.ProductQuantity;
+import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
+
+public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyViewHolder>{
+    Context context;
+    List<CartItem> array;
+
+    public CartItemAdapter(Context context, List<CartItem> array) {
+        this.context = context;
+        this.array = array;
+    }
+
+    public  List<CartItem> getModelList() {
+        return array;
+    }
+
+
+    @NonNull
+    @Override
+    public CartItemAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.recycler_item_cart_item, null);
+        CartItemAdapter.MyViewHolder myViewHolder = new CartItemAdapter.MyViewHolder(view);
+        return myViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CartItemAdapter.MyViewHolder holder, int position) {
+        CartItem cartItem = array.get(position);
+        holder.ProductName.setText(cartItem.getProduct().getName());
+        holder.ProductPrice.setText(String.valueOf(cartItem.getProduct().getPromotionalPrice()) + "đ");
+        holder.txtQuantity.setText(String.valueOf(cartItem.getQuantity()));
+        Glide.with(context).load(cartItem.getProduct().getProductImages().get(0).getImage()).into(holder.ProductImage);
+        holder.txtSize.setText(cartItem.getSize());
+        List<String> sizes = new ArrayList<>();
+        for (ProductQuantity productQuantity : cartItem.getProduct().getProductQuantities()) {
+            sizes.add(productQuantity.getSize());
+        }
+        ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, sizes);
+
+        holder.sizeSpinner.setAdapter(sizeAdapter);
+
+        // Thiết lập giá trị được chọn trong Spinner
+        int selectedIndex = sizes.indexOf(cartItem.getSize());
+        holder.sizeSpinner.setSelection(selectedIndex);
+
+        // Thiết lập sự kiện chọn giá trị trong Spinner
+        holder.sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                onItemSelectedHandler(parent, view, position, id);
+                if (!holder.sizeSpinner.getSelectedItem().toString().equals(holder.txtSize.getText().toString())){
+                    holder.progressDialog.show();
+                    CartItem newCartItem = new CartItem(cartItem.getId(), cartItem.getProduct(),
+                            holder.sizeSpinner.getSelectedItem().toString(),
+                            cartItem.getQuantity(), cartItem.getCreateAt(), cartItem.getUpdateAt());
+                    holder.apiService.updateCartItem(newCartItem).enqueue(new Callback<AddToCartResponse>() {
+                        @Override
+                        public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
+                            if (response.isSuccessful()){
+                                Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                holder.progressDialog.dismiss();
+                                holder.txtSize.setText(holder.sizeSpinner.getSelectedItem().toString());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<AddToCartResponse> call, Throwable t) {
+
+                        }
+                    });
+                    /*new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            holder.progressDialog.dismiss();
+                            holder.txtSize.setText(holder.sizeSpinner.getSelectedItem().toString());
+                        }
+                    }, 2000);*/
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
+    private void onItemSelectedHandler(AdapterView<?> parent, View view, int position, long id) {
+        Adapter adapter = (Adapter) parent.getAdapter();
+        String size = adapter.getItem(position).toString();
+
+        Log.e("TAG", "onItemSelectedHandler: " + size);
+    }
+
+    @Override
+    public int getItemCount() {
+        return array == null ? 0 : array.size();
+    }
+
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView ProductName, ProductPrice, txtSize, storeName, txtQuantity;
+        Spinner sizeSpinner;
+        public boolean isSwipeable;
+        public ImageView ProductImage, storeImage;
+        public ProgressDialog progressDialog;
+        APIService apiService;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            isSwipeable = true;
+            progressDialog = new ProgressDialog(itemView.getContext());
+            progressDialog.setMessage("Đang cập nhật giỏ hàng...");
+            //progressDialog.setCancelable(false);
+            //progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            apiService = RetrofitCosmeticShop.getRetrofit().create(APIService.class);
+            anhXa();
+        }
+
+        private void anhXa() {
+            sizeSpinner = itemView.findViewById(R.id.size_spinner);
+            txtSize = itemView.findViewById(R.id.txtsize);
+            ProductPrice = (TextView) itemView.findViewById(R.id.txtPriceProduct);
+            ProductName = (TextView) itemView.findViewById(R.id.txtNameProduct);
+            ProductImage = (ImageView) itemView.findViewById(R.id.imgProduct);
+            storeName = itemView.findViewById(R.id.storeName);
+            storeImage = itemView.findViewById(R.id.storeImage);
+            txtQuantity = itemView.findViewById(R.id.count_product);
+        }
+    }
+}

@@ -5,11 +5,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Query;
 import vn.iotstar.cosmeticshopapp.model.AddToCartResponse;
+import vn.iotstar.cosmeticshopapp.model.CartItem;
 import vn.iotstar.cosmeticshopapp.model.CartResponse;
 import vn.iotstar.cosmeticshopapp.model.CategoryAndStyleResponse;
 import vn.iotstar.cosmeticshopapp.model.FollowProductResponse;
@@ -73,5 +78,11 @@ public interface APIService {
     @POST("product/getProductByStyle")
     @FormUrlEncoded
     Call<ProductResponse> getProductByStyle(@Field("styleId") Integer styleId, @Field("isSelling") Boolean isSelling);
+
+    @PUT("cartItem/updateCartItem")
+    Call<AddToCartResponse> updateCartItem(@Body CartItem cartItem);
+
+    @DELETE("cartItem/deleteCartItem")
+    Call<AddToCartResponse> deleteCartItem(@Query("cartItemId") int cartItemId);
 }
 

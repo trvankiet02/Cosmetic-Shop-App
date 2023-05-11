@@ -76,4 +76,12 @@ public class CartItem implements Serializable
         this.updateAt = updateAt;
     }
 
+    public CartItem(Integer id, Product product, String size, Integer quantity, String createAt, Object updateAt) {
+        this.id = id;
+        this.product = product;
+        this.size = size;
+        this.quantity = quantity;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+    }
 }
