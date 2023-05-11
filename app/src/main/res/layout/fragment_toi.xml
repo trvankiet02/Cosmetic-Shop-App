@@ -37,6 +37,7 @@
                             android:layout_marginEnd="15dp"
                             android:src="@drawable/img_icon_camera"/>
                         <ImageView
+                            android:id="@+id/btnProfile"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_marginEnd="15dp"
