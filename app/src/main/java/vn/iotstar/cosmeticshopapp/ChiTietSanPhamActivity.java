@@ -240,7 +240,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
 
     private void setFollowProduct(){
-        Log.d("TAG", "userFromShared: " + sharedPrefManager.getUser().getId());
         apiService.getFollowProduct(sharedPrefManager.getUser().getId()).enqueue(new Callback<FollowProductResponse>() {
             @Override
             public void onResponse(Call<FollowProductResponse> call, Response<FollowProductResponse> response) {
@@ -248,13 +247,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 isLiked = false;
                 if (response.isSuccessful()){
                     for (UserFollowProduct userFollowProduct : response.body().getBody()){
-                        Log.d("TAG", "followProduct: productFollow: " + userFollowProduct.getProduct().getId());
                         if (userFollowProduct.getProduct().getId().equals(product.getId())){
-                            Log.d("TAG", "onResponse: " + "true");
                             imgLike.setBackgroundResource(R.drawable.icon_favourited);
                             isLiked = true;
                         } else {
-                            Log.d("TAG", "onResponse: " + "false");
+                            imgLike.setBackgroundResource(R.drawable.icon_favourite);
+                            isLiked = false;
                         }
                     }
                 }

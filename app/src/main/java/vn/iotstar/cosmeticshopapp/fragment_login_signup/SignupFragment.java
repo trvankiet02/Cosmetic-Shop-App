@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -35,6 +36,15 @@ public class SignupFragment extends Fragment {
     APIService apiService;
     ProgressDialog progressDialog;
     TextInputLayout passwordLayout, emailLayout, rePasswordLayout;
+    public interface OnButtonClickListener {
+        void onButtonClick();
+    }
+
+    private OnButtonClickListener onButtonClickListener;
+    public void setOnButtonClickListener(OnButtonClickListener listener) {
+        this.onButtonClickListener = listener;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -117,16 +127,22 @@ public class SignupFragment extends Fragment {
                     public void onResponse(Call<LoginSignupResponse> call, Response<LoginSignupResponse> response) {
                         if (response.isSuccessful()){
                             progressDialog.dismiss();
-                            Intent intent = new Intent(getContext(), LoginSignupActivity.class);
-                            startActivity(intent);
+                            /*Intent intent = new Intent(getContext(), LoginSignupActivity.class);
+                            startActivity(intent);*/
+                            if (onButtonClickListener != null) {
+                                onButtonClickListener.onButtonClick();
+                            }
+                            Toast.makeText(getContext(), "Đăng ký thành công", Toast.LENGTH_SHORT).show();
 
                         } else {
+                            progressDialog.dismiss();
                             Log.e("TAG", "Error on response: " + response.code());
                         }
                     }
 
                     @Override
                     public void onFailure(Call<LoginSignupResponse> call, Throwable t) {
+                        progressDialog.dismiss();
                         Log.e("TAG", "onFailure: " + t.getMessage());
                     }
                 });

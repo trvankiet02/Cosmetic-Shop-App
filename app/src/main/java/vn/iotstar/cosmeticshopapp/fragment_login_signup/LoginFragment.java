@@ -43,6 +43,13 @@ public class LoginFragment extends Fragment {
     APIService apiService;
     SharedPrefManager sharedPrefManager;
     TextInputLayout passwordLayout, emailLayout;
+    public interface OnButtonClickListener {
+        void onButtonClick();
+    }
+    private OnButtonClickListener onButtonClickListener;
+    public void setOnButtonClickListener(OnButtonClickListener listener) {
+        this.onButtonClickListener = listener;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

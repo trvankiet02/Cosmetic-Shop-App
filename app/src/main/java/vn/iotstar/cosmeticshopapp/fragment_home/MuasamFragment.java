@@ -50,12 +50,20 @@ public class MuasamFragment extends Fragment {
     RecyclerView rvCategoryHome;
     List<Category> categoryList;
     CategoryHomeAdapter categoryHomeAdapter;
-    ImageView GioHang;
+    ImageView GioHang, ivFavouriteProduct;
     APIService apiService;
     SharedPrefManager sharedPrefManager;
     Boolean isLoading = false;
     ProductFlashSaleAdapter productFlashSaleAdapter;
     List<Product> productFlashSaleList = new ArrayList<>();
+    public interface OnButtonClickListener {
+        void onButtonClick();
+    }
+    private OnButtonClickListener onButtonClickListener;
+    public void setOnButtonClickListener(OnButtonClickListener listener) {
+        this.onButtonClickListener = listener;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,7 +74,7 @@ public class MuasamFragment extends Fragment {
         setRvProductDeNghi();
         setRvCategoryHome();
         setRvProductSale();
-
+        setFavoriteProduct();
         GioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,6 +86,16 @@ public class MuasamFragment extends Fragment {
 
     }
 
+    private void setFavoriteProduct() {
+        ivFavouriteProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onButtonClickListener != null) {
+                    onButtonClickListener.onButtonClick();
+                }
+            }
+        });
+    }
 
 
     @Override
@@ -130,6 +148,7 @@ public class MuasamFragment extends Fragment {
         apiService = RetrofitCosmeticShop.getRetrofit().create(APIService.class);
         sharedPrefManager = new SharedPrefManager(getContext());
         rvFlashSale = (RecyclerView) view.findViewById(R.id.rvFlashSale);
+        ivFavouriteProduct = (ImageView) view.findViewById(R.id.ivFavouriteProduct);
     }
 
     private void setRvProductDeNghi(){

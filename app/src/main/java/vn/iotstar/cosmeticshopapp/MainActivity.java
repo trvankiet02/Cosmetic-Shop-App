@@ -57,11 +57,19 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         //adapter
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        viewPagerAdapter.addFragment(new MuasamFragment(), "Mua sắm");
-        viewPagerAdapter.addFragment(new DanhmucFragment(), "Danh mục");
-        viewPagerAdapter.addFragment(new MoiFragment(), "Mới");
-        viewPagerAdapter.addFragment(new TinNhanFragment(), "Bộ sưu tập");
-        viewPagerAdapter.addFragment(new ToiFragment(), "Tôi");
+        MuasamFragment muasamFragment = new MuasamFragment();
+        DanhmucFragment danhmucFragment = new DanhmucFragment();
+        MoiFragment moiFragment = new MoiFragment();
+        TinNhanFragment tinNhanFragment = new TinNhanFragment();
+        ToiFragment toiFragment = new ToiFragment();
+
+        viewPagerAdapter.addFragment(muasamFragment, "Mua sắm");
+        viewPagerAdapter.addFragment(danhmucFragment, "Danh mục");
+        viewPagerAdapter.addFragment(moiFragment, "Mới");
+        viewPagerAdapter.addFragment(tinNhanFragment, "Bộ sưu tập");
+        viewPagerAdapter.addFragment(toiFragment, "Tôi");
+
+
         //map menu item
         menuItemMap = new HashMap<>();
         menuItemMap.put(R.id.muasam, 0);
@@ -69,6 +77,19 @@ public class MainActivity extends AppCompatActivity {
         menuItemMap.put(R.id.moi, 2);
         menuItemMap.put(R.id.gals, 3);
         menuItemMap.put(R.id.toi, 4);
+
+        muasamFragment.setOnButtonClickListener(new MuasamFragment.OnButtonClickListener() {
+            @Override
+            public void onButtonClick() {
+                viewPager.setCurrentItem(4);
+            }
+        });
+        danhmucFragment.setOnButtonClickListener(new DanhmucFragment.OnButtonClickListener() {
+            @Override
+            public void onButtonClick() {
+                viewPager.setCurrentItem(4);
+            }
+        });
     }
 
     private void setBottomNavigationView(){

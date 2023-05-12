@@ -1,5 +1,6 @@
 package vn.iotstar.cosmeticshopapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Handler;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -37,12 +40,16 @@ import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyViewHolder>{
     Context context;
     List<CartItem> array;
+    ArrayList<CartItem> selectedCartItems;
 
     public CartItemAdapter(Context context, List<CartItem> array) {
         this.context = context;
         this.array = array;
+        selectedCartItems = new ArrayList<>();
     }
-
+    public List<CartItem> getSelectedCartItemList() {
+        return selectedCartItems;
+    }
     public  List<CartItem> getModelList() {
         return array;
     }
@@ -54,12 +61,14 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_item_cart_item, null);
         CartItemAdapter.MyViewHolder myViewHolder = new CartItemAdapter.MyViewHolder(view);
+
+
         return myViewHolder;
     }
-
     @Override
-    public void onBindViewHolder(@NonNull CartItemAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CartItemAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         CartItem cartItem = array.get(position);
+        holder.checkBox.setChecked(selectedCartItems.contains(cartItem));
         holder.ProductName.setText(cartItem.getProduct().getName());
         holder.ProductPrice.setText(String.valueOf(cartItem.getProduct().getPromotionalPrice()) + "đ");
         holder.txtQuantity.setText(String.valueOf(cartItem.getQuantity()));
@@ -179,13 +188,24 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
                 }
             }
         });
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (selectedCartItems.contains(cartItem)){
+                    selectedCartItems.remove(cartItem);
+                    notifyDataSetChanged();
+                } else {
+                    selectedCartItems.add(cartItem);
+                    notifyDataSetChanged();
+                }
+            }
+        });
     }
+
 
     private void onItemSelectedHandler(AdapterView<?> parent, View view, int position, long id) {
         Adapter adapter = (Adapter) parent.getAdapter();
         String size = adapter.getItem(position).toString();
-
-        Log.e("TAG", "onItemSelectedHandler: " + size);
     }
 
     @Override
@@ -202,6 +222,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
         public ProgressDialog progressDialog;
         APIService apiService;
         ImageButton btnTang, btnGiam;
+        public CheckBox checkBox;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -226,6 +247,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
             txtQuantity = itemView.findViewById(R.id.count_product);
             btnTang = itemView.findViewById(R.id.btnTang);
             btnGiam = itemView.findViewById(R.id.btnGiam);
+            checkBox = itemView.findViewById(R.id.checkbox);
         }
     }
 }

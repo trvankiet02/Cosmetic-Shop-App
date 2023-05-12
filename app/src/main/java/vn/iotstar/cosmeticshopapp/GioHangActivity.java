@@ -4,6 +4,12 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -22,6 +28,7 @@ import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.helper.SwipeHelper;
 import vn.iotstar.cosmeticshopapp.adapter.CartItemAdapter;
 import vn.iotstar.cosmeticshopapp.model.Cart;
+import vn.iotstar.cosmeticshopapp.model.CartItem;
 import vn.iotstar.cosmeticshopapp.model.CartResponse;
 import vn.iotstar.cosmeticshopapp.model.Product;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
@@ -40,6 +47,10 @@ public class GioHangActivity extends AppCompatActivity {
     APIService apiService;
     ProgressDialog progressDialog;
     SharedPrefManager sharedPrefManager;
+    ImageView ivFavouriteProduct;
+    TextView tvTotalPrice, btnThanhToan;
+    CheckBox cbSelectAll;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +58,33 @@ public class GioHangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_giohang);
         AnhXa();
         setRvProductGioHang();
+        setBtnThanhToan();
         //btnXoa();
+    }
+
+    private void setBtnThanhToan() {
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                productGioHangAdapter.getSelectedCartItem();
+                for (CartItem cI: productGioHangAdapter.getSelectedCartItem()) {
+                    Log.e("TAG", "setBtnThanhToan: " + cI.getSize() + " " + cI.getQuantity());
+                }
+            }
+        });
+    }
+
+    private void setCheckAll(){
+        cbSelectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbSelectAll.isChecked()) {
+
+                } else {
+
+                }
+            }
+        });
     }
 
     private void setRvProductGioHang() {
@@ -81,6 +118,10 @@ public class GioHangActivity extends AppCompatActivity {
         setProgressDialog();
         sharedPrefManager = new SharedPrefManager(this);
         carts = new ArrayList<>();
+        ivFavouriteProduct = (ImageView) findViewById(R.id.ivFavouriteProduct);
+        tvTotalPrice = (TextView) findViewById(R.id.tvTongTien);
+        cbSelectAll = (CheckBox) findViewById(R.id.cbAll);
+        btnThanhToan = (TextView) findViewById(R.id.btnThanhToan);
     }
 
     private void setProgressDialog() {

@@ -37,13 +37,24 @@ public class LoginSignupActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.vpLoginSignup);
         //adapter
         loginSignupAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        loginSignupAdapter.addFragment(new LoginFragment(), "Đăng nhập");
-        loginSignupAdapter.addFragment(new SignupFragment(), "Đăng ký");
+        LoginFragment loginFragment = new LoginFragment();
+        SignupFragment signupFragment = new SignupFragment();
+        loginSignupAdapter.addFragment(loginFragment, "Đăng nhập");
+        loginSignupAdapter.addFragment(signupFragment, "Đăng ký");
+
+        signupFragment.setOnButtonClickListener(new SignupFragment.OnButtonClickListener() {
+            @Override
+            public void onButtonClick() {
+                viewPager.setCurrentItem(0);
+            }
+        });
     }
 
     private void setTabLayout(){
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(loginSignupAdapter);
         loginSignupAdapter.notifyDataSetChanged();
+
+
     }
 }

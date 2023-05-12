@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class StyleActivity extends AppCompatActivity {
     Style style;
     Category cate;
     TextView tvTitle;
+    ImageView imgBack, imgCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,27 @@ public class StyleActivity extends AppCompatActivity {
         //set 2 recycler view
         setStyleRecyclerView();
         setProductRecyclerView();
+        setImgBack();
+        setImgCart();
+    }
+
+    private void setImgBack() {
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    private void setImgCart() {
+        imgCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StyleActivity.this, GioHangActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void anhXa() {
@@ -59,6 +82,8 @@ public class StyleActivity extends AppCompatActivity {
         apiService = RetrofitCosmeticShop.getRetrofit().create(APIService.class);
         styleList = new ArrayList<>();
         tvTitle = findViewById(R.id.tvTitle);
+        imgBack = findViewById(R.id.ivBack);
+        imgCart = findViewById(R.id.ivCart);
     }
 
     private void getCategoryFromAdapter() {

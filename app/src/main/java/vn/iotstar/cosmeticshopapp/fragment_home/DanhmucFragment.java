@@ -1,9 +1,11 @@
 package vn.iotstar.cosmeticshopapp.fragment_home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -15,6 +17,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.iotstar.cosmeticshopapp.GioHangActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.adapter.CategorySideBarAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.StyleSideBarAdapter;
@@ -36,6 +39,15 @@ public class DanhmucFragment extends Fragment {
     StyleSideBarAdapter styleSideBarAdapter;
     APIService apiService;
     SharedPrefManager sharedPrefManager;
+    ImageView ivFavouriteProduct, ivCart;
+    public interface OnButtonClickListener {
+        void onButtonClick();
+    }
+    private OnButtonClickListener onButtonClickListener;
+    public void setOnButtonClickListener(OnButtonClickListener listener) {
+        this.onButtonClickListener = listener;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,7 +55,7 @@ public class DanhmucFragment extends Fragment {
 
         AnhXa();
         setRvCategory();
-
+        setIvCart();
         return view;
 
     }
@@ -85,6 +97,24 @@ public class DanhmucFragment extends Fragment {
         rvStyle = (RecyclerView) view.findViewById(R.id.rvStyle);
         apiService = RetrofitCosmeticShop.getRetrofit().create(APIService.class);
         sharedPrefManager = new SharedPrefManager(getContext());
+        ivCart = (ImageView) view.findViewById(R.id.ivCart);
+        ivFavouriteProduct = (ImageView) view.findViewById(R.id.ivFavouriteProduct);
+        ivFavouriteProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onButtonClickListener != null) {
+                    onButtonClickListener.onButtonClick();
+                }
+            }
+        });
     }
-
+    private void setIvCart(){
+        ivCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), GioHangActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 }

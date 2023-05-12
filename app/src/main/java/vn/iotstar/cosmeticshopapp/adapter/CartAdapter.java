@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,16 +36,22 @@ import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     Context context;
     List<Cart> array;
+    List<CartItem> cartItemList = new ArrayList<>();
     public CartAdapter(Context context, List<Cart> array) {
         this.context = context;
         this.array = array;
     }
+    public List<CartItem> getSelectedCartItem (){
+        return cartItemList;
+    }
+
     @NonNull
     @Override
     public CartAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_item_cart, null);
         CartAdapter.MyViewHolder myViewHolder = new CartAdapter.MyViewHolder(view);
+
         return myViewHolder;
     }
 
@@ -63,6 +70,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             holder.rvCart_item.setHasFixedSize(true);
             holder.rvCart_item.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
             holder.cartItemAdapter.notifyDataSetChanged();
+            cartItemList = holder.cartItemAdapter.getSelectedCartItemList();
             holder.swipeHelper = new SwipeHelper(context, holder.rvCart_item, false) {
                 @Override
                 public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
