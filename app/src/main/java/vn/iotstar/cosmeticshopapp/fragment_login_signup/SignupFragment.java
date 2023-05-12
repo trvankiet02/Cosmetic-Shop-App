@@ -1,6 +1,7 @@
 package vn.iotstar.cosmeticshopapp.fragment_login_signup;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.iotstar.cosmeticshopapp.LoginSignupActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.LoginSignupResponse;
@@ -115,12 +117,8 @@ public class SignupFragment extends Fragment {
                     public void onResponse(Call<LoginSignupResponse> call, Response<LoginSignupResponse> response) {
                         if (response.isSuccessful()){
                             progressDialog.dismiss();
-                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                            LoginFragment newFragment = new LoginFragment();
-                            fragmentTransaction.replace(R.id.vpLoginSignup, newFragment);
-                            fragmentTransaction.commit();
+                            Intent intent = new Intent(getContext(), LoginSignupActivity.class);
+                            startActivity(intent);
 
                         } else {
                             Log.e("TAG", "Error on response: " + response.code());

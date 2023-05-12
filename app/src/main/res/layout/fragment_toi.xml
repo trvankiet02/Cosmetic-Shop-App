@@ -6,7 +6,7 @@
     tools:context=".fragment_home.ToiFragment"
     android:background="@color/background_muasam">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbarSize="0dp">
@@ -376,21 +376,22 @@
                     android:background="@color/white">
 
                     <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="15dp"
-                        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-                        app:tabSelectedTextColor="@android:color/black"
-                        android:layout_gravity="center_horizontal"
                         app:tabIndicatorColor="@color/black"
                         app:tabIndicatorFullWidth="false"
-                        app:tabIndicatorHeight="3dp">
+                        app:tabIndicatorHeight="3dp"
+                        app:tabSelectedTextColor="@android:color/black"
+                        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
 
                         <com.google.android.material.tabs.TabItem
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Danh sách yêu thích"/>
+                            android:text="Danh sách yêu thích" />
 
                         <com.google.android.material.tabs.TabItem
                             android:layout_width="wrap_content"
@@ -398,17 +399,16 @@
                             android:text="Đã xem gần đây" />
 
                     </com.google.android.material.tabs.TabLayout>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="2000dp"
-                        android:scrollbars="vertical"
-                        android:background="@color/white">
 
-                    </androidx.recyclerview.widget.RecyclerView>
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/vpProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="670dp" />
+
                 </LinearLayout>
 
             </LinearLayout>
 
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

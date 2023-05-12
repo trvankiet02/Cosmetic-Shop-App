@@ -36,7 +36,7 @@ public interface APIService {
     @FormUrlEncoded
     Call<LoginSignupResponse> login(@Field("email") String email, @Field("password") String password);
 
-    @POST("/signup")
+    @POST("signup")
     @FormUrlEncoded
     Call<LoginSignupResponse> signup(
             @Field("email") String email,

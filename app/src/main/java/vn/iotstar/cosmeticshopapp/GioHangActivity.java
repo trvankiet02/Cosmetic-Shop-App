@@ -80,6 +80,7 @@ public class GioHangActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         setProgressDialog();
         sharedPrefManager = new SharedPrefManager(this);
+        carts = new ArrayList<>();
     }
 
     private void setProgressDialog() {

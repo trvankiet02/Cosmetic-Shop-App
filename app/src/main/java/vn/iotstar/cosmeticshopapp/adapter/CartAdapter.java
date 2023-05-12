@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,55 +51,64 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.MyViewHolder holder, int position) {
         Cart cart = array.get(position);
-        for (CartItem cartItem : cart.getCartItems()) {
-            cart.addCartItem(cartItem);
-        }
-        holder.storeName.setText(cart.getStore().getName());
-        Glide.with(context).load(cart.getStore().getStoreImage()).into(holder.storeImage);
-        holder.cartItemAdapter = new CartItemAdapter(context, cart.getCartItems());
-        holder.rvCart_item.setAdapter(holder.cartItemAdapter);
-        holder.rvCart_item.setHasFixedSize(true);
-        holder.rvCart_item.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
-        holder.cartItemAdapter.notifyDataSetChanged();
-        holder.swipeHelper = new SwipeHelper(context, holder.rvCart_item, false) {
-            @Override
-            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
-                Typeface typeface = Typeface.create("sans-serif", Typeface.SANS_SERIF.getStyle());
-                // Button Xóa
-                underlayButtons.add(new SwipeHelper.UnderlayButton(
-                        "Xóa",
-                        null, // icon set to null to remove image
-                        Color.parseColor("#FF0000"),
-                        Color.parseColor("#FFFFFF"),
-                        typeface,
-                        new UnderlayButtonClickListener() {
-                            @Override
-                            public void onClick(int pos) {
-                                holder.progressDialog.show();
-                                holder.apiService.deleteCartItem(cart.getCartItems().get(pos).getId()).enqueue(new Callback<AddToCartResponse>() {
-                                    @Override
-                                    public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
-                                        holder.progressDialog.dismiss();
-                                        Toast.makeText(
-                                                context,
-                                                "Đã xóa",
-                                                Toast.LENGTH_SHORT
-                                        ).show();
-                                        cart.getCartItems().remove(pos);
-                                        holder.cartItemAdapter.notifyItemRemoved(pos);
-                                        holder.cartItemAdapter.notifyItemRangeRemoved(pos, 1);
-                                        holder.cartItemAdapter.notifyItemRangeChanged(pos, cart.getCartItems().size());
-                                    }
-                                    @Override
-                                    public void onFailure(Call<AddToCartResponse> call, Throwable t) {
-                                    }
-                                });
-
-                            }
-                        }
-                ));
+        if (cart.getCartItems().size() >0 ) {
+            Log.e("TAG", "onBindViewHolder: " + cart.getCartItems().size());
+            for (CartItem cartItem : cart.getCartItems()) {
+                cart.addCartItem(cartItem);
             }
-        };
+            holder.storeName.setText(cart.getStore().getName());
+            Glide.with(context).load(cart.getStore().getStoreImage()).into(holder.storeImage);
+            holder.cartItemAdapter = new CartItemAdapter(context, cart.getCartItems());
+            holder.rvCart_item.setAdapter(holder.cartItemAdapter);
+            holder.rvCart_item.setHasFixedSize(true);
+            holder.rvCart_item.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
+            holder.cartItemAdapter.notifyDataSetChanged();
+            holder.swipeHelper = new SwipeHelper(context, holder.rvCart_item, false) {
+                @Override
+                public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
+                    Typeface typeface = Typeface.create("sans-serif", Typeface.SANS_SERIF.getStyle());
+                    // Button Xóa
+                    underlayButtons.add(new SwipeHelper.UnderlayButton(
+                            "Xóa",
+                            null, // icon set to null to remove image
+                            Color.parseColor("#FF0000"),
+                            Color.parseColor("#FFFFFF"),
+                            typeface,
+                            new UnderlayButtonClickListener() {
+                                @Override
+                                public void onClick(int pos) {
+                                    holder.progressDialog.show();
+                                    holder.apiService.deleteCartItem(cart.getCartItems().get(pos).getId()).enqueue(new Callback<AddToCartResponse>() {
+                                        @Override
+                                        public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
+                                            holder.progressDialog.dismiss();
+                                            Toast.makeText(
+                                                    context,
+                                                    "Đã xóa",
+                                                    Toast.LENGTH_SHORT
+                                            ).show();
+                                            cart.getCartItems().remove(pos);
+                                            holder.cartItemAdapter.notifyItemRemoved(pos);
+                                            holder.cartItemAdapter.notifyItemRangeRemoved(pos, 1);
+                                            holder.cartItemAdapter.notifyItemRangeChanged(pos, cart.getCartItems().size());
+                                            if (holder.cartItemAdapter.getItemCount() == 0) {
+                                                holder.itemView.setVisibility(View.GONE);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<AddToCartResponse> call, Throwable t) {
+                                        }
+                                    });
+
+                                }
+                            }
+                    ));
+                }
+            };
+        } else {
+            holder.itemView.setVisibility(View.GONE);
+        }
     }
 
     @Override
