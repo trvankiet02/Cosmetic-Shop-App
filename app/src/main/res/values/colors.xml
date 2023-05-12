@@ -19,4 +19,5 @@
     <color name="background_voucher">#FFF5F3</color>
     <color name="text_voucher">#AD4E2B</color>
     <color name="grey">#D3D3D3</color>
+    <color name="grey_dark">#9E9E9E</color>
 </resources>
