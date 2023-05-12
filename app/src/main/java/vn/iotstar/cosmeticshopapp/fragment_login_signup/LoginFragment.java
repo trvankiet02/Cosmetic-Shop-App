@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +42,7 @@ public class LoginFragment extends Fragment {
     View view;
     APIService apiService;
     SharedPrefManager sharedPrefManager;
+    TextInputLayout passwordLayout, emailLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +62,15 @@ public class LoginFragment extends Fragment {
                 progressDialog.show();
 
                 String email = edtEmail.getText().toString().trim(); //trim() xoa khoang trang dau va cuoi
+
+                if (Patterns.EMAIL_ADDRESS.matcher(email).matches() == false){
+                    progressDialog.dismiss();
+                    emailLayout.setError("Địa chỉ Email không hợp lệ");
+                    return;
+                } else {
+                    emailLayout.setError(null);
+                }
+
                 String password = edtPassword.getText().toString().trim();
 
                 apiService.login(email, password).enqueue(new Callback<LoginSignupResponse>() {
@@ -70,6 +84,7 @@ public class LoginFragment extends Fragment {
                         } else {
                             progressDialog.dismiss();
                             Toast.makeText(getContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                            passwordLayout.setError("Địa chỉ Email hoặc Mật khẩu nhập không chính xác");
                         }
                     }
 
@@ -84,19 +99,23 @@ public class LoginFragment extends Fragment {
         });
     }
     private void anhXa(){
-        edtEmail = (EditText) view.findViewById(R.id.edtEmail);
-        edtPassword = (EditText) view.findViewById(R.id.edtPassword);
+        edtEmail = view.findViewById(R.id.edtEmail);
+        edtPassword = view.findViewById(R.id.edtPassword);
         btnLogin = (Button) view.findViewById(R.id.btnLogin);
         tvForgotPassword = (TextView) view.findViewById(R.id.tvForgotPassword);
         apiService = RetrofitCosmeticShop.getRetrofit().create(APIService.class);
         sharedPrefManager = new SharedPrefManager(getContext());
         progressDialog = new ProgressDialog(getContext());
         setProgressDialog();
+        emailLayout = view.findViewById(R.id.emailLayout);
+        passwordLayout = view.findViewById(R.id.passwordLayout);
 
     }
     private void setProgressDialog(){
         progressDialog.setTitle("Đang đăng nhập");
         progressDialog.setMessage("Làm ơn hãy đợi trong giây lát...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        //progressDialog.setCancelable(false);
+        //progressDialog.setCanceledOnTouchOutside(false);
     }
 }

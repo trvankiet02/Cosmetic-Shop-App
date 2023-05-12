@@ -12,12 +12,17 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import vn.iotstar.cosmeticshopapp.model.AddToCartResponse;
+import vn.iotstar.cosmeticshopapp.model.Address;
+import vn.iotstar.cosmeticshopapp.model.AddressResponse;
 import vn.iotstar.cosmeticshopapp.model.CartItem;
 import vn.iotstar.cosmeticshopapp.model.CartResponse;
+import vn.iotstar.cosmeticshopapp.model.Category;
 import vn.iotstar.cosmeticshopapp.model.CategoryAndStyleResponse;
 import vn.iotstar.cosmeticshopapp.model.FollowProductResponse;
+import vn.iotstar.cosmeticshopapp.model.ListAddressResponse;
 import vn.iotstar.cosmeticshopapp.model.LoginSignupResponse;
 import vn.iotstar.cosmeticshopapp.model.OrderResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
@@ -31,8 +36,20 @@ public interface APIService {
     @FormUrlEncoded
     Call<LoginSignupResponse> login(@Field("email") String email, @Field("password") String password);
 
+    @POST("/signup")
+    @FormUrlEncoded
+    Call<LoginSignupResponse> signup(
+            @Field("email") String email,
+            @Field("password") String password,
+            @Field("rePassword") String rePassword
+    );
     @GET("category")
     Call<CategoryAndStyleResponse> getCategory();
+
+    @POST("category/getCategoryByStyle")
+    @FormUrlEncoded
+    Call<CategoryAndStyleResponse> getCategoryByStyle(@Field("styleId") Integer styleId);
+
     @GET("style")
     Call<CategoryAndStyleResponse> getStyle();
 
@@ -80,9 +97,21 @@ public interface APIService {
     Call<ProductResponse> getProductByStyle(@Field("styleId") Integer styleId, @Field("isSelling") Boolean isSelling);
 
     @PUT("cartItem/updateCartItem")
-    Call<AddToCartResponse> updateCartItem(@Body CartItem cartItem);
+    Call<AddToCartResponse> updateCartItem(@Body CartItem cartItem, @Query("cartId") Integer cartId);
 
     @DELETE("cartItem/deleteCartItem")
     Call<AddToCartResponse> deleteCartItem(@Query("cartItemId") int cartItemId);
+
+    @GET("address/user/{id}")
+    Call<ListAddressResponse> getAddressByUserId(@Path("id") Integer id);
+
+    @DELETE("address/{id}")
+    Call<Void> deleteAddress(@Path("id") Integer id);
+
+    @GET("address/{id}")
+    Call<AddressResponse> getAddress(@Path("id") Integer id);
+
+    @PUT("address/addOrUpdate")
+    Call<AddressResponse> addOrUpdateAddress(@Body Address address, @Query("userId") Integer userId);
 }
 

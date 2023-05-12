@@ -233,6 +233,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
     private void setProgressDialog() {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setTitle("Vui lòng đợi");
+        progressDialog.setMessage("Đang xử lý yêu cầu...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(false);
     }
 
     private void setFollowProduct(){
@@ -264,6 +268,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         imgLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (sharedPrefManager.getUser().getId() == -1){
+                    Intent intent = new Intent(ChiTietSanPhamActivity.this, LoginSignupActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(ChiTietSanPhamActivity.this, "Vui lòng đăng nhập để thực hiện chức năng này", Toast.LENGTH_SHORT).show();
+                }
                 progressDialog.show();
                 if (isLiked) {
                     apiService.followOrUnfollow(sharedPrefManager.getUser().getId(), product.getId()).enqueue(new Callback<FollowProductResponse>() {
@@ -328,6 +337,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                             if (response.isSuccessful()){
                                 Toast.makeText(ChiTietSanPhamActivity.this, "Thêm vào giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
+                            } else {
+                                if (response.code() == 400){
+                                    Toast.makeText(ChiTietSanPhamActivity.this, "Số lượng thêm đã vượt quá số lượng sản phẩm hiện có", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                }
+
                             }
                         }
                         @Override

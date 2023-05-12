@@ -25,8 +25,18 @@ public class CartItem implements Serializable
     private String createAt;
     @SerializedName("updateAt")
     @Expose
-    private Object updateAt;
+    private String updateAt;
     private final static long serialVersionUID = -4946597825171164199L;
+
+    private Cart cart;
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 
     public Integer getId() {
         return id;
@@ -68,15 +78,15 @@ public class CartItem implements Serializable
         this.createAt = createAt;
     }
 
-    public Object getUpdateAt() {
+    public String getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(Object updateAt) {
+    public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
     }
 
-    public CartItem(Integer id, Product product, String size, Integer quantity, String createAt, Object updateAt) {
+    public CartItem(Integer id, Product product, String size, Integer quantity, String createAt, String updateAt) {
         this.id = id;
         this.product = product;
         this.size = size;

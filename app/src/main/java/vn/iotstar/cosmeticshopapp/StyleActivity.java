@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import vn.iotstar.cosmeticshopapp.adapter.CategoryHomeAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.ProductHomeAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.StyleOfStyleAdapter;
 import vn.iotstar.cosmeticshopapp.api.APIService;
+import vn.iotstar.cosmeticshopapp.model.Category;
 import vn.iotstar.cosmeticshopapp.model.CategoryAndStyleResponse;
 import vn.iotstar.cosmeticshopapp.model.Product;
 import vn.iotstar.cosmeticshopapp.model.ProductResponse;
@@ -36,36 +38,70 @@ public class StyleActivity extends AppCompatActivity {
     StyleOfStyleAdapter styleOfStyleAdapter;
     List<Style> styleList;
     Style style;
+    Category cate;
+    TextView tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_style);
         anhXa();
+        getCategoryFromAdapter();
         getStyleFromAdapter();
         //set 2 recycler view
         setStyleRecyclerView();
         setProductRecyclerView();
     }
+
     private void anhXa() {
         rcStyle = findViewById(R.id.rcStyle);
         rvProduct = findViewById(R.id.rvProduct);
         apiService = RetrofitCosmeticShop.getRetrofit().create(APIService.class);
         styleList = new ArrayList<>();
+        tvTitle = findViewById(R.id.tvTitle);
     }
-    private void getStyleFromAdapter(){
+
+    private void getCategoryFromAdapter() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        cate = (Category) bundle.getSerializable("category");
+        //Log.d("TAG", "getCategoryFromMain: " + cate.getName());
+    }
+
+    private void getStyleFromAdapter() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         style = (Style) bundle.getSerializable("style");
-        Log.d("TAG", "getProductFromAdapter: " + style.getId());
+        //Log.d("TAG", "getProductFromAdapter: " + style.getId());
     }
 
     private void setStyleRecyclerView() {
+        if (cate != null){
+            style = cate.getStyles().get(0);
+            tvTitle.setText(cate.getName());
+        } else {
+            apiService.getCategoryByStyle(style.getId()).enqueue(new Callback<CategoryAndStyleResponse>() {
+                @Override
+                public void onResponse(Call<CategoryAndStyleResponse> call, Response<CategoryAndStyleResponse> response) {
+                    if (response.isSuccessful()) {
+                        CategoryAndStyleResponse categoryAndStyleResponse = response.body();
+                        cate = categoryAndStyleResponse.getBody().get(0);
+                        tvTitle.setText(cate.getName());
+                    } else {
+                        Log.e("TAG", "onResponse: " + response.message());
+                    }
+                }
 
+                @Override
+                public void onFailure(Call<CategoryAndStyleResponse> call, Throwable t) {
+
+                }
+            });
+        }
         apiService.getStyleSelling(style.getId()).enqueue(new Callback<StyleByCategoryResponse>() {
             @Override
             public void onResponse(Call<StyleByCategoryResponse> call, Response<StyleByCategoryResponse> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Style allStyle = new Style();
                     styleList = response.body().getBody();
                     styleOfStyleAdapter = new StyleOfStyleAdapter(StyleActivity.this, styleList);
@@ -79,10 +115,10 @@ public class StyleActivity extends AppCompatActivity {
                             apiService.getProductByStyle(style.getId(), true).enqueue(new Callback<ProductResponse>() {
                                 @Override
                                 public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                                    if (response.isSuccessful()){
+                                    if (response.isSuccessful()) {
                                         products = response.body().getBody();
-                                        if (products == null){
-                                            Log.e("TAG", "onResponse: " + "NULL" );
+                                        if (products == null) {
+                                            Log.e("TAG", "onResponse: " + "NULL");
                                         }
                                         productHomeAdapter = new ProductHomeAdapter(StyleActivity.this, products);
                                         rvProduct.setHasFixedSize(true);
@@ -108,6 +144,7 @@ public class StyleActivity extends AppCompatActivity {
                     Log.e("TAG", "onResponse: " + response.message());
                 }
             }
+
             @Override
             public void onFailure(Call<StyleByCategoryResponse> call, Throwable t) {
 
@@ -119,10 +156,10 @@ public class StyleActivity extends AppCompatActivity {
         apiService.getProductByStyle(style.getId(), true).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     products = response.body().getBody();
-                    if (products == null){
-                        Log.e("TAG", "onResponse: " + "NULL" );
+                    if (products == null) {
+                        Log.e("TAG", "onResponse: " + "NULL");
                     }
                     productHomeAdapter = new ProductHomeAdapter(StyleActivity.this, products);
                     rvProduct.setHasFixedSize(true);

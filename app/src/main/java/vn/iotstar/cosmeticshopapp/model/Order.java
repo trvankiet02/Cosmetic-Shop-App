@@ -14,6 +14,9 @@ public class Order implements Serializable
     @SerializedName("delivery")
     @Expose
     private Delivery delivery;
+    @SerializedName("name")
+    @Expose
+    private String name;
     @SerializedName("store")
     @Expose
     private Store store;
@@ -38,7 +41,7 @@ public class Order implements Serializable
     @SerializedName("orderItems")
     @Expose
     private List<OrderItem> orderItems;
-    private final static long serialVersionUID = -7536799767692161604L;
+    private final static long serialVersionUID = -6815536380145437055L;
 
     public Integer getId() {
         return id;
@@ -54,6 +57,14 @@ public class Order implements Serializable
 
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Store getStore() {

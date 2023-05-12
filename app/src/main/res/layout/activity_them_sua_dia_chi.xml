@@ -63,6 +63,7 @@
                             android:textSize="19dp"
                             android:textColor="#000"/>
                         <EditText
+                            android:id="@+id/edtHo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
@@ -92,6 +93,7 @@
                         android:textSize="19dp"
                         android:textColor="#000"/>
                     <EditText
+                        android:id="@+id/edtTen"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
@@ -121,6 +123,7 @@
                         android:textSize="19dp"
                         android:textColor="#000"/>
                     <EditText
+                        android:id="@+id/edtSDT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
@@ -152,7 +155,8 @@
                         android:text="Địa chỉ nhận hàng"
                         android:textSize="19dp"
                         android:textColor="#000"/>
-                    <AutoCompleteTextView
+                    <EditText
+                        android:id="@+id/edtDiaChi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"

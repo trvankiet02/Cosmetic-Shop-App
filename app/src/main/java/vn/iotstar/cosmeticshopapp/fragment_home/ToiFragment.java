@@ -41,7 +41,11 @@ public class ToiFragment extends Fragment {
                 }
             });
         } else {
-            txtLogin.setText("Xin chào " + sharedPrefManager.getUser().getFirstName() + " " + sharedPrefManager.getUser().getLastName());
+            if (sharedPrefManager.getUser().getFirstName() == null && sharedPrefManager.getUser().getLastName() == null){
+                txtLogin.setText("Xin chào " + sharedPrefManager.getUser().getEmail());
+            } else {
+                txtLogin.setText("Xin chào " + sharedPrefManager.getUser().getFirstName() + " " + sharedPrefManager.getUser().getLastName());
+            }
         }
         return view;
     }

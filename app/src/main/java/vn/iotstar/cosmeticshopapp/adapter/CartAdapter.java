@@ -50,6 +50,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.MyViewHolder holder, int position) {
         Cart cart = array.get(position);
+        for (CartItem cartItem : cart.getCartItems()) {
+            cart.addCartItem(cartItem);
+        }
         holder.storeName.setText(cart.getStore().getName());
         Glide.with(context).load(cart.getStore().getStoreImage()).into(holder.storeImage);
         holder.cartItemAdapter = new CartItemAdapter(context, cart.getCartItems());
@@ -83,7 +86,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
                                         ).show();
                                         cart.getCartItems().remove(pos);
                                         holder.cartItemAdapter.notifyItemRemoved(pos);
-                                        holder.cartItemAdapter.notifyItemRangeRemoved(pos, cart.getCartItems().size());
+                                        holder.cartItemAdapter.notifyItemRangeRemoved(pos, 1);
+                                        holder.cartItemAdapter.notifyItemRangeChanged(pos, cart.getCartItems().size());
                                     }
                                     @Override
                                     public void onFailure(Call<AddToCartResponse> call, Throwable t) {

@@ -1,6 +1,8 @@
 package vn.iotstar.cosmeticshopapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +21,8 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import vn.iotstar.cosmeticshopapp.R;
+import vn.iotstar.cosmeticshopapp.StyleActivity;
+import vn.iotstar.cosmeticshopapp.fragment_home.DanhmucFragment;
 import vn.iotstar.cosmeticshopapp.model.Category;
 
 public class CategoryHomeAdapter extends RecyclerView.Adapter<CategoryHomeAdapter.MyViewHolder>{
@@ -26,10 +33,6 @@ public class CategoryHomeAdapter extends RecyclerView.Adapter<CategoryHomeAdapte
         this.context = context;
         this.array = array;
     }
-
-
-
-
     @NonNull
     @Override
     public CategoryHomeAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,6 +53,13 @@ public class CategoryHomeAdapter extends RecyclerView.Adapter<CategoryHomeAdapte
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Ban dang nhan vao " + category.getName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), StyleActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("category", category);
+                intent.putExtras(bundle);
+
+                view.getContext().startActivity(intent);
             }
         });
     }

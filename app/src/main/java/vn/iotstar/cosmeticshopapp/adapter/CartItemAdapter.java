@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -75,6 +76,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
         // Thiết lập giá trị được chọn trong Spinner
         int selectedIndex = sizes.indexOf(cartItem.getSize());
         holder.sizeSpinner.setSelection(selectedIndex);
+        Integer cartId = cartItem.getCart().getId();
+
 
         // Thiết lập sự kiện chọn giá trị trong Spinner
         holder.sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -86,7 +89,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
                     CartItem newCartItem = new CartItem(cartItem.getId(), cartItem.getProduct(),
                             holder.sizeSpinner.getSelectedItem().toString(),
                             cartItem.getQuantity(), cartItem.getCreateAt(), cartItem.getUpdateAt());
-                    holder.apiService.updateCartItem(newCartItem).enqueue(new Callback<AddToCartResponse>() {
+                    holder.apiService.updateCartItem(newCartItem, cartId).enqueue(new Callback<AddToCartResponse>() {
                         @Override
                         public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
                             if (response.isSuccessful()){
@@ -114,6 +117,68 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+        holder.btnTang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.progressDialog.show();
+                int newQuantity = Integer.parseInt(holder.txtQuantity.getText().toString()) + 1;
+                if (newQuantity > cartItem.getProduct().getProductQuantities().get(selectedIndex).getQuantity()) {
+                    Toast.makeText(context, "Số lượng sản phẩm không đủ", Toast.LENGTH_SHORT).show();
+                    holder.progressDialog.dismiss();
+                    return;
+                } else {
+                    //holder.txtQuantity.setText(String.valueOf(newQuantity));
+                    CartItem newCartItem = new CartItem(cartItem.getId(), cartItem.getProduct(),
+                            holder.sizeSpinner.getSelectedItem().toString(),
+                            newQuantity, cartItem.getCreateAt(), cartItem.getUpdateAt());
+                    holder.apiService.updateCartItem(newCartItem, cartId).enqueue(new Callback<AddToCartResponse>() {
+                        @Override
+                        public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
+                            if (response.isSuccessful()){
+                                Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                holder.progressDialog.dismiss();
+                                holder.txtQuantity.setText(String.valueOf(newQuantity));
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<AddToCartResponse> call, Throwable t) {
+                            Log.e("TAG", "onFailure: " + t.getMessage());
+                        }
+                    });
+                }
+            }
+        });
+        holder.btnGiam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.progressDialog.show();
+                int newQuantity = Integer.parseInt(holder.txtQuantity.getText().toString()) - 1;
+                if (newQuantity < 1) {
+                    Toast.makeText(context, "Số lượng sản phẩm không hợp lệ", Toast.LENGTH_SHORT).show();
+                    holder.progressDialog.dismiss();
+                    return;
+                } else {
+                    //holder.txtQuantity.setText(String.valueOf(newQuantity));
+                    CartItem newCartItem = new CartItem(cartItem.getId(), cartItem.getProduct(),
+                            holder.sizeSpinner.getSelectedItem().toString(),
+                            newQuantity, cartItem.getCreateAt(), cartItem.getUpdateAt());
+                    holder.apiService.updateCartItem(newCartItem, cartId).enqueue(new Callback<AddToCartResponse>() {
+                        @Override
+                        public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
+                            if (response.isSuccessful()){
+                                Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                holder.progressDialog.dismiss();
+                                holder.txtQuantity.setText(String.valueOf(newQuantity));
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<AddToCartResponse> call, Throwable t) {
+                            Log.e("TAG", "onFailure: " + t.getMessage());
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private void onItemSelectedHandler(AdapterView<?> parent, View view, int position, long id) {
@@ -136,6 +201,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
         public ImageView ProductImage, storeImage;
         public ProgressDialog progressDialog;
         APIService apiService;
+        ImageButton btnTang, btnGiam;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -158,6 +224,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
             storeName = itemView.findViewById(R.id.storeName);
             storeImage = itemView.findViewById(R.id.storeImage);
             txtQuantity = itemView.findViewById(R.id.count_product);
+            btnTang = itemView.findViewById(R.id.btnTang);
+            btnGiam = itemView.findViewById(R.id.btnGiam);
         }
     }
 }
