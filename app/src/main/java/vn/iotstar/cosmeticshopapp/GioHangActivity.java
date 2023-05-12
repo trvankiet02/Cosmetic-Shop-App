@@ -1,6 +1,7 @@
 package vn.iotstar.cosmeticshopapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -67,22 +68,12 @@ public class GioHangActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 productGioHangAdapter.getSelectedCartItem();
+                Integer total = 0;
                 for (CartItem cI: productGioHangAdapter.getSelectedCartItem()) {
                     Log.e("TAG", "setBtnThanhToan: " + cI.getSize() + " " + cI.getQuantity());
+                    total += cI.getProduct().getPromotionalPrice();
                 }
-            }
-        });
-    }
-
-    private void setCheckAll(){
-        cbSelectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (cbSelectAll.isChecked()) {
-
-                } else {
-
-                }
+                tvTotalPrice.setText(total.toString() + "đ");
             }
         });
     }
