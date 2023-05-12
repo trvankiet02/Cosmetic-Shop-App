@@ -113,5 +113,8 @@ public interface APIService {
 
     @PUT("address/addOrUpdate")
     Call<AddressResponse> addOrUpdateAddress(@Body Address address, @Query("userId") Integer userId);
+
+    @POST("order/getOrder")
+    Call<OrderResponse> getOrder(@Query("userId") Integer userId, @Query("status") Integer status);
 }
 
