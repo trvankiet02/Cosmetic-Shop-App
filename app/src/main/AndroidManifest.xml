@@ -21,6 +21,24 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".quanlytaikhoancuatoi.ChangeEmailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".quanlytaikhoancuatoi.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".quanlytaikhoancuatoi.AddPhoneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".quanlytaikhoancuatoi.ChangeUsernameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".quanlytaikhoancuatoi.ChangeAvataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLyTaiKhoanCuaToiActivity"
+            android:exported="false" />
+        <activity
             android:name=".XacNhanDatHangActivity"
             android:exported="false" />
         <activity

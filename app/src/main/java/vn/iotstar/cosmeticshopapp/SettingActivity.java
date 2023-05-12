@@ -54,6 +54,13 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        lnQuanLyTaiKhoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingActivity.this, QuanLyTaiKhoanCuaToiActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void anhXa() {
