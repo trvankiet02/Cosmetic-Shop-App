@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +21,7 @@ import java.util.List;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.Address;
 import vn.iotstar.cosmeticshopapp.model.Order;
+import vn.iotstar.cosmeticshopapp.model.OrderItem;
 
 public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHolder>{
     Context context;
@@ -49,7 +51,14 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
         //holder.tv_soluongsanpham.setText(order.getOrderItems().size());
         holder.tv_giadonhang.setText(order.getPrice().toString());
         //order.getOrderItems().get(0).getProduct();
+
         //adapter chuyển item.Image vào
+        holder.orderItemAdapter = new OrderItemAdapter(context.getApplicationContext(), order.getOrderItems());
+        holder.rcImageProductOder.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context.getApplicationContext(), 1, RecyclerView.HORIZONTAL, false);
+        holder.rcImageProductOder.setLayoutManager(layoutManager);
+        holder.rcImageProductOder.setAdapter(holder.orderItemAdapter);
+        holder.orderItemAdapter.notifyDataSetChanged();
     }
 
     public void setTrangThaiTongThe(DonHangAdapter.MyViewHolder holder, int trangThai){
@@ -147,6 +156,8 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
         ImageView img_mautrangthai, storeImage, img_xoa;
         TextView tv_trangthai, tv_madonhang, tv_soluongsanpham, tv_giadonhang, storeName;
         TextView tv_danhgia, tv_huydon, tv_danhan;
+        OrderItemAdapter orderItemAdapter;
+        RecyclerView rcImageProductOder;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             anhXa();
@@ -163,6 +174,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
             tv_danhgia = itemView.findViewById(R.id.tv_danhgia);
             tv_huydon = itemView.findViewById(R.id.tv_huydon);
             tv_danhan = itemView.findViewById(R.id.tv_danhan);
+            rcImageProductOder = itemView.findViewById(R.id.rcImageProductOder);
         }
     }
 }
