@@ -41,6 +41,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
     Context context;
     List<CartItem> array;
     ArrayList<CartItem> selectedCartItems;
+    Boolean isSelectAll = false;
 
     public CartItemAdapter(Context context, List<CartItem> array) {
         this.context = context;
@@ -53,6 +54,13 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
     public  List<CartItem> getModelList() {
         return array;
     }
+    public interface CartItemListener {
+        void onCartItemCheckedChanged(int position, boolean isChecked);
+    }
+    private CartItemListener cartItemListener;
+    public void setCartItemListener(CartItemListener listener) {
+        this.cartItemListener = listener;
+    }
 
 
     @NonNull
@@ -61,7 +69,6 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_item_cart_item, null);
         CartItemAdapter.MyViewHolder myViewHolder = new CartItemAdapter.MyViewHolder(view);
-
 
         return myViewHolder;
     }
@@ -191,6 +198,10 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cartItemListener != null) {
+                    cartItemListener.onCartItemCheckedChanged(position, selectedCartItems.contains(cartItem));
+                    return;
+                }
                 if (selectedCartItems.contains(cartItem)){
                     selectedCartItems.remove(cartItem);
                     notifyDataSetChanged();
@@ -198,6 +209,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
                     selectedCartItems.add(cartItem);
                     notifyDataSetChanged();
                 }
+
             }
         });
     }

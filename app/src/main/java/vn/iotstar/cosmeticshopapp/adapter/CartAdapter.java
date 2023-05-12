@@ -37,6 +37,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     Context context;
     List<Cart> array;
     List<CartItem> cartItemList = new ArrayList<>();
+    Boolean isSelectAll = false;
     public CartAdapter(Context context, List<Cart> array) {
         this.context = context;
         this.array = array;
@@ -44,7 +45,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     public List<CartItem> getSelectedCartItem (){
         return cartItemList;
     }
-
     @NonNull
     @Override
     public CartAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
