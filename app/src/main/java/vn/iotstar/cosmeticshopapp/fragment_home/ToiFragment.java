@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,16 +12,13 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import vn.iotstar.cosmeticshopapp.LoginSignupActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.SettingActivity;
 import vn.iotstar.cosmeticshopapp.XuLyDonHangActivity;
 import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.ChoXacNhanFragment;
-import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DaHuyFragment;
-import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DaNhanFragment;
-import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DaXacNhanFragment;
-import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DangGiaoFragment;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 
@@ -63,6 +59,7 @@ public class ToiFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
     }
 
     private void anhXa(){

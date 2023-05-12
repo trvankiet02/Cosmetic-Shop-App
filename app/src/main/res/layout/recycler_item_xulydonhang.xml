@@ -18,6 +18,7 @@
                 android:layout_height="8dp"
                 android:background="@drawable/backbackground_boder"/>
             <TextView
+                android:id="@+id/tv_trangthai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="10dp"
@@ -38,6 +39,7 @@
                 android:text="Đơn hàng #"
                 android:textSize="14dp"/>
             <TextView
+                android:id="@+id/tv_madonhang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="10dp"
@@ -61,12 +63,12 @@
                 android:paddingBottom="10dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:id="@+id/storeImage"
+                    android:id="@+id/storeImage3"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:background="@drawable/img_icon_shop" />
                 <TextView
-                    android:id="@+id/storeName"
+                    android:id="@+id/storeName3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -120,6 +122,7 @@
             android:paddingBottom="10dp"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/tv_soluongsanpham"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
@@ -131,6 +134,7 @@
                 android:text=" Sản phẩm Giá thực: "
                 android:textSize="14dp"/>
             <TextView
+                android:id="@+id/tv_giasanpham"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="499.000"
@@ -152,54 +156,51 @@
             android:gravity="center_vertical"
             android:paddingBottom="10dp"
             android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text=". . ."
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="18dp"/>
+            <ImageView
+                android:id="@+id/img_xoa"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/img_icon_bin" />
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"></View>
             <TextView
+                android:id="@+id/tv_mualai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:layout_marginStart="5dp"
-                android:text="button1"
-                android:textColor="#fff"
-                android:textStyle="bold"
+                android:text="Mua lại"
+                android:textColor="#000"
                 android:textSize="16dp"
-                android:background="@color/black"/>
+                android:background="@drawable/background_vienden_nentrang"/>
             <TextView
+                android:id="@+id/tv_huydon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:text="button2"
-                android:textColor="#fff"
-                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:text="Hủy đơn"
+                android:textColor="#000"
                 android:textSize="16dp"
-                android:background="@color/black"/>
+                android:background="@drawable/background_vienden_nentrang"/>
             <TextView
+                android:id="@+id/tv_danhan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:text="button3"
-                android:textColor="#fff"
-                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:text="Đã nhận"
+                android:textColor="#000"
                 android:textSize="16dp"
-                android:background="@color/black"/>
+                android:background="@drawable/background_vienden_nentrang"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -1,11 +1,16 @@
 package vn.iotstar.cosmeticshopapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -28,7 +33,42 @@ public class XuLyDonHangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_xu_ly_don_hang);
         AnhXa();
         setTabLayout();
+        //getFragment();
     }
+
+    private void getFragment() {
+        // Lấy thông tin về fragment cần hiển thị từ Intent
+        int fragmentToLoad = getIntent().getIntExtra("fragmentToLoad", 0);
+
+        // Tạo đối tượng Fragment mới tương ứng với fragment cần hiển thị
+        Fragment fragment;
+        switch (fragmentToLoad) {
+            case 1:
+                fragment = new ChoXacNhanFragment();
+                break;
+            case 2:
+                fragment = new DaXacNhanFragment();
+                break;
+            case 3:
+                fragment = new DangGiaoFragment();
+                break;
+            case 4:
+                fragment = new DaNhanFragment();
+                break;
+            case 5:
+                fragment = new DaHuyFragment();
+                break;
+            default:
+                fragment = new TatCaDonHangFragment();
+        }
+
+        // Hiển thị fragment tương ứng
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.tlXuLyDonHang, fragment);
+        fragmentTransaction.commit();
+    }
+
     private void AnhXa() {
         tabLayout = (TabLayout) findViewById(R.id.tlXuLyDonHang);
         viewPager = (ViewPager) findViewById(R.id.vpXuLyDonHang);
@@ -39,10 +79,12 @@ public class XuLyDonHangActivity extends AppCompatActivity {
         xulydonhangAdapter.addFragment(new DangGiaoFragment(), "Đang giao");
         xulydonhangAdapter.addFragment(new DaNhanFragment(), "Đã nhận");
         xulydonhangAdapter.addFragment(new DaHuyFragment(), "Đã hủy");
+
     }
     private void setTabLayout() {
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(xulydonhangAdapter);
         xulydonhangAdapter.notifyDataSetChanged();
     }
+
 }
