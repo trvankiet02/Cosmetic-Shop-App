@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.FragmentManager;
 
 import vn.iotstar.cosmeticshopapp.LoginSignupActivity;
 import vn.iotstar.cosmeticshopapp.R;
@@ -22,6 +23,12 @@ import vn.iotstar.cosmeticshopapp.SettingActivity;
 import vn.iotstar.cosmeticshopapp.adapter.ViewPagerAdapter;
 import vn.iotstar.cosmeticshopapp.fragment_product.FavouritedProductFragment;
 import vn.iotstar.cosmeticshopapp.fragment_product.RecentProductFragment;
+import vn.iotstar.cosmeticshopapp.XuLyDonHangActivity;
+import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.ChoXacNhanFragment;
+import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DaHuyFragment;
+import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DaNhanFragment;
+import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DaXacNhanFragment;
+import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DangGiaoFragment;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 
@@ -33,6 +40,7 @@ public class ToiFragment extends Fragment {
     TabLayout tabLayout;
     ViewPager vpProduct;
     ViewPagerAdapter productAdapter;
+    LinearLayout lnChuaXacNhan, lnDaXacNhan, lnDangVanChuyen, lnDaNhan, lnDaHuy;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,6 +48,7 @@ public class ToiFragment extends Fragment {
 
         anhXa();
         setBtnProfile();
+        setBtnXyLyDonHang();
         if (sharedPrefManager.getUser().getId() == -1){
             txtLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -57,6 +66,17 @@ public class ToiFragment extends Fragment {
         }
         return view;
     }
+
+    private void setBtnXyLyDonHang() {
+        lnChuaXacNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), XuLyDonHangActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void anhXa(){
         txtLogin = view.findViewById(R.id.txtDangNhap);
         sharedPrefManager = new SharedPrefManager(getContext());
@@ -69,6 +89,11 @@ public class ToiFragment extends Fragment {
         tabLayout.setupWithViewPager(vpProduct);
         vpProduct.setAdapter(productAdapter);
         productAdapter.notifyDataSetChanged();
+        lnChuaXacNhan = view.findViewById(R.id.lnChuaXacNhan);
+        lnDaXacNhan = view.findViewById(R.id.lnDaXacNhan);
+        lnDangVanChuyen = view.findViewById(R.id.lnDangVanChuyen);
+        lnDaNhan = view.findViewById(R.id.lnDaNhan);
+        lnDaHuy = view.findViewById(R.id.lnDaHuy);
     }
     private void setBtnProfile(){
         btnProfile.setOnClickListener(new View.OnClickListener() {
