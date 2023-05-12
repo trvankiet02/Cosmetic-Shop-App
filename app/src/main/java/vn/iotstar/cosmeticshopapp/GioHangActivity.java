@@ -1,6 +1,7 @@
 package vn.iotstar.cosmeticshopapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -69,6 +70,9 @@ public class GioHangActivity extends AppCompatActivity {
                 productGioHangAdapter.getSelectedCartItem();
                 for (CartItem cI: productGioHangAdapter.getSelectedCartItem()) {
                     Log.e("TAG", "setBtnThanhToan: " + cI.getSize() + " " + cI.getQuantity());
+                    //chuyển qua XacNhanDatHangActivity
+                    Intent intent = new Intent(GioHangActivity.this, XacNhanDatHangActivity.class);
+                    startActivity(intent);
                 }
             }
         });
