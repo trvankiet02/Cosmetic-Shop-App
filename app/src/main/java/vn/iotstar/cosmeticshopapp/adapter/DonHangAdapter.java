@@ -46,7 +46,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
         Glide.with(context)
                 .load(order.getStore().getStoreImage())
                 .into(holder.storeImage);
-        //holder.tv_soluongsanpham.setText(order.getOrderItems().size());
+        holder.tv_soluongsanpham.setText(String.valueOf(order.getOrderItems().size()));
         holder.tv_giadonhang.setText(order.getPrice().toString());
         //order.getOrderItems().get(0).getProduct();
         //adapter chuyển item.Image vào
