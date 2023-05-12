@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setBottomNavigationView();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search_layout, menu);

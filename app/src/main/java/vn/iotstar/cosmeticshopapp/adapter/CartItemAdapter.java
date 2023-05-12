@@ -54,14 +54,6 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
     public  List<CartItem> getModelList() {
         return array;
     }
-    public interface CartItemListener {
-        void onCartItemCheckedChanged(int position, boolean isChecked);
-    }
-    private CartItemListener cartItemListener;
-    public void setCartItemListener(CartItemListener listener) {
-        this.cartItemListener = listener;
-    }
-
 
     @NonNull
     @Override
@@ -198,10 +190,6 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (cartItemListener != null) {
-                    cartItemListener.onCartItemCheckedChanged(position, selectedCartItems.contains(cartItem));
-                    return;
-                }
                 if (selectedCartItems.contains(cartItem)){
                     selectedCartItems.remove(cartItem);
                     notifyDataSetChanged();

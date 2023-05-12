@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +22,13 @@ import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DaNhanFragment;
 import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DaXacNhanFragment;
 import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DangGiaoFragment;
 import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.TatCaDonHangFragment;
+import vn.iotstar.cosmeticshopapp.model.Product;
 
 public class XuLyDonHangActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter xulydonhangAdapter;
+    Integer fragmentId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,40 +36,19 @@ public class XuLyDonHangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_xu_ly_don_hang);
         AnhXa();
         setTabLayout();
-        //getFragment();
+        getFragment();
+
     }
 
     private void getFragment() {
-        // Lấy thông tin về fragment cần hiển thị từ Intent
-        int fragmentToLoad = getIntent().getIntExtra("fragmentToLoad", 0);
-
-        // Tạo đối tượng Fragment mới tương ứng với fragment cần hiển thị
-        Fragment fragment;
-        switch (fragmentToLoad) {
-            case 1:
-                fragment = new ChoXacNhanFragment();
-                break;
-            case 2:
-                fragment = new DaXacNhanFragment();
-                break;
-            case 3:
-                fragment = new DangGiaoFragment();
-                break;
-            case 4:
-                fragment = new DaNhanFragment();
-                break;
-            case 5:
-                fragment = new DaHuyFragment();
-                break;
-            default:
-                fragment = new TatCaDonHangFragment();
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        fragmentId = (Integer) bundle.getSerializable("fragment");
+        if (fragmentId != -1){
+            viewPager.setCurrentItem(fragmentId);
+        } else {
+            viewPager.setCurrentItem(0);
         }
-
-        // Hiển thị fragment tương ứng
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.tlXuLyDonHang, fragment);
-        fragmentTransaction.commit();
     }
 
     private void AnhXa() {
