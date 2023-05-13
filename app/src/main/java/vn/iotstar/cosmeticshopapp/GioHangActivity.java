@@ -74,16 +74,16 @@ public class GioHangActivity extends AppCompatActivity {
                     Log.d("TAG", "onClick: " + cI.getProduct().getName() + " " + cI.getQuantity() + " " + cI.getProduct().getPromotionalPrice());
                 }*/
 
-                for (Cart c: productGioHangAdapter.getSelectedCart()){
-                    for (CartItem cI: c.getCartItems()){
-                        total += cI.getQuantity() * cI.getProduct().getPromotionalPrice();
-                        Log.d("TAG", "onClick: " + cI.getProduct().getName() + " " + cI.getQuantity() + " " + cI.getProduct().getPromotionalPrice());
-                    }
-                }
+//                for (Cart c: productGioHangAdapter.getSelectedCart()){
+//                    for (CartItem cI: c.getCartItems()){
+//                        total += cI.getQuantity() * cI.getProduct().getPromotionalPrice();
+//                        Log.d("TAG", "onClick: " + cI.getProduct().getName() + " " + cI.getQuantity() + " " + cI.getProduct().getPromotionalPrice());
+//                    }
+//                }
 
                 //chuyển qua XacNhanDatHangActivity
-                /*Intent intent = new Intent(GioHangActivity.this, XacNhanDatHangActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(GioHangActivity.this, XacNhanDatHangActivity.class);
+                startActivity(intent);
                 tvTotalPrice.setText(total.toString() + "đ");
             }
         });

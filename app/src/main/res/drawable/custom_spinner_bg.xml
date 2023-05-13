@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Thiết lập màu nền cho Spinner -->
+    <solid android:color="#ffffff" />
+
+    <!-- Thiết lập đường viền cho Spinner -->
+    <stroke
+        android:width="2dp"
+        android:color="#999999" />
+
+    <!-- Thiết lập góc bo tròn cho Spinner -->
+    <corners android:radius="4dp" />
+
+    <!-- Thiết lập padding cho Spinner -->
+    <padding
+        android:left="8dp"
+        android:top="8dp"
+        android:right="8dp"
+        android:bottom="8dp" />
+
+</shape>
