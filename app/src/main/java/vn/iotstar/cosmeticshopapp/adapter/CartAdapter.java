@@ -37,6 +37,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     Context context;
     List<Cart> array;
     List<CartItem> cartItemList = new ArrayList<>();
+    List<Cart> returnCart = new ArrayList<>();
     Boolean isSelectAll = false;
     public CartAdapter(Context context, List<Cart> array) {
         this.context = context;
@@ -45,34 +46,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     public List<CartItem> getSelectedCartItem (){
         return cartItemList;
     }
+
     public List<Cart> getSelectedCart() {
-        List<Cart> returnCartList = new ArrayList<>();
-        List<CartItem> selectedCartItemList = getSelectedCartItem();
-        for (CartItem cI: selectedCartItemList){
-            Log.d("Adapter", "SelectedCart: " + cI.getId());
-        }
-
-        for (Cart cart : array) {
-            Log.e("AdapterCart", "getSelectedCart: " + cart.getId() );
-            List<CartItem> returnCartItemList = new ArrayList<>();
-
-            for (CartItem cartItem : cart.getCartItems()) {
-                Log.e("AdapterCartItem", "getSelectedCart: " + cartItem.getId());
-                if (selectedCartItemList.contains(cartItem)) {
-                    Log.d("Adapter", "getSelectedCartItem: " + cartItem.getId());
-                    returnCartItemList.add(cartItem);
-                }
-            }
-
-            if (!returnCartItemList.isEmpty()) {
-                Cart selectedCart = new Cart();
-                selectedCart.setStore(cart.getStore());
-                selectedCart.setCartItems(returnCartItemList);
-                returnCartList.add(selectedCart);
-            }
-        }
-
-        return returnCartList;
+        return returnCart;
     }
 
 
@@ -102,6 +78,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             holder.rvCart_item.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
             holder.cartItemAdapter.notifyDataSetChanged();
             cartItemList = holder.cartItemAdapter.getSelectedCartItemList();
+
+            Cart newCart = cart;
+            newCart.setCartItems(cartItemList);
+            returnCart.add(newCart);
+
             holder.swipeHelper = new SwipeHelper(context, holder.rvCart_item, false) {
                 @Override
                 public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {

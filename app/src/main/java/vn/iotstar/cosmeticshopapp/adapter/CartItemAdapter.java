@@ -145,9 +145,9 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
                             if (response.isSuccessful()){
                                 Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                                 cartItem.setQuantity(newQuantity);
-                                notifyDataSetChanged();
                                 holder.progressDialog.dismiss();
                                 holder.txtQuantity.setText(String.valueOf(newQuantity));
+                                notifyDataSetChanged();
                             }
                         }
                         @Override
@@ -178,7 +178,6 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
                             if (response.isSuccessful()){
                                 Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                                 cartItem.setQuantity(newQuantity);
-                                notifyDataSetChanged();
                                 holder.progressDialog.dismiss();
                                 holder.txtQuantity.setText(String.valueOf(newQuantity));
                             }
@@ -196,10 +195,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (selectedCartItems.contains(cartItem)){
                     selectedCartItems.remove(cartItem);
-                    notifyDataSetChanged();
                 } else {
                     selectedCartItems.add(cartItem);
-                    notifyDataSetChanged();
                 }
 
             }

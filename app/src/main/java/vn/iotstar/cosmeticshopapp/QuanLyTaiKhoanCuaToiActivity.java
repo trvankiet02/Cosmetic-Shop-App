@@ -10,22 +10,39 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import vn.iotstar.cosmeticshopapp.model.User;
 import vn.iotstar.cosmeticshopapp.quanlytaikhoancuatoi.AddPhoneActivity;
 import vn.iotstar.cosmeticshopapp.quanlytaikhoancuatoi.ChangeAvataActivity;
 import vn.iotstar.cosmeticshopapp.quanlytaikhoancuatoi.ChangeEmailActivity;
 import vn.iotstar.cosmeticshopapp.quanlytaikhoancuatoi.ChangePasswordActivity;
 import vn.iotstar.cosmeticshopapp.quanlytaikhoancuatoi.ChangeUsernameActivity;
+import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 public class QuanLyTaiKhoanCuaToiActivity extends AppCompatActivity {
     ImageView avata, img_change_avata;
     LinearLayout lnEmail, lnSoDienThoai, lnDoiMatKhau, lnXoaTaiKhoan,lnTaiXuong;
     TextView tvSoDienThoai,tvEmail, tvNameUser;
+    SharedPrefManager sharedPrefManager;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_ly_tai_khoan_cua_toi);
         anhXa();
+        loadData();
         setClick();
+    }
+
+    private void loadData() {
+        user = sharedPrefManager.getUser();
+        tvNameUser.setText(user.getFirstName() + " " + user.getLastName());
+        tvEmail.setText(user.getEmail());
+        if (!user.getPhone().equals("")){
+            tvSoDienThoai.setText(user.getPhone());
+        }
+        Glide.with(this).load(user.getProfileImage()).into(avata);
     }
 
     private void setClick() {
@@ -77,5 +94,6 @@ public class QuanLyTaiKhoanCuaToiActivity extends AppCompatActivity {
         tvSoDienThoai = findViewById(R.id.tvSoDienThoai);
         tvEmail = findViewById(R.id.tvEmail);
         tvNameUser = findViewById(R.id.tvNameUser);
+        sharedPrefManager = new SharedPrefManager(this);
     }
 }
