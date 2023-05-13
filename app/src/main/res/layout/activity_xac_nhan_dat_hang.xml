@@ -118,8 +118,8 @@
                         </LinearLayout>
                         <Spinner
                             android:id="@+id/address_spinner"
-                            android:layout_width="35dp"
-                            android:layout_height="55dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:spinnerMode="dropdown"/>
 
                     </LinearLayout>
@@ -149,7 +149,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:orientation="vertical">
@@ -202,10 +201,11 @@
                         android:text=" phiếu giảm giá có sẵn"
                         android:layout_marginEnd="10dp"
                         android:textSize="14dp"/>
-                    <ImageView
-                        android:layout_width="25dp"
+                    <Spinner
+                        android:id="@+id/voucher_spinner"
+                        android:layout_width="50dp"
                         android:layout_height="25dp"
-                        android:background="@drawable/next" />
+                        android:spinnerMode="dropdown" />
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
@@ -226,9 +226,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tổng cộng: "
+                        android:text="Hiện có: "
                         android:textSize="14dp"/>
                     <TextView
+                        android:id="@+id/tvEwallet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -273,7 +274,7 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:layout_marginTop="10dp"
-                android:paddingBottom="50dp"
+                android:paddingBottom="10dp"
                 android:background="@color/white"
                 android:orientation="vertical">
                 <LinearLayout
@@ -297,10 +298,26 @@
                         android:text="0"
                         android:textSize="16dp"
                         android:textColor="#000"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₫"
+                        android:layout_weight="1"
+                        android:text="Đảm bảo vận chuyển:"
+                        android:textColor="#000"
+                        android:textSize="16dp" />
+                    <TextView
+                        android:id="@+id/tvPhiVanChuyen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
                         android:textSize="16dp"
                         android:textColor="#000"/>
                 </LinearLayout>
@@ -319,38 +336,12 @@
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Miễn phí"
-                        android:textSize="16dp"
-                        android:textColor="#000"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Đảm bảo vận chuyển:"
-                        android:textColor="#000"
-                        android:textSize="16dp" />
-                    <TextView
+                        android:id="@+id/tvDamBaoVanChuyen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textSize="16dp"
                         android:textColor="#000"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="₫"
-                        android:textSize="16dp"
-                        android:textColor="#000"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -363,15 +354,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Phí COD:"
+                        android:text="Phiếu giảm giá:"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <TextView
+                        android:id="@+id/tvpgg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Miễn phí"
+                        android:text="-0"
                         android:textSize="16dp"
-                        android:textColor="#000"/>
+                        android:textColor="@color/text_voucher"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -392,12 +384,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="-0"
-                        android:textSize="16dp"
-                        android:textColor="@color/text_voucher"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="₫"
                         android:textSize="16dp"
                         android:textColor="@color/text_voucher"/>
                 </LinearLayout>

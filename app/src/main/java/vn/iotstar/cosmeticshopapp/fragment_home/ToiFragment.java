@@ -42,7 +42,7 @@ public class ToiFragment extends Fragment {
     TabLayout tabLayout;
     ViewPager vpProduct;
     ViewPagerAdapter productAdapter;
-    LinearLayout lnChuaXacNhan, lnDaXacNhan, lnDangVanChuyen, lnDaNhan, lnDaHuy, lnAllOrder;
+    LinearLayout lnChuaXacNhan, lnDaXacNhan, lnDangVanChuyen, lnDaNhan, lnDaHuy, lnAllOrder, lnlVoucher;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -136,6 +136,7 @@ public class ToiFragment extends Fragment {
         lnDaHuy = view.findViewById(R.id.lnDaHuy);
         lnAllOrder = view.findViewById(R.id.lnAllOrder);
         btnCart = view.findViewById(R.id.btnCart);
+        lnlVoucher = view.findViewById(R.id.lnlVoucher);
     }
     private void setBtnCart(){
         btnCart.setOnClickListener(new View.OnClickListener() {

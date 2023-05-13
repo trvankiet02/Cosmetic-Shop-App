@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,10 +37,10 @@ import vn.iotstar.cosmeticshopapp.model.User;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
-public class XacNhanDatHangActivity extends AppCompatActivity {
+public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhanShopAdapter.TotalAmountListener {
     LinearLayout ln_chondiachi,ln_themdiachi;
     TextView tvHoTen, tvSoDienThoai,tvDiaChi;
-    TextView tvtongcong1, tvsophieugiamgia, tvtamtinh,tvchietkhau,tvtongcongtienthanhtoan;
+    TextView tvtongcong1, tvsophieugiamgia, tvtamtinh,tvchietkhau,tvtongcongtienthanhtoan, tvPhiVanChuyen, tvDamBaoVanChuyen, tvpgg;
     TextView tvtieptucthanhtoan;
     RadioButton rb_giaohangtieuchuan;
     Switch switchdambaovanchuyen;
@@ -50,7 +51,11 @@ public class XacNhanDatHangActivity extends AppCompatActivity {
     SharedPrefManager sharedPrefManager;
     User user;
     List <Address> addressList;
-    Spinner addressSpinner;
+    Spinner addressSpinner, voucher_spinner;
+    Integer discount;
+    Integer chietKhau;
+
+    private int totalAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,68 +71,88 @@ public class XacNhanDatHangActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             carts = (List<Cart>) bundle.getSerializable("cartList");
-            if (carts != null) {
-                // Sử dụng danh sách cartList ở đây
-                Log.d("TAG", "Received cartList with size: " + carts.size());
+            List<Cart> validCarts = new ArrayList<>();
+            for (Cart cart : carts) {
+                if (cart.getCartItems().size() > 0) {
+                    validCarts.add(cart);
+                }
             }
+            carts = validCarts;
         }
 
         xacNhanShopAdapter = new XacNhanShopAdapter(XacNhanDatHangActivity.this, carts);
+        xacNhanShopAdapter.setTotalAmountListener(this);
         rv_shop.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(XacNhanDatHangActivity.this, RecyclerView.VERTICAL, false);
         rv_shop.setLayoutManager(layoutManager);
         rv_shop.setAdapter(xacNhanShopAdapter);
         xacNhanShopAdapter.notifyDataSetChanged();
 
-//        productGioHangAdapter = new CartAdapter(GioHangActivity.this, carts);
-//        rvProductGioHang.setHasFixedSize(true);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GioHangActivity.this, RecyclerView.VERTICAL, false);
-//        rvProductGioHang.setLayoutManager(layoutManager);
-//        rvProductGioHang.setAdapter(productGioHangAdapter);
-//        productGioHangAdapter.notifyDataSetChanged();
+        tvtongcongtienthanhtoan.setText(String.valueOf(xacNhanShopAdapter.getTotal()));
+        Integer tamTinh = xacNhanShopAdapter.getTotal() - xacNhanShopAdapter.getBaoHoTotal() - xacNhanShopAdapter.getGiaoHangTotal();
+        Integer giaoHang = xacNhanShopAdapter.getGiaoHangTotal();
+        Integer baoHo = xacNhanShopAdapter.getBaoHoTotal();
+        discount = xacNhanShopAdapter.getTotal()*10/100;
+        chietKhau = (tamTinh)*10/100;
+        Integer tongCong = tamTinh + giaoHang + baoHo - discount - chietKhau;
+
+        tvtamtinh.setText(String.valueOf(tamTinh));
+        tvPhiVanChuyen.setText(String.valueOf(giaoHang));
+        tvDamBaoVanChuyen.setText(String.valueOf(baoHo));
+        tvpgg.setText(String.valueOf(-discount));
+        tvchietkhau.setText(String.valueOf(-chietKhau));
+        tvtongcongtienthanhtoan.setText(String.valueOf(tongCong));
+
+    }
+    private void selectVoucher(){
+
     }
 
     private void setSpinner() {
-        List<String> addresses = new ArrayList<>();
+
         apiService.getAddressByUserId(sharedPrefManager.getUser().getId()).enqueue(new Callback<ListAddressResponse>() {
             @Override
             public void onResponse(Call<ListAddressResponse> call, Response<ListAddressResponse> response) {
                 if (response.isSuccessful()){
                     addressList = response.body().getBody();
-                    Log.e("TAG", "setSpinner: 0 " + addressList.size() );
+                    List<String> addresses = new ArrayList<>();
+
                     for (Address address : addressList){
-                        addresses.add("Tên người nhận: " + address.getFirstName() + " " + address.getLastName() + "." +
-                                "\nSố điện thoại: " + address.getPhone() + "" +
-                                "\nĐịa chỉ: " + address.getAddress() + ".");
+                        addresses.add("Tên người nhận: " + address.getFirstName() + " " + address.getLastName()
+                                + "\nSố điện thoại: " + address.getPhone()
+                                + "\nĐịa chỉ: " + address.getAddress());
+                        if (address.getIsDefault()){
+                            tvHoTen.setText(address.getFirstName() + " " + address.getLastName());
+                            tvSoDienThoai.setText(address.getPhone());
+                            tvDiaChi.setText(address.getAddress());
+                        }
                     }
-                } else {
-                    Toast.makeText(XacNhanDatHangActivity.this, "Lỗi", Toast.LENGTH_SHORT).show();
+                    ArrayAdapter<String> addressArrayAdapter = new ArrayAdapter<>(XacNhanDatHangActivity.this, R.layout.my_custom_spinner_dropdown_item, addresses);
+                    addressSpinner.setAdapter(addressArrayAdapter);
+
+
+
+                    addressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String selectedAddress = (String) parent.getItemAtPosition(position);
+                            int pos = addresses.indexOf(selectedAddress);
+                            tvHoTen.setText(addressList.get(pos).getFirstName() + " " + addressList.get(pos).getLastName());
+                            tvSoDienThoai.setText(addressList.get(pos).getPhone());
+                            tvDiaChi.setText(addressList.get(pos).getAddress());
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
                 }
             }
 
             @Override
             public void onFailure(Call<ListAddressResponse> call, Throwable t) {
-                Log.e("TAG", "onFailure: " + t.getMessage() );
-            }
-        });
-        // Tạo một ArrayAdapter để cung cấp dữ liệu cho Spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.my_custom_spinner_dropdown_item, addresses);
 
-        // Thiết lập Adapter cho Spinner
-        addressSpinner.setAdapter(adapter);
-
-        int selectedIndex = addresses.indexOf(addresses.get(0));
-        addressSpinner.setSelection(selectedIndex);
-        addressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Xử lý sự kiện khi người dùng chọn một mục trong Spinner
-                String selectedAddress = (String) parent.getItemAtPosition(position);
-                tvDiaChi.setText(addressSpinner.getSelectedItem().toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
@@ -154,5 +179,18 @@ public class XacNhanDatHangActivity extends AppCompatActivity {
         sharedPrefManager = new SharedPrefManager(XacNhanDatHangActivity.this);
         user = sharedPrefManager.getUser();
         addressList = new ArrayList<>();
+        tvPhiVanChuyen = findViewById(R.id.tvPhiVanChuyen);
+        tvDamBaoVanChuyen = findViewById(R.id.tvDamBaoVanChuyen);
+        tvpgg = findViewById(R.id.tvpgg);
+        voucher_spinner = findViewById(R.id.voucher_spinner);
+    }
+
+    @Override
+    public void onTotalAmountChanged(int totalAmount, int baoHoAmount, int giaoHangAmount) {
+        this.totalAmount = totalAmount;
+        tvtamtinh.setText(String.valueOf(totalAmount - baoHoAmount - giaoHangAmount));
+        tvDamBaoVanChuyen.setText(String.valueOf(baoHoAmount));
+        tvPhiVanChuyen.setText(String.valueOf(giaoHangAmount));
+        tvtongcongtienthanhtoan.setText(String.valueOf(totalAmount - discount - chietKhau));
     }
 }

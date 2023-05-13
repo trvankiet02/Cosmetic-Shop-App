@@ -83,6 +83,7 @@
                         android:weightSum="4"
                         android:gravity="center_vertical">
                         <LinearLayout
+                            android:id="@+id/lnlVoucher"
                             android:layout_width="wrap_content"
                             android:layout_height="67dp"
                             android:layout_weight="1"

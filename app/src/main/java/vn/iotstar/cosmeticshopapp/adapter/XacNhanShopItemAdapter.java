@@ -21,6 +21,7 @@ import vn.iotstar.cosmeticshopapp.model.CartItem;
 public class XacNhanShopItemAdapter extends RecyclerView.Adapter<XacNhanShopItemAdapter.MyViewHolder>{
     Context context;
     List<CartItem> array;
+    Integer total = 0;
 
     public XacNhanShopItemAdapter(Context context, List<CartItem> array) {
         this.context = context;
@@ -35,10 +36,14 @@ public class XacNhanShopItemAdapter extends RecyclerView.Adapter<XacNhanShopItem
 
         return myViewHolder;
     }
+    public Integer getTotal(){
+        return total;
+    }
 
     @Override
     public void onBindViewHolder(@NonNull XacNhanShopItemAdapter.MyViewHolder holder, int position) {
         CartItem cartItem = array.get(position);
+        total += cartItem.getProduct().getPromotionalPrice() * cartItem.getQuantity();
         holder.txtNameProduct.setText(cartItem.getProduct().getName());
         holder.tvSizeProduct.setText(cartItem.getSize());
         holder.tvSoluong.setText(String.valueOf(cartItem.getQuantity()));
