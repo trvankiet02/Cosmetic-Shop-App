@@ -91,7 +91,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
                     underlayButtons.add(new SwipeHelper.UnderlayButton(
                             "Xóa",
                             null, // icon set to null to remove image
-                            Color.parseColor("#FF0000"),
+                            Color.parseColor("#d31900"),
                             Color.parseColor("#FFFFFF"),
                             typeface,
                             new UnderlayButtonClickListener() {

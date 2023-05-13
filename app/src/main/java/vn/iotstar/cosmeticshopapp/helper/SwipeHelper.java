@@ -259,7 +259,7 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
                 //animate
                 // Draw Text
                 TextPaint textPaint = new TextPaint();
-                textPaint.setTextSize(40);
+                textPaint.setTextSize(50);
                 textPaint.setColor(textColor);
                 StaticLayout sl = new StaticLayout(text, textPaint, (int) rect.width(),
                         Layout.Alignment.ALIGN_CENTER, 1, 1, false);

@@ -156,6 +156,8 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
 
             }
         });
+        //set voucher spinner
+
     }
 
 
