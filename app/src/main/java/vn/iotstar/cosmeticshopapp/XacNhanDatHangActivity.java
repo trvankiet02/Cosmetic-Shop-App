@@ -111,6 +111,7 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
     private void setSpinner() {
 
         apiService.getAddressByUserId(sharedPrefManager.getUser().getId()).enqueue(new Callback<ListAddressResponse>() {
+
             @Override
             public void onResponse(Call<ListAddressResponse> call, Response<ListAddressResponse> response) {
                 if (response.isSuccessful()){

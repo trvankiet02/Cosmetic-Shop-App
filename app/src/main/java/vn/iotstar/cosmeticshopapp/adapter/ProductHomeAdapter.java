@@ -82,7 +82,7 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private void populateItemRows(ItemViewHolder holder, int position) {
         Product product = array.get(position);
         holder.ProductName.setText(product.getName());
-        holder.ProductPrice.setText(String.valueOf(product.getPrice()));
+        holder.ProductPrice.setText(String.valueOf(product.getPromotionalPrice()));
         SliderProductImageAdapter sliderProductImageAdapter = new SliderProductImageAdapter(context.getApplicationContext(), product.getProductImages(), 1);
         holder.sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
         holder.sliderView.setSliderAdapter(sliderProductImageAdapter);

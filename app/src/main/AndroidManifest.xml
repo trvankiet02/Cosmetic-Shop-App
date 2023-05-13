@@ -24,6 +24,12 @@
             android:name=".VoucherActivity"
             android:exported="false" />
         <activity
+            android:name=".DanhGiaDonHangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietDonHangActivity"
+            android:exported="false" />
+        <activity
             android:name=".quanlytaikhoancuatoi.ChangeEmailActivity"
             android:exported="false" />
         <activity

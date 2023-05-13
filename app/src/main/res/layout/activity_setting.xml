@@ -340,7 +340,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
                         android:layout_weight="1"
-                        android:text="Giới thiệu SHEIN"
+                        android:text="Giới thiệu T2KVN"
                         android:textColor="#000"
                         android:textSize="17dp"/>
                     <ImageView
