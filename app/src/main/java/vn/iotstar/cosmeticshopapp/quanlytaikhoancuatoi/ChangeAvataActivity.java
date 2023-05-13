@@ -11,6 +11,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.File;
@@ -41,12 +43,14 @@ import vn.iotstar.cosmeticshopapp.util.RealPathUtil;
 
 public class ChangeAvataActivity extends AppCompatActivity {
     Button btnSelectImage, btnSave;
-    RoundedImageView ivAvatar;
+    ImageView ivAvatar;
     APIService apiService;
     SharedPrefManager sharedPrefManager;
     ProgressDialog mProgressDialog;
     Uri uri;
     String path;
+    RequestOptions requestOptions;
+    ImageView btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,16 @@ public class ChangeAvataActivity extends AppCompatActivity {
         anhXa();
         loadAvatar();
         clickListeners();
+        setBtnBack();
+    }
+    private void setBtnBack(){
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChangeAvataActivity.this, QuanLyTaiKhoanCuaToiActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void clickListeners() {
         btnSelectImage.setOnClickListener(new View.OnClickListener() {
@@ -88,11 +102,11 @@ public class ChangeAvataActivity extends AppCompatActivity {
         mProgressDialog.show();
         File file = new File(path);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("images", file.getName(), requestFile);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
         RequestBody id = RequestBody.create(MediaType.parse("multipart/form-data"),String.valueOf(userId));
         Log.d("TAG", "updateImages: " + userId);
-        apiService.updateAvatar(userId, body).enqueue(new Callback<LoginSignupResponse>() {
+        apiService.updateAvatar(id, body).enqueue(new Callback<LoginSignupResponse>() {
             @Override
             public void onResponse(Call<LoginSignupResponse> call, Response<LoginSignupResponse> response) {
                 mProgressDialog.dismiss();
@@ -117,7 +131,7 @@ public class ChangeAvataActivity extends AppCompatActivity {
 
     private void loadAvatar() {
         Log.e("TAG", "loadAvatar: " + sharedPrefManager.getUser().getProfileImage());
-        Glide.with(this).load(sharedPrefManager.getUser().getProfileImage()).into(ivAvatar);
+        Glide.with(this).load(sharedPrefManager.getUser().getProfileImage()).apply(requestOptions).into(ivAvatar);
     }
 
     private void anhXa(){
@@ -127,7 +141,11 @@ public class ChangeAvataActivity extends AppCompatActivity {
         sharedPrefManager = new SharedPrefManager(this);
         apiService = RetrofitCosmeticShop.getRetrofit().create(APIService.class);
         mProgressDialog = new ProgressDialog(ChangeAvataActivity.this);
-        mProgressDialog.setMessage("Please waiting upload....");
+        mProgressDialog.setMessage("Đang cập nhật....");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        btnBack = findViewById(R.id.btnBack);
+        requestOptions = RequestOptions.circleCropTransform();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -137,8 +155,11 @@ public class ChangeAvataActivity extends AppCompatActivity {
             Context context = ChangeAvataActivity.this;
             path = RealPathUtil.getRealPath(context, uri);
             //bitmap = BitmapFactory.decodeFile(path);
-            ivAvatar.setImageURI(uri);
-
+            //ivAvatar.setImageURI(uri);
+            Glide.with(context)
+                    .load(uri)
+                    .apply(requestOptions)
+                    .into(ivAvatar);
         }
     }
 }

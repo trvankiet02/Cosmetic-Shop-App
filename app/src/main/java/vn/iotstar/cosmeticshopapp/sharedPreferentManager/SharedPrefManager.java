@@ -16,6 +16,7 @@ public class SharedPrefManager {
     private static String SHARED_PREF_NAME = "user";
     private static String KEY_USER_ID = "id";
     private static String KEY_USER_EMAIL = "email";
+    private static String KEY_USER_PASSWORD = "password";
     private static String KEY_USER_FIRST_NAME = "firstName";
     private static String KEY_USER_LAST_NAME = "lastName";
     private static String KEY_USER_PHONE = "phone";
@@ -30,6 +31,12 @@ public class SharedPrefManager {
 
     public SharedPrefManager(Context ctx) {
         this.context = ctx;
+    }
+    public void setPassword(String password) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_USER_PASSWORD, password);
+        editor.commit();
     }
 
     public void setUser(User user) {
@@ -48,6 +55,13 @@ public class SharedPrefManager {
         editor.putString(KEY_USER_ADDRESSES, toAddressesJson(user.getAddresses()));
         editor.putInt(KEY_USER_EWALLET, user.getEwallet());
         editor.commit();
+    }
+
+    public void deletePassword() {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(KEY_USER_PASSWORD);
+        editor.apply();
     }
 
     public void deleteUser() {
@@ -74,6 +88,11 @@ public class SharedPrefManager {
                 toAddressesList(sharedPreferences.getString(KEY_USER_ADDRESSES, null)),
                 sharedPreferences.getInt(KEY_USER_EWALLET, -1));
         return user;
+    }
+    public String getPassword() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String password = sharedPreferences.getString(KEY_USER_PASSWORD, null);
+        return password;
     }
 
     public void updateUser(String key, String data) {

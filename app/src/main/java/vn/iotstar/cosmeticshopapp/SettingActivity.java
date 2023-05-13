@@ -34,6 +34,7 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sharedPrefManager.deleteUser();
+                sharedPrefManager.deletePassword();
                 Intent homeIntent = new Intent(SettingActivity.this, MainActivity.class);
                 startActivity(homeIntent);
             }
@@ -42,7 +43,11 @@ public class SettingActivity extends AppCompatActivity {
 
     private void getUserFromShared() {
         user = sharedPrefManager.getUser();
-        tvTenUser.setText(user.getFirstName() + " " + user.getLastName());
+        if (user.getFirstName() == null && user.getLastName() == null) {
+            tvTenUser.setText(user.getEmail());
+        } else {
+            tvTenUser.setText(user.getFirstName() + " " + user.getLastName());
+        }
         setClick();
     }
 

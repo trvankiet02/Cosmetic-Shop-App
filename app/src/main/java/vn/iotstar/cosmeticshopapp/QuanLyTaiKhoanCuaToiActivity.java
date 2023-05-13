@@ -37,9 +37,13 @@ public class QuanLyTaiKhoanCuaToiActivity extends AppCompatActivity {
 
     private void loadData() {
         user = sharedPrefManager.getUser();
-        tvNameUser.setText(user.getFirstName() + " " + user.getLastName());
+        if (user.getFirstName() == null && user.getLastName() == null) {
+            tvNameUser.setText(user.getEmail());
+        } else {
+            tvNameUser.setText(user.getFirstName() + " " + user.getLastName());
+        }
         tvEmail.setText(user.getEmail());
-        if (!user.getPhone().equals("")){
+        if (user.getPhone() != null){
             tvSoDienThoai.setText(user.getPhone());
         }
         Glide.with(this).load(user.getProfileImage()).into(avata);
@@ -67,13 +71,13 @@ public class QuanLyTaiKhoanCuaToiActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        lnEmail.setOnClickListener(new View.OnClickListener() {
+        /*lnEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(QuanLyTaiKhoanCuaToiActivity.this, ChangeEmailActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
         tvNameUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

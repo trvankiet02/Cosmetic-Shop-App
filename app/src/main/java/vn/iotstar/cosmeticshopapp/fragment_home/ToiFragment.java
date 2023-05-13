@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import java.io.Serializable;
 
+import vn.iotstar.cosmeticshopapp.GioHangActivity;
 import vn.iotstar.cosmeticshopapp.LoginSignupActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.SettingActivity;
@@ -35,7 +36,7 @@ import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 public class ToiFragment extends Fragment {
     View view;
-    ImageView btnProfile;
+    ImageView btnProfile, btnCart;
     TextView txtLogin;
     SharedPrefManager sharedPrefManager;
     TabLayout tabLayout;
@@ -50,6 +51,7 @@ public class ToiFragment extends Fragment {
         anhXa();
         setBtnProfile();
         setBtnXyLyDonHang();
+        setBtnCart();
         if (sharedPrefManager.getUser().getId() == -1){
             txtLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -133,6 +135,16 @@ public class ToiFragment extends Fragment {
         lnDaNhan = view.findViewById(R.id.lnDaNhan);
         lnDaHuy = view.findViewById(R.id.lnDaHuy);
         lnAllOrder = view.findViewById(R.id.lnAllOrder);
+        btnCart = view.findViewById(R.id.btnCart);
+    }
+    private void setBtnCart(){
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), GioHangActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void setBtnProfile(){
         btnProfile.setOnClickListener(new View.OnClickListener() {

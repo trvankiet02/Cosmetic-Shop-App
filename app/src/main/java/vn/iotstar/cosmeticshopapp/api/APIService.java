@@ -123,6 +123,18 @@ public interface APIService {
 
     @POST("user/updateAvatar")
     @Multipart
-    Call<LoginSignupResponse> updateAvatar(@Query("userId") Integer userId, @Part MultipartBody.Part image);
+    Call<LoginSignupResponse> updateAvatar(@Part("userId") RequestBody userId, @Part MultipartBody.Part image);
+
+    @POST("user/updatePhone")
+    @FormUrlEncoded
+    Call<LoginSignupResponse> updatePhone(@Field("userId") Integer userId, @Field("phone") String phone);
+
+    @POST("user/updatePassword")
+    @FormUrlEncoded
+    Call<LoginSignupResponse> updatePassword(@Field("userId") Integer userId, @Field("password") String password);
+
+    @POST("user/updateName")
+    @FormUrlEncoded
+    Call<LoginSignupResponse> updateName(@Field("userId") Integer userId, @Field("firstName") String firstName, @Field("lastName") String lastName);
 }
 
