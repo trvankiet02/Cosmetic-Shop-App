@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Locale;
 
 import vn.iotstar.cosmeticshopapp.ChiTietDonHangActivity;
+import vn.iotstar.cosmeticshopapp.DanhGiaDonHangActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.Address;
 import vn.iotstar.cosmeticshopapp.model.Order;
@@ -48,7 +49,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
         NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
 
         Order order = array.get(position);
-        setTrangThaiTongThe(holder, Integer.parseInt(order.getStatus().toString()));
+        setTrangThaiTongThe(holder, order, Integer.parseInt(order.getStatus().toString()));
         holder.tv_madonhang.setText(order.getId().toString());
         holder.storeName.setText(order.getStore().getName());
         Glide.with(context)
@@ -78,7 +79,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
         });
     }
 
-    public void setTrangThaiTongThe(DonHangAdapter.MyViewHolder holder, int trangThai){
+    public void setTrangThaiTongThe(DonHangAdapter.MyViewHolder holder, Order o,int trangThai){
         //đổi img màu, đổi txt trạng thái, ẩn nút xóa,
         //đơn chờ xác nhận thì có thể Hủy đơn
         //đơn đã xác nhận thì không được hủy
@@ -151,11 +152,20 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 holder.tv_danhgia.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        //chuyển đến trang đánh giá
+                        Intent intent = new Intent(context.getApplicationContext(), DanhGiaDonHangActivity.class);
+                        intent.putExtra("order", o);
+                        context.startActivity(intent);
                     }
                 });
                 holder.tv_danhan.setBackgroundResource(R.drawable.background_xam);
                 holder.tv_danhan.setTextColor(ContextCompat.getColor(context, R.color.grey_dark));
+                //nếu đơn đã đánh giá
+//                if (o.getreview == 1) {
+//                    holder.tv_danhgia.setBackgroundResource(R.drawable.background_xam);
+//                    holder.tv_danhgia.setTextColor(ContextCompat.getColor(context, R.color.grey_dark));
+//                    holder.tv_danhgia.setEnabled(false);
+//                }
                 break;
             default:
                 break;
