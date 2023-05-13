@@ -45,6 +45,37 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     public List<CartItem> getSelectedCartItem (){
         return cartItemList;
     }
+    public List<Cart> getSelectedCart() {
+        List<Cart> returnCartList = new ArrayList<>();
+        List<CartItem> selectedCartItemList = getSelectedCartItem();
+        for (CartItem cI: selectedCartItemList){
+            Log.d("Adapter", "SelectedCart: " + cI.getId());
+        }
+
+        for (Cart cart : array) {
+            Log.e("AdapterCart", "getSelectedCart: " + cart.getId() );
+            List<CartItem> returnCartItemList = new ArrayList<>();
+
+            for (CartItem cartItem : cart.getCartItems()) {
+                Log.e("AdapterCartItem", "getSelectedCart: " + cartItem.getId());
+                if (selectedCartItemList.contains(cartItem)) {
+                    Log.d("Adapter", "getSelectedCartItem: " + cartItem.getId());
+                    returnCartItemList.add(cartItem);
+                }
+            }
+
+            if (!returnCartItemList.isEmpty()) {
+                Cart selectedCart = new Cart();
+                selectedCart.setStore(cart.getStore());
+                selectedCart.setCartItems(returnCartItemList);
+                returnCartList.add(selectedCart);
+            }
+        }
+
+        return returnCartList;
+    }
+
+
     @NonNull
     @Override
     public CartAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

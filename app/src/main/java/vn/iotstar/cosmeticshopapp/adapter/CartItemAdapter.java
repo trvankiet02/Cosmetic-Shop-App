@@ -144,6 +144,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
                         public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
                             if (response.isSuccessful()){
                                 Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                cartItem.setQuantity(newQuantity);
+                                notifyDataSetChanged();
                                 holder.progressDialog.dismiss();
                                 holder.txtQuantity.setText(String.valueOf(newQuantity));
                             }
@@ -175,6 +177,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
                         public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
                             if (response.isSuccessful()){
                                 Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                cartItem.setQuantity(newQuantity);
+                                notifyDataSetChanged();
                                 holder.progressDialog.dismiss();
                                 holder.txtQuantity.setText(String.valueOf(newQuantity));
                             }

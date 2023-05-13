@@ -67,15 +67,21 @@ public class GioHangActivity extends AppCompatActivity {
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                productGioHangAdapter.getSelectedCartItem();
+                productGioHangAdapter.getSelectedCart();
                 Integer total = 0;
-                for (CartItem cI: productGioHangAdapter.getSelectedCartItem()) {
-                    Log.e("TAG", "setBtnThanhToan: " + cI.getSize() + " " + cI.getQuantity());
-                    total += cI.getProduct().getPromotionalPrice();
-                    //chuyển qua XacNhanDatHangActivity
-                    Intent intent = new Intent(GioHangActivity.this, XacNhanDatHangActivity.class);
-                    startActivity(intent);
+                if (productGioHangAdapter.getSelectedCart().size() == 0) {
+                    Toast.makeText(GioHangActivity.this, "Bạn chưa chọn sản phẩm nào", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                for (Cart c: productGioHangAdapter.getSelectedCart()) {
+                    for (CartItem cI: productGioHangAdapter.getSelectedCartItem()){
+                        total += cI.getQuantity() * cI.getProduct().getPromotionalPrice();
+                        Log.d("TAG", "onClick: " + c.getStore().getName() + " " + cI.getProduct().getName() + " " + cI.getQuantity() + " " + cI.getProduct().getPromotionalPrice());
+                    }
+                }
+                //chuyển qua XacNhanDatHangActivity
+                /*Intent intent = new Intent(GioHangActivity.this, XacNhanDatHangActivity.class);
+                startActivity(intent);*/
                 tvTotalPrice.setText(total.toString() + "đ");
             }
         });
