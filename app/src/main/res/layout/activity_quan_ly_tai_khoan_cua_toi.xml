@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".SettingActivity"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#f8f1e9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingStart="10dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginEnd="25dp"
+            android:text="Quản lý tài khoản của tôi"
+            android:textColor="#000"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avata"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_gravity="center|top"
+            android:background="@drawable/background_tron_xam"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="40dp"
+            android:src="@color/d8c8b8"/>
+        <ImageView
+            android:id="@+id/img_change_avata"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/img_icon_change_avata"/>
+        <TextView
+            android:id="@+id/tvNameUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_gravity="center|bottom"
+            android:gravity="center"
+            android:layout_marginTop="170dp"
+            android:text="thien"
+            android:textColor="#703e3b"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:background="@drawable/background_boder_e2ddd9"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/lnEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:text="Email"
+                android:textColor="#000"
+                android:textSize="17dp"/>
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:text="Nguy*********en@gmail.com"
+                android:layout_marginEnd="10dp"
+                android:textSize="14dp"/>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/next" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black" />
+        <LinearLayout
+            android:id="@+id/lnSoDienThoai"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:text="Số điện thoại"
+                android:textColor="#000"
+                android:textSize="17dp"/>
+            <TextView
+                android:id="@+id/tvSoDienThoai"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginEnd="10dp"
+                android:text="Thêm"
+                android:textColor="#000"
+                android:textSize="17dp"/>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/next" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black" />
+        <LinearLayout
+            android:id="@+id/lnDoiMatKhau"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:text="Đổi mật khẩu"
+                android:textColor="#000"
+                android:textSize="17dp" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/next" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black" />
+        <LinearLayout
+            android:id="@+id/lnXoaTaiKhoan"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:text="Xóa tài khoản"
+                android:textColor="#000"
+                android:textSize="17dp"/>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/next" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black" />
+        <LinearLayout
+            android:id="@+id/lnTaiXuong"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:text="Tải xuống thông tin của bạn"
+                android:textColor="#000"
+                android:textSize="17dp"/>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/next" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

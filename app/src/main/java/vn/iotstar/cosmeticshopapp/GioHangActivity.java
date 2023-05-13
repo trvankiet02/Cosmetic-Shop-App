@@ -72,6 +72,9 @@ public class GioHangActivity extends AppCompatActivity {
                 for (CartItem cI: productGioHangAdapter.getSelectedCartItem()) {
                     Log.e("TAG", "setBtnThanhToan: " + cI.getSize() + " " + cI.getQuantity());
                     total += cI.getProduct().getPromotionalPrice();
+                    //chuyển qua XacNhanDatHangActivity
+                    Intent intent = new Intent(GioHangActivity.this, XacNhanDatHangActivity.class);
+                    startActivity(intent);
                 }
                 tvTotalPrice.setText(total.toString() + "đ");
             }
