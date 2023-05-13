@@ -362,6 +362,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
                 Glide.with(getApplicationContext()).load(response.body().getBody().getProductImages().get(0).getImage()).into(viewAnimation);
                 sliderView.setSliderAdapter(sliderProductImageAdapter);
+                tv_rate_sanpham_tren.setText(String.valueOf(response.body().getBody().getSold()));
 
                 int promotionalPrice = response.body().getBody().getPromotionalPrice();
                 int price = response.body().getBody().getPrice();
@@ -523,7 +524,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                         setRatingTable(feedbacks, progressBar_nho, progressBar_vua, progressBar_lon,
                                 tv_nho, tv_vua, tv_lon);
                         tv_rate_num.setText(df.format(avgRating(feedbacks)));
-                        tv_rate_sanpham_tren.setText(String.valueOf(feedbacks.size()));
+                        //tv_rate_sanpham_tren.setText(String.valueOf(feedbacks.size()));
                         tv_rate_sanpham_duoi.setText(String.valueOf(feedbacks.size()));
                         rate_sanpham_duoi.setRating(avgRating(feedbacks));
                         rate_sanpham_tren.setRating(avgRating(feedbacks));

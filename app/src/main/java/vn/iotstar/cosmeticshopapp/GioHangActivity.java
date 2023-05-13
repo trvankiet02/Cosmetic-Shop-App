@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +83,12 @@ public class GioHangActivity extends AppCompatActivity {
 //                }
 
                 //chuyển qua XacNhanDatHangActivity
+                List<Cart> cartList = productGioHangAdapter.getSelectedCart();
+                Log.d("TAG", "onClick: " + cartList.size());
                 Intent intent = new Intent(GioHangActivity.this, XacNhanDatHangActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("cartList", (Serializable) cartList);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 tvTotalPrice.setText(total.toString() + "đ");
             }

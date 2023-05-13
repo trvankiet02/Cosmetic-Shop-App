@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +38,12 @@ public class XacNhanShopItemAdapter extends RecyclerView.Adapter<XacNhanShopItem
 
     @Override
     public void onBindViewHolder(@NonNull XacNhanShopItemAdapter.MyViewHolder holder, int position) {
-
+        CartItem cartItem = array.get(position);
+        holder.txtNameProduct.setText(cartItem.getProduct().getName());
+        holder.tvSizeProduct.setText(cartItem.getSize());
+        holder.tvSoluong.setText(String.valueOf(cartItem.getQuantity()));
+        holder.tvPrice.setText(cartItem.getProduct().getPromotionalPrice() + "đ");
+        Glide.with(context).load(cartItem.getProduct().getProductImages().get(0).getImage()).into(holder.imgProduct);
     }
 
     @Override

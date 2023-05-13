@@ -31,6 +31,9 @@ public class Product implements Serializable
     @SerializedName("madeIn")
     @Expose
     private String madeIn;
+    @SerializedName("sold")
+    @Expose
+    private Integer sold;
     @SerializedName("store")
     @Expose
     private Store store;
@@ -42,14 +45,14 @@ public class Product implements Serializable
     private String createAt;
     @SerializedName("updateAt")
     @Expose
-    private Object updateAt;
+    private String updateAt;
     @SerializedName("productImages")
     @Expose
     private List<ProductImage> productImages;
     @SerializedName("productQuantities")
     @Expose
     private List<ProductQuantity> productQuantities;
-    private final static long serialVersionUID = -8478122976543636160L;
+    private final static long serialVersionUID = 6392130297516943028L;
 
     public Integer getId() {
         return id;
@@ -115,6 +118,14 @@ public class Product implements Serializable
         this.madeIn = madeIn;
     }
 
+    public Integer getSold() {
+        return sold;
+    }
+
+    public void setSold(Integer sold) {
+        this.sold = sold;
+    }
+
     public Store getStore() {
         return store;
     }
@@ -139,11 +150,11 @@ public class Product implements Serializable
         this.createAt = createAt;
     }
 
-    public Object getUpdateAt() {
+    public String getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(Object updateAt) {
+    public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
     }
 
