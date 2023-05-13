@@ -34,13 +34,15 @@ import vn.iotstar.cosmeticshopapp.model.Cart;
 import vn.iotstar.cosmeticshopapp.model.ListAddressResponse;
 import vn.iotstar.cosmeticshopapp.model.Product;
 import vn.iotstar.cosmeticshopapp.model.User;
+import vn.iotstar.cosmeticshopapp.model.Voucher;
+import vn.iotstar.cosmeticshopapp.model.VoucherResponse;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhanShopAdapter.TotalAmountListener {
     LinearLayout ln_chondiachi,ln_themdiachi;
     TextView tvHoTen, tvSoDienThoai,tvDiaChi;
-    TextView tvtongcong1, tvsophieugiamgia, tvtamtinh,tvchietkhau,tvtongcongtienthanhtoan, tvPhiVanChuyen, tvDamBaoVanChuyen, tvpgg;
+    TextView tvsophieugiamgia, tvtamtinh,tvchietkhau,tvtongcongtienthanhtoan, tvPhiVanChuyen, tvDamBaoVanChuyen, tvpgg;
     TextView tvtieptucthanhtoan;
     RadioButton rb_giaohangtieuchuan;
     Switch switchdambaovanchuyen;
@@ -63,6 +65,7 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
         setContentView(R.layout.activity_xac_nhan_dat_hang);
         anhXa();
         setSpinner();
+        selectVoucher();
         setRVXacNhan_Shop();
     }
 
@@ -94,18 +97,51 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
         Integer baoHo = xacNhanShopAdapter.getBaoHoTotal();
         discount = xacNhanShopAdapter.getTotal()*10/100;
         chietKhau = (tamTinh)*10/100;
-        Integer tongCong = tamTinh + giaoHang + baoHo - discount - chietKhau;
+        Integer tongCong = tamTinh + giaoHang + baoHo - discount + chietKhau;
 
         tvtamtinh.setText(String.valueOf(tamTinh));
         tvPhiVanChuyen.setText(String.valueOf(giaoHang));
         tvDamBaoVanChuyen.setText(String.valueOf(baoHo));
-        tvpgg.setText(String.valueOf(-discount));
-        tvchietkhau.setText(String.valueOf(-chietKhau));
+
+        tvchietkhau.setText(String.valueOf(chietKhau));
         tvtongcongtienthanhtoan.setText(String.valueOf(tongCong));
 
     }
     private void selectVoucher(){
+//set voucher spinner
+        apiService.getAllVoucher().enqueue(new Callback<VoucherResponse>() {
+            @Override
+            public void onResponse(Call<VoucherResponse> call, Response<VoucherResponse> response) {
+                if (response.isSuccessful()){
+                    tvsophieugiamgia.setText(String.valueOf(response.body().getBody().size()));
+                    List<Voucher> vouchers = response.body().getBody();
+                    List<String> voucherNames = new ArrayList<>();
+                    for (Voucher voucher : vouchers){
+                        voucherNames.add(String.valueOf(voucher.getDescription()));
+                    }
+                    ArrayAdapter<String> voucherArrayAdapter = new ArrayAdapter<>(XacNhanDatHangActivity.this, R.layout.my_custom_spinner_dropdown_item, voucherNames);
+                    voucher_spinner.setAdapter(voucherArrayAdapter);
+                    voucher_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String selectedVoucher = (String) parent.getItemAtPosition(position);
+                            int pos = voucherNames.indexOf(selectedVoucher);
+                            tvpgg.setText(String.valueOf(vouchers.get(pos).getDiscount()*Double.parseDouble(tvtamtinh.getText().toString())));
 
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onFailure(Call<VoucherResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     private void setSpinner() {
@@ -156,8 +192,6 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
 
             }
         });
-        //set voucher spinner
-
     }
 
 
@@ -168,7 +202,6 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
         tvHoTen = findViewById(R.id.tvHoTen);
         tvSoDienThoai = findViewById(R.id.tvSoDienThoai);
         tvDiaChi = findViewById(R.id.tvDiaChi);
-        tvtongcong1 = findViewById(R.id.tvtongcong1);
         tvsophieugiamgia = findViewById(R.id.tvsophieugiamgia);
         tvtamtinh = findViewById(R.id.tvtamtinh);
         tvchietkhau = findViewById(R.id.tvchietkhau);

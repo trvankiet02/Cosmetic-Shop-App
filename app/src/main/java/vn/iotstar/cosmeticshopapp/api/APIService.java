@@ -33,6 +33,7 @@ import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductResponse;
 import vn.iotstar.cosmeticshopapp.model.ReviewResponse;
 import vn.iotstar.cosmeticshopapp.model.StyleByCategoryResponse;
+import vn.iotstar.cosmeticshopapp.model.VoucherResponse;
 
 public interface APIService {
 
@@ -137,7 +138,7 @@ public interface APIService {
     @FormUrlEncoded
     Call<LoginSignupResponse> updateName(@Field("userId") Integer userId, @Field("firstName") String firstName, @Field("lastName") String lastName);
 
-
-
+    @GET("voucher")
+    Call<VoucherResponse> getAllVoucher();
 }
 
