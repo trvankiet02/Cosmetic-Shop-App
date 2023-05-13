@@ -4,6 +4,8 @@ import androidx.core.content.pm.PermissionInfoCompat;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -28,10 +30,12 @@ import vn.iotstar.cosmeticshopapp.model.CategoryAndStyleResponse;
 import vn.iotstar.cosmeticshopapp.model.FollowProductResponse;
 import vn.iotstar.cosmeticshopapp.model.ListAddressResponse;
 import vn.iotstar.cosmeticshopapp.model.LoginSignupResponse;
+import vn.iotstar.cosmeticshopapp.model.NullBodyResponse;
 import vn.iotstar.cosmeticshopapp.model.OrderResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductResponse;
 import vn.iotstar.cosmeticshopapp.model.ReviewResponse;
+import vn.iotstar.cosmeticshopapp.model.SingleOrderResponse;
 import vn.iotstar.cosmeticshopapp.model.StyleByCategoryResponse;
 import vn.iotstar.cosmeticshopapp.model.VoucherResponse;
 
@@ -126,6 +130,11 @@ public interface APIService {
     @Multipart
     Call<LoginSignupResponse> updateAvatar(@Part("userId") RequestBody userId, @Part MultipartBody.Part image);
 
+    @POST("review/addReview")
+    @Multipart
+    Call<SingleOrderResponse> addReview(@Part("orderId") RequestBody orderId, @Part("rating") RequestBody rating,
+                                        @Part("content") RequestBody content, @Part List<MultipartBody.Part> reviewImages);
+
     @POST("user/updatePhone")
     @FormUrlEncoded
     Call<LoginSignupResponse> updatePhone(@Field("userId") Integer userId, @Field("phone") String phone);
@@ -140,5 +149,13 @@ public interface APIService {
 
     @GET("voucher")
     Call<VoucherResponse> getAllVoucher();
+
+    @POST("order/cancelOrder")
+    @FormUrlEncoded
+    Call<SingleOrderResponse> cancelOrder(@Field("orderId") Integer orderId);
+
+    @POST("order/receiveOrder")
+    @FormUrlEncoded
+    Call<SingleOrderResponse> receiveOrder(@Field("orderId") Integer orderId);
 }
 

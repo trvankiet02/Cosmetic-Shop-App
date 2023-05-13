@@ -1,11 +1,10 @@
 package vn.iotstar.cosmeticshopapp.model;
 
 import java.io.Serializable;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Review implements Serializable
+public class UserFollowStore implements Serializable
 {
 
     @SerializedName("id")
@@ -14,22 +13,13 @@ public class Review implements Serializable
     @SerializedName("user")
     @Expose
     private User user;
-    @SerializedName("content")
-    @Expose
-    private String content;
-    @SerializedName("rating")
-    @Expose
-    private Double rating;
     @SerializedName("createAt")
     @Expose
     private String createAt;
     @SerializedName("updateAt")
     @Expose
     private String updateAt;
-    @SerializedName("reviewImages")
-    @Expose
-    private List<ReviewImage> reviewImages;
-    private final static long serialVersionUID = 2975520389868787566L;
+    private final static long serialVersionUID = 2336915228739526281L;
 
     public Integer getId() {
         return id;
@@ -47,22 +37,6 @@ public class Review implements Serializable
         this.user = user;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-
     public String getCreateAt() {
         return createAt;
     }
@@ -77,14 +51,6 @@ public class Review implements Serializable
 
     public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
-    }
-
-    public List<ReviewImage> getReviewImages() {
-        return reviewImages;
-    }
-
-    public void setReviewImages(List<ReviewImage> reviewImages) {
-        this.reviewImages = reviewImages;
     }
 
 }

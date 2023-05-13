@@ -1,12 +1,17 @@
 package vn.iotstar.cosmeticshopapp.adapter;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -21,12 +26,19 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import vn.iotstar.cosmeticshopapp.ChiTietDonHangActivity;
 import vn.iotstar.cosmeticshopapp.DanhGiaDonHangActivity;
 import vn.iotstar.cosmeticshopapp.R;
+import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.Address;
+import vn.iotstar.cosmeticshopapp.model.NullBodyResponse;
 import vn.iotstar.cosmeticshopapp.model.Order;
 import vn.iotstar.cosmeticshopapp.model.OrderItem;
+import vn.iotstar.cosmeticshopapp.model.SingleOrderResponse;
+import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 
 public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHolder>{
     Context context;
@@ -77,6 +89,44 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 context.startActivity(intent);
             }
         });
+        holder.builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                holder.progressDialog.setMessage("Đang xử lý...");
+                holder.progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                holder.progressDialog.show();
+                //callAPI
+                holder.apiService.cancelOrder(order.getId()).enqueue(new Callback<SingleOrderResponse>() {
+                    @Override
+                    public void onResponse(Call<SingleOrderResponse> call, Response<SingleOrderResponse> response) {
+                        holder.progressDialog.dismiss();
+                        if (response.isSuccessful()) {
+                            Toast.makeText(context.getApplicationContext(), "Hủy đơn hàng thành công", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(context.getApplicationContext(), ChiTietDonHangActivity.class);
+                            intent.putExtra("order", response.body().getBody());
+                            context.startActivity(intent);
+                        } else {
+                            Toast.makeText(context.getApplicationContext(), "Hủy đơn hàng thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SingleOrderResponse> call, Throwable t) {
+                        Log.e("TAG", "onFailure: " + t.getMessage());
+                    }
+                });
+
+            }
+        });
+        holder.builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        holder.builder.setTitle("Xác nhận hành động");
+        holder.builder.setMessage("Bạn có chắc chắn muốn hủy đơn hàng này?");
+        holder.dialog = holder.builder.create();
     }
 
     public void setTrangThaiTongThe(DonHangAdapter.MyViewHolder holder, Order o,int trangThai){
@@ -111,7 +161,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 holder.tv_huydon.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        holder.dialog.show();
                     }
                 });
                 break;
@@ -131,6 +181,27 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 holder.tv_danhan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        holder.progressDialog.setMessage("Đang xử lý...");
+                        holder.progressDialog.show();
+                        holder.apiService.receiveOrder(o.getId()).enqueue(new Callback<SingleOrderResponse>() {
+                            @Override
+                            public void onResponse(Call<SingleOrderResponse> call, Response<SingleOrderResponse> response) {
+                                holder.progressDialog.dismiss();
+                                if (response.isSuccessful() && response.code() == 200){
+                                    Toast.makeText(context, "Đã nhận đơn hàng", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(context.getApplicationContext(), ChiTietDonHangActivity.class);
+                                    intent.putExtra("order", response.body().getBody());
+                                    context.startActivity(intent);
+                                } else {
+                                    Toast.makeText(context, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<SingleOrderResponse> call, Throwable t) {
+                                Log.e("TAG", "onFailure: " + t.getMessage());
+                            }
+                        });
 
                     }
                 });
@@ -146,6 +217,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 holder.img_xoa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        //callAPI
 
                     }
                 });
@@ -166,6 +238,11 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
 //                    holder.tv_danhgia.setTextColor(ContextCompat.getColor(context, R.color.grey_dark));
 //                    holder.tv_danhgia.setEnabled(false);
 //                }
+                if (o.getReview() != null){
+                    holder.tv_danhgia.setBackgroundResource(R.drawable.background_xam);
+                    holder.tv_danhgia.setTextColor(ContextCompat.getColor(context, R.color.grey_dark));
+                    holder.tv_danhgia.setEnabled(false);
+                }
                 break;
             default:
                 break;
@@ -185,6 +262,10 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
         TextView tv_danhgia, tv_huydon, tv_danhan;
         OrderItemAdapter orderItemAdapter;
         RecyclerView rcImageProductOder;
+        AlertDialog.Builder builder;
+        AlertDialog dialog;
+        APIService apiService;
+        ProgressDialog progressDialog;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             anhXa();
@@ -202,6 +283,9 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
             tv_huydon = itemView.findViewById(R.id.tv_huydon);
             tv_danhan = itemView.findViewById(R.id.tv_danhan);
             rcImageProductOder = itemView.findViewById(R.id.rcImageProductOder);
+            builder = new AlertDialog.Builder(itemView.getContext());
+            apiService = RetrofitCosmeticShop.getRetrofit().create(APIService.class);
+            progressDialog = new ProgressDialog(itemView.getContext());
         }
     }
 }

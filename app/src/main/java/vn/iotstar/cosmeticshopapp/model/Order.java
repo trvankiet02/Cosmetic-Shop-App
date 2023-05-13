@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Order implements Serializable
 {
-
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -20,6 +19,9 @@ public class Order implements Serializable
     @SerializedName("store")
     @Expose
     private Store store;
+    @SerializedName("voucher")
+    @Expose
+    private Voucher voucher;
     @SerializedName("address")
     @Expose
     private String address;
@@ -41,7 +43,10 @@ public class Order implements Serializable
     @SerializedName("orderItems")
     @Expose
     private List<OrderItem> orderItems;
-    private final static long serialVersionUID = -6815536380145437055L;
+    @SerializedName("review")
+    @Expose
+    private Review review;
+    private final static long serialVersionUID = -1809491193631655702L;
 
     public Integer getId() {
         return id;
@@ -73,6 +78,14 @@ public class Order implements Serializable
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public Voucher getVoucher() {
+        return voucher;
+    }
+
+    public void setVoucher(Voucher voucher) {
+        this.voucher = voucher;
     }
 
     public String getAddress() {
@@ -131,4 +144,11 @@ public class Order implements Serializable
         this.orderItems = orderItems;
     }
 
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
+    }
 }
