@@ -1,6 +1,7 @@
 package vn.iotstar.cosmeticshopapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,11 @@ import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
+import vn.iotstar.cosmeticshopapp.ChiTietDonHangActivity;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.Address;
 import vn.iotstar.cosmeticshopapp.model.Order;
@@ -41,6 +45,8 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull DonHangAdapter.MyViewHolder holder, int position) {
+        NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
+
         Order order = array.get(position);
         setTrangThaiTongThe(holder, Integer.parseInt(order.getStatus().toString()));
         holder.tv_madonhang.setText(order.getId().toString());
@@ -49,7 +55,8 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 .load(order.getStore().getStoreImage())
                 .into(holder.storeImage);
         holder.tv_soluongsanpham.setText(String.valueOf(order.getOrderItems().size()));
-        holder.tv_giadonhang.setText(order.getPrice().toString());
+        String formattedNumber = formatter.format(order.getPrice());
+        holder.tv_giadonhang.setText(formattedNumber);
         //order.getOrderItems().get(0).getProduct();
 
         //adapter chuyển item.Image vào
@@ -59,6 +66,16 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
         holder.rcImageProductOder.setLayoutManager(layoutManager);
         holder.rcImageProductOder.setAdapter(holder.orderItemAdapter);
         holder.orderItemAdapter.notifyDataSetChanged();
+
+        //chuyển đến trang xem chi tiết đơn hàng
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context.getApplicationContext(), ChiTietDonHangActivity.class);
+                intent.putExtra("order", order);
+                context.startActivity(intent);
+            }
+        });
     }
 
     public void setTrangThaiTongThe(DonHangAdapter.MyViewHolder holder, int trangThai){

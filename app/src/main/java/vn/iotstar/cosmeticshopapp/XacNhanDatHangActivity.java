@@ -74,8 +74,8 @@ public class XacNhanDatHangActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.my_custom_spinner_dropdown_item, addresses);
 
         // Thiết lập Adapter cho Spinner
-        Spinner addressSpinner = findViewById(R.id.address_spinner);
-        addressSpinner.setAdapter(adapter);
+
+        address_spinner.setAdapter(adapter);
         address_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
