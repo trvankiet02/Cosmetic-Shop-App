@@ -211,5 +211,8 @@ public interface APIService {
     @FormUrlEncoded
     Call<ProductResponse> getProductByStore(@Field("storeId") Integer storeId, @Field("isSelling") Boolean isSelling);
 
+    @POST("order/getOrderByStore")
+    @FormUrlEncoded
+    Call<OrderResponse> getOrderByStore(@Field("storeId") Integer storeId, @Field("status") Integer status);
 }
 
