@@ -10,7 +10,6 @@ import vn.iotstar.cosmeticshopapp.model.Address;
 
 public class User implements Serializable
 {
-
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -47,7 +46,7 @@ public class User implements Serializable
     @SerializedName("ewallet")
     @Expose
     private Integer ewallet;
-    private final static long serialVersionUID = 1997451940403294055L;
+    private final static long serialVersionUID = -5080609665973113173L;
 
     public Integer getId() {
         return id;

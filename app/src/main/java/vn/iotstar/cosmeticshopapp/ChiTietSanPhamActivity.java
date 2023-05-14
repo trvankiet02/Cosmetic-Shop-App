@@ -113,7 +113,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chitietsanpham);
         AnhXa();
-        //SetSpinner();
         setRvProductGoiY();
         getProductId();
         getProductDetail();
@@ -517,14 +516,15 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             public void onResponse(Call<ReviewResponse> call, Response<ReviewResponse> response) {
                 if (response.isSuccessful()){
                     feedbacks = response.body().getBody();
+                    Log.e(TAG, "onResponse: " + feedbacks.size());
                     if(feedbacks.size() == 0){
                         lnReview.setVisibility(View.GONE);
                     }
                     else {
+                        //LỖI Ở ĐÂY
                         setRatingTable(feedbacks, progressBar_nho, progressBar_vua, progressBar_lon,
                                 tv_nho, tv_vua, tv_lon);
                         tv_rate_num.setText(df.format(avgRating(feedbacks)));
-                        //tv_rate_sanpham_tren.setText(String.valueOf(feedbacks.size()));
                         tv_rate_sanpham_duoi.setText(String.valueOf(feedbacks.size()));
                         rate_sanpham_duoi.setRating(avgRating(feedbacks));
                         rate_sanpham_tren.setRating(avgRating(feedbacks));
@@ -533,7 +533,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                         if (feedbacks.size() >= 2) {
                             twoFeedbacks = new ArrayList<>(feedbacks.subList(0, 2));
                         } else {
-                            twoFeedbacks = feedbacks;
+                            twoFeedbacks.addAll(feedbacks);
                         }
 
                         feedbackAdapter = new FeedbackAdapter(getApplicationContext(), twoFeedbacks);

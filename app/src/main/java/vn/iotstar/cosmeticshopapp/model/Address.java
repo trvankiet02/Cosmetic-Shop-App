@@ -31,7 +31,7 @@ public class Address implements Serializable
     @SerializedName("updateAt")
     @Expose
     private String updateAt;
-    private final static long serialVersionUID = 5695209804406132539L;
+    private final static long serialVersionUID = 5513515709366933641L;
 
     public Integer getId() {
         return id;

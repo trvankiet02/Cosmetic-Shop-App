@@ -39,11 +39,11 @@ public class Store implements Serializable
     private String updateAt;
     @SerializedName("userFollowStores")
     @Expose
-    private List<Object> userFollowStores;
+    private List<UserFollowStore> userFollowStores;
     @SerializedName("ewallet")
     @Expose
     private Integer ewallet;
-    private final static long serialVersionUID = 8598772755526796830L;
+    private final static long serialVersionUID = 2002024235378252062L;
 
     public Integer getId() {
         return id;
@@ -125,11 +125,11 @@ public class Store implements Serializable
         this.updateAt = updateAt;
     }
 
-    public List<Object> getUserFollowStores() {
+    public List<UserFollowStore> getUserFollowStores() {
         return userFollowStores;
     }
 
-    public void setUserFollowStores(List<Object> userFollowStores) {
+    public void setUserFollowStores(List<UserFollowStore> userFollowStores) {
         this.userFollowStores = userFollowStores;
     }
 
@@ -140,5 +140,4 @@ public class Store implements Serializable
     public void setEwallet(Integer ewallet) {
         this.ewallet = ewallet;
     }
-
 }

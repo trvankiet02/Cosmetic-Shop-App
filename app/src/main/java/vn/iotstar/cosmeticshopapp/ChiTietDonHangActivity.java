@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,6 +30,7 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
     ChiTietDonHangProductAdapter chiTietDonHangProductAdapter;
     RecyclerView rcProductOrder;
     NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
+    Order order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
         // lấy dữ liệu từ adapter
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            Order order = (Order) bundle.getSerializable("order");
+            order = (Order) bundle.getSerializable("order");
             setChiTietDonHang(order ,Integer.parseInt(order.getStatus().toString()));
 
         }
@@ -143,11 +145,18 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
                 tv_danhgia.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        Intent intent = new Intent(ChiTietDonHangActivity.this, DanhGiaDonHangActivity.class);
+                        intent.putExtra("order", order);
+                        startActivity(intent);
                     }
                 });
                 tv_danhan.setBackgroundResource(R.drawable.background_xam);
                 tv_danhan.setTextColor(ContextCompat.getColor(ChiTietDonHangActivity.this, R.color.grey_dark));
+                if (order.getReview() != null){
+                    tv_danhgia.setBackgroundResource(R.drawable.background_xam);
+                    tv_danhgia.setTextColor(ContextCompat.getColor(ChiTietDonHangActivity.this, R.color.grey_dark));
+                    tv_danhgia.setEnabled(false);
+                }
                 break;
             default:
                 break;

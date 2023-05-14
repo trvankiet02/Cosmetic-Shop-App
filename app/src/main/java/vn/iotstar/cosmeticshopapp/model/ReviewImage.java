@@ -18,7 +18,7 @@ public class ReviewImage implements Serializable
     private String createAt;
     @SerializedName("updateAt")
     @Expose
-    private Object updateAt;
+    private String updateAt;
     private final static long serialVersionUID = -6660992471757515865L;
 
     public Integer getId() {
@@ -45,11 +45,11 @@ public class ReviewImage implements Serializable
         this.createAt = createAt;
     }
 
-    public Object getUpdateAt() {
+    public String getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(Object updateAt) {
+    public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
     }
 
