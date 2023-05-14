@@ -37,7 +37,7 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.array = array;
     }
     public void updateProduct(List<Product> productList) {
-        array = productList;
+        this.array = productList;
         notifyDataSetChanged();
     }
     public void setLoadMoreListener(LoadMoreListener loadMoreListener) {
