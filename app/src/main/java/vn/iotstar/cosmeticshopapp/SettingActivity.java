@@ -2,15 +2,30 @@ package vn.iotstar.cosmeticshopapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.fragment_home.DanhmucFragment;
+import vn.iotstar.cosmeticshopapp.model.Store;
+import vn.iotstar.cosmeticshopapp.model.StoreResponse;
 import vn.iotstar.cosmeticshopapp.model.User;
+import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 public class SettingActivity extends AppCompatActivity {
@@ -21,6 +36,10 @@ public class SettingActivity extends AppCompatActivity {
     SharedPrefManager sharedPrefManager;
     ImageView btnBack;
     User user;
+    APIService apiService;
+    ProgressDialog progressDialog;
+    AlertDialog.Builder builder;
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +98,33 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        lnTuyChonLienHe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progressDialog.setMessage("Đang kiểm tra...");
+                progressDialog.show();
+                apiService.getStoreByUserId(sharedPrefManager.getUser().getId()).enqueue(new Callback<StoreResponse>() {
+                    @Override
+                    public void onResponse(Call<StoreResponse> call, Response<StoreResponse> response) {
+                        progressDialog.dismiss();
+                        if (response.isSuccessful()) {
+                            Intent intent = new Intent(SettingActivity.this, SellerHomeActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("store", response.body().getBody());
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        } else {
+                            dialog.show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<StoreResponse> call, Throwable t) {
+                        Log.e("TAG", "onFailure: " + t.getMessage());
+                    }
+                });
+            }
+        });
     }
 
     private void anhXa() {
@@ -100,5 +146,24 @@ public class SettingActivity extends AppCompatActivity {
         sharedPrefManager = new SharedPrefManager(this);
         user = new User();
         btnBack = findViewById(R.id.btnBack);
+        apiService = RetrofitCosmeticShop.getRetrofit().create(APIService.class);
+        progressDialog = new ProgressDialog(this);
+        builder = new AlertDialog.Builder(this);
+        builder.setTitle("Bạn không có cửa hàng");
+        builder.setMessage("Bạn có muốn tạo cửa hàng không?");
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(SettingActivity.this, SellerSignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        dialog = builder.create();
     }
 }

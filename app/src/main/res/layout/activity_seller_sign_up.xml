@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SellerSignUpActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingStart="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginEnd="25dp"
+                    android:text="Đăng ký trở thành người bán"
+                    android:textColor="#000"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="304dp"
+                android:layout_height="91dp"
+                android:layout_gravity="center"
+                android:src="@drawable/t2k_logo" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilStoreName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Tên cửa hàng"
+                android:padding="10dp"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/email">
+
+                <EditText
+                    android:id="@+id/edtStoreName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilStoreEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Email"
+                android:padding="10dp"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/email">
+
+                <EditText
+                    android:id="@+id/edtStoreEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilStorePhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Số điện thoại"
+                android:padding="10dp"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/email">
+
+                <EditText
+                    android:id="@+id/edtStorePhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                tools:ignore="MissingConstraints">
+
+                <Button
+                    android:id="@+id/btnSelectImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chọn hình ảnh"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/background_muasam"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+                    <!--<de.hdodenhof.circleimageview.CircleImageView
+                      android:id="@+id/ivAvatar"
+                      android:layout_width="200dp"
+                      android:layout_height="200dp"
+                      android:layout_gravity="center"
+                      android:background="@drawable/background_tron_xam"/>-->
+                    <!--<ImageView
+                        android:id="@+id/ivAvatar"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/background_tron_xam"/>-->
+                    <ImageView
+                        android:id="@+id/ivStoreImage"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center|top"
+                        android:background="@drawable/background_tron_xam"/>
+
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Bằng cách đăng nhập vào tài khoản của bạn, bạn đồng ý với Chính sách bảo mật &amp; Cookie và Điều khoản và Điều kiện của chúng tôi"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+        <!--<TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Bằng cách đăng nhập vào tài khoản của bạn, bạn đồng ý với Chính sách bảo mật &amp; Cookie và Điều khoản và Điều kiện của chúng tôi"
+            android:textAlignment="center"
+            android:layout_weight="1"/>-->
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

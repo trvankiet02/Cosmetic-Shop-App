@@ -37,6 +37,7 @@ import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductResponse;
 import vn.iotstar.cosmeticshopapp.model.ReviewResponse;
 import vn.iotstar.cosmeticshopapp.model.SingleOrderResponse;
+import vn.iotstar.cosmeticshopapp.model.StoreResponse;
 import vn.iotstar.cosmeticshopapp.model.StyleByCategoryResponse;
 import vn.iotstar.cosmeticshopapp.model.VoucherResponse;
 
@@ -136,6 +137,14 @@ public interface APIService {
     Call<SingleOrderResponse> addReview(@Part("orderId") RequestBody orderId, @Part("rating") RequestBody rating,
                                         @Part("content") RequestBody content, @Part List<MultipartBody.Part> reviewImages);
 
+    @POST("store/signup")
+    @Multipart
+    Call<StoreResponse> storeSignup(@Part("userId") RequestBody userId,
+                                    @Part("storeName") RequestBody storeName,
+                                    @Part("storeAddress") RequestBody storeAddress,
+                                    @Part("storePhone") RequestBody storePhone,
+                                    @Part MultipartBody.Part image);
+
     @POST("user/updatePhone")
     @FormUrlEncoded
     Call<LoginSignupResponse> updatePhone(@Field("userId") Integer userId, @Field("phone") String phone);
@@ -154,6 +163,14 @@ public interface APIService {
     @POST("order/cancelOrder")
     @FormUrlEncoded
     Call<SingleOrderResponse> cancelOrder(@Field("orderId") Integer orderId);
+
+    @POST("order/confirmOrder")
+    @FormUrlEncoded
+    Call<SingleOrderResponse> confirmOrder(@Field("orderId") Integer orderId);
+
+    @POST("order/shipOrder")
+    @FormUrlEncoded
+    Call<SingleOrderResponse> shipOrder(@Field("orderId") Integer orderId);
 
     @POST("order/receiveOrder")
     @FormUrlEncoded
@@ -184,8 +201,15 @@ public interface APIService {
     @FormUrlEncoded
     Call<ProductResponse> getNewProduct(@Field("storeId") Integer storeId);
 
+
+    @POST("store/getStoreByUser")
+    @FormUrlEncoded
+    Call<StoreResponse> getStoreByUserId(@Field("userId") Integer userId);
+
+
     @POST("product/getProductByStore")
     @FormUrlEncoded
     Call<ProductResponse> getProductByStore(@Field("storeId") Integer storeId, @Field("isSelling") Boolean isSelling);
+
 }
 
