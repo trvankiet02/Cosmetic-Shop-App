@@ -144,18 +144,11 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 holder.tv_danhan.setVisibility(View.GONE);
                 holder.tv_huydon.setVisibility(View.GONE);
                 holder.tv_danhgia.setVisibility(View.GONE);
-                holder.img_xoa.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                    }
-                });
                 break;
             case 1:
                 // Xử lý khi trạng thái là chờ xác nhận
                 holder.img_mautrangthai.setBackgroundResource(R.drawable.background_tt_1);
                 holder.tv_trangthai.setText("CHƯA XÁC NHẬN");
-                holder.img_xoa.setVisibility(View.GONE);
                 holder.tv_danhan.setVisibility(View.GONE);
                 holder.tv_danhgia.setVisibility(View.GONE);
                 holder.tv_huydon.setOnClickListener(new View.OnClickListener() {
@@ -169,7 +162,6 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 // Xử lý khi trạng thái là đã xác nhận
                 holder.img_mautrangthai.setBackgroundResource(R.drawable.background_tt_2);
                 holder.tv_trangthai.setText("ĐÃ XÁC NHẬN");
-                holder.img_xoa.setVisibility(View.GONE);
                 holder.tv_danhan.setVisibility(View.GONE);
                 holder.tv_huydon.setVisibility(View.GONE);
                 holder.tv_danhgia.setVisibility(View.GONE);
@@ -205,7 +197,6 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
 
                     }
                 });
-                holder.img_xoa.setVisibility(View.GONE);
                 holder.tv_danhgia.setVisibility(View.GONE);
                 holder.tv_huydon.setVisibility(View.GONE);
                 break;
@@ -214,13 +205,6 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 holder.img_mautrangthai.setBackgroundResource(R.drawable.background_tt_4);
                 holder.tv_trangthai.setText("ĐÃ NHẬN HÀNG");
                 holder.tv_huydon.setVisibility(View.GONE);
-                holder.img_xoa.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //callAPI
-
-                    }
-                });
                 holder.tv_danhgia.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -252,7 +236,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView img_mautrangthai, storeImage, img_xoa;
+        ImageView img_mautrangthai, storeImage;
         TextView tv_trangthai, tv_madonhang, tv_soluongsanpham, tv_giadonhang, storeName;
         TextView tv_danhgia, tv_huydon, tv_danhan;
         OrderItemAdapter orderItemAdapter;
@@ -269,7 +253,6 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
             img_mautrangthai = itemView.findViewById(R.id.img_mautrangthai);
             storeImage = itemView.findViewById(R.id.storeImage3);
             storeName = itemView.findViewById(R.id.storeName3);
-            img_xoa = itemView.findViewById(R.id.img_xoa);
             tv_trangthai = itemView.findViewById(R.id.tv_trangthai);
             tv_madonhang = itemView.findViewById(R.id.tv_madonhang);
             tv_soluongsanpham = itemView.findViewById(R.id.tv_soluongsanpham);

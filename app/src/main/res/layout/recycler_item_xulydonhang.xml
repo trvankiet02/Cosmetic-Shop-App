@@ -144,11 +144,6 @@
             android:gravity="center_vertical"
             android:paddingBottom="10dp"
             android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/img_xoa"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/img_icon_bin" />
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"

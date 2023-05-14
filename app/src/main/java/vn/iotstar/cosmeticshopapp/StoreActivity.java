@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
@@ -45,7 +46,6 @@ public class StoreActivity extends AppCompatActivity {
     Button btnFollow;
     APIService apiService;
     SharedPrefManager sharedPrefManager;
-    ViewPager viewPager;
     User user;
     RecyclerView rvProduct;
     List<Product> soldProductList;
@@ -65,8 +65,8 @@ public class StoreActivity extends AppCompatActivity {
         if (bundle != null) {
             store = (Store) bundle.get("store");
             getStoreInfo();
-            setClick();
             getProductList();
+            setClick();
         }
 
     }
@@ -137,6 +137,7 @@ public class StoreActivity extends AppCompatActivity {
         tvEmail.setText(store.getEmail());
         tvStar.setText(String.valueOf(Math.round(store.getRating()*10.0) /10.0));
         tvFollowCount.setText(String.valueOf(store.getUserFollowStores().size() + " Người theo dõi"));
+        Glide.with(this).load(store.getStoreImage()).into(ivStoreImage);
     }
 
     private void getProductList() {

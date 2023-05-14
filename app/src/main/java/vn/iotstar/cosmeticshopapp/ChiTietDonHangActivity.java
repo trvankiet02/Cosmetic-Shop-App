@@ -23,7 +23,7 @@ import vn.iotstar.cosmeticshopapp.adapter.OrderItemAdapter;
 import vn.iotstar.cosmeticshopapp.model.Order;
 
 public class ChiTietDonHangActivity extends AppCompatActivity {
-    ImageView img_mautrangthai, storeImage, img_xoa;
+    ImageView img_mautrangthai, storeImage;
     TextView tv_trangthai, tv_madonhang, tv_soluongsanpham, tv_giadonhang, storeName;
     TextView tv_danhgia, tv_huydon, tv_danhan, tv_donvivanchuyen, tv_diachinhanhang;
 
@@ -87,18 +87,11 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
                 tv_danhan.setVisibility(View.GONE);
                 tv_huydon.setVisibility(View.GONE);
                 tv_danhgia.setVisibility(View.GONE);
-                img_xoa.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                    }
-                });
                 break;
             case 1:
                 // Xử lý khi trạng thái là chờ xác nhận
                 img_mautrangthai.setBackgroundResource(R.drawable.background_tt_1);
                 tv_trangthai.setText("CHƯA XÁC NHẬN");
-                img_xoa.setVisibility(View.GONE);
                 tv_danhan.setVisibility(View.GONE);
                 tv_danhgia.setVisibility(View.GONE);
                 tv_huydon.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +105,6 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
                 // Xử lý khi trạng thái là đã xác nhận
                 img_mautrangthai.setBackgroundResource(R.drawable.background_tt_2);
                 tv_trangthai.setText("ĐÃ XÁC NHẬN");
-                img_xoa.setVisibility(View.GONE);
                 tv_danhan.setVisibility(View.GONE);
                 tv_huydon.setVisibility(View.GONE);
                 tv_danhgia.setVisibility(View.GONE);
@@ -127,7 +119,6 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
 
                     }
                 });
-                img_xoa.setVisibility(View.GONE);
                 tv_danhgia.setVisibility(View.GONE);
                 tv_huydon.setVisibility(View.GONE);
                 break;
@@ -136,12 +127,6 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
                 img_mautrangthai.setBackgroundResource(R.drawable.background_tt_4);
                 tv_trangthai.setText("ĐÃ NHẬN HÀNG");
                 tv_huydon.setVisibility(View.GONE);
-                img_xoa.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                    }
-                });
                 tv_danhgia.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -169,7 +154,6 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
         img_mautrangthai = findViewById(R.id.img_mautrangthai);
         storeImage = findViewById(R.id.storeImage4);
         storeName = findViewById(R.id.storeName4);
-        img_xoa = findViewById(R.id.img_xoa);
         tv_trangthai = findViewById(R.id.tv_trangthai);
         tv_madonhang = findViewById(R.id.tv_madonhang);
         tv_soluongsanpham = findViewById(R.id.tv_soluongsanpham);
