@@ -175,5 +175,15 @@ public interface APIService {
             @Field("totalPrice") Integer totalPrice,
             @Field("payMethod") Integer payMethod
     );
+
+    @POST("product/getSoldProduct")
+    @FormUrlEncoded
+    Call<ProductResponse> getSoldProduct(@Field("storeId") Integer storeId);
+
+    @POST("product/getNewProduct")
+    @FormUrlEncoded
+    Call<ProductResponse> getNewProduct(@Field("storeId") Integer storeId);
+
+
 }
 
