@@ -233,11 +233,6 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 holder.tv_danhan.setBackgroundResource(R.drawable.background_xam);
                 holder.tv_danhan.setTextColor(ContextCompat.getColor(context, R.color.grey_dark));
                 //nếu đơn đã đánh giá
-//                if (o.getreview == 1) {
-//                    holder.tv_danhgia.setBackgroundResource(R.drawable.background_xam);
-//                    holder.tv_danhgia.setTextColor(ContextCompat.getColor(context, R.color.grey_dark));
-//                    holder.tv_danhgia.setEnabled(false);
-//                }
                 if (o.getReview() != null){
                     holder.tv_danhgia.setBackgroundResource(R.drawable.background_xam);
                     holder.tv_danhgia.setTextColor(ContextCompat.getColor(context, R.color.grey_dark));

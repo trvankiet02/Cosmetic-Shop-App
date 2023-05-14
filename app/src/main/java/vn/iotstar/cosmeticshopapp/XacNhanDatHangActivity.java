@@ -379,12 +379,12 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
                 Integer totalPrice = Integer.parseInt(tvtongcongtienthanhtoan.getText().toString());
                 Log.d("TAG", sharedPrefManager.getUser().getId()
                         + "\n" + addressList.get(addressId).getFirstName() + " " + addressList.get(addressId).getLastName()
-                + "\n" + deliveryId
-                + "\n" + addressList.get(addressId).getAddress()
-                + "\n" + addressList.get(addressId).getPhone()
-                + "\n" + voucherId
-                + "\n" + tvtongcongtienthanhtoan.getText().toString()
-                + "\n" + payMethodId);
+                        + "\n" + deliveryId
+                        + "\n" + addressList.get(addressId).getAddress()
+                        + "\n" + addressList.get(addressId).getPhone()
+                        + "\n" + voucherId
+                        + "\n" + tvtongcongtienthanhtoan.getText().toString()
+                        + "\n" + payMethodId);
                 if (deliveryId == 0) { deliveryId = deliveryList.get(0).getId(); }
                 Log.d("TAG", "onClick: "  + voucherId);
                 if (voucherId == 0) { voucherId = voucherList.get(0).getId();}
