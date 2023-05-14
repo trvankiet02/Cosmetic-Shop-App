@@ -67,8 +67,8 @@ public class ThemSuaDiaChiActivity extends AppCompatActivity {
                         switchMacDinh.setChecked(false);
                         isMacDinh = false;
                     } else {
-                        switchMacDinh.setBackgroundResource(R.drawable.backbackground_boder);
-                        switchMacDinh.setTrackDrawable(getResources().getDrawable(R.drawable.backbackground_boder));
+                        switchMacDinh.setBackgroundResource(R.drawable.background_boder);
+                        switchMacDinh.setTrackDrawable(getResources().getDrawable(R.drawable.background_boder));
                         switchMacDinh.setChecked(true);
                         isMacDinh = true;
                     }
@@ -106,8 +106,8 @@ public class ThemSuaDiaChiActivity extends AppCompatActivity {
                     switchMacDinh.setTrackDrawable(getResources().getDrawable(R.drawable.switch_background));
                     isMacDinh = false;
                 } else {
-                    switchMacDinh.setBackgroundResource(R.drawable.backbackground_boder);
-                    switchMacDinh.setTrackDrawable(getResources().getDrawable(R.drawable.backbackground_boder));
+                    switchMacDinh.setBackgroundResource(R.drawable.background_boder);
+                    switchMacDinh.setTrackDrawable(getResources().getDrawable(R.drawable.background_boder));
                     isMacDinh = true;
                 }
             }

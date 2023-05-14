@@ -537,7 +537,7 @@
                         android:id="@+id/txtGio"
                         android:textColor="#fff"
                         android:layout_marginTop="3dp"
-                        android:background="@drawable/backbackground_boder"/>
+                        android:background="@drawable/background_boder"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -558,7 +558,7 @@
                         android:id="@+id/txtPhut"
                         android:textColor="#fff"
                         android:layout_marginTop="3dp"
-                        android:background="@drawable/backbackground_boder"/>
+                        android:background="@drawable/background_boder"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -580,7 +580,7 @@
                         android:id="@+id/txtGiay"
                         android:textColor="#fff"
                         android:layout_marginTop="3dp"
-                        android:background="@drawable/backbackground_boder"/>
+                        android:background="@drawable/background_boder"/>
 
                 </LinearLayout>
                 <LinearLayout

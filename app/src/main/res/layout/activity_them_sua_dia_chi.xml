@@ -247,7 +247,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/backbackground_boder"
+            android:background="@drawable/background_boder"
             android:text="Lưu"
             android:textColor="#fff"
             android:textSize="19dp"

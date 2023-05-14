@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,9 +14,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.smarteist.autoimageslider.SliderView;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import vn.iotstar.cosmeticshopapp.ChiTietSanPhamActivity;
 import vn.iotstar.cosmeticshopapp.R;
@@ -82,11 +86,16 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private void populateItemRows(ItemViewHolder holder, int position) {
         Product product = array.get(position);
         holder.ProductName.setText(product.getName());
-        holder.ProductPrice.setText(String.valueOf(product.getPromotionalPrice()));
+
+        NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
+        holder.ProductPrice.setText(formatter.format(product.getPromotionalPrice()));
+
         SliderProductImageAdapter sliderProductImageAdapter = new SliderProductImageAdapter(context.getApplicationContext(), product.getProductImages(), 1);
         holder.sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
         holder.sliderView.setSliderAdapter(sliderProductImageAdapter);
-
+        holder.storeName.setText(product.getStore().getName());
+        holder.tv_soluongdaban.setText(String.valueOf(product.getSold()));
+        Glide.with(context).load(product.getStore().getStoreImage()).into(holder.storeImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,14 +135,18 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
-        TextView ProductName, ProductPrice;
+        TextView ProductName, ProductPrice,storeName, tv_soluongdaban;
         SliderView sliderView;
+        ImageView storeImage;
 
         ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             ProductName = itemView.findViewById(R.id.txtNameProduct);
             ProductPrice = (TextView) itemView.findViewById(R.id.txtPriceProduct);
             sliderView = itemView.findViewById(R.id.slider);
+            storeName = itemView.findViewById(R.id.storeName);
+            storeImage = itemView.findViewById(R.id.storeImage);
+            tv_soluongdaban = itemView.findViewById(R.id.tv_soluongdaban);
         }
     }
 

@@ -2,11 +2,9 @@ package vn.iotstar.cosmeticshopapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
@@ -16,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -164,8 +161,8 @@ public class XacNhanShopAdapter extends RecyclerView.Adapter<XacNhanShopAdapter.
                     } else {
                         baoHoMap.put(position, true);
                         //calculateTotalBaoHo();
-                        holder.switchdambaovanchuyen.setBackgroundResource(R.drawable.backbackground_boder);
-                        holder.switchdambaovanchuyen.setTrackDrawable(context.getResources().getDrawable(R.drawable.backbackground_boder));
+                        holder.switchdambaovanchuyen.setBackgroundResource(R.drawable.background_boder);
+                        holder.switchdambaovanchuyen.setTrackDrawable(context.getResources().getDrawable(R.drawable.background_boder));
                         holder.baoHo = true;
                         calculateTotal();
                         notifyDataSetChanged();
