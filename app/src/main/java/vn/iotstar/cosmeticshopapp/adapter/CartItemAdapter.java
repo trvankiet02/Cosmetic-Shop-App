@@ -24,8 +24,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,6 +43,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
     Context context;
     List<CartItem> array;
     ArrayList<CartItem> selectedCartItems;
+    NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
     Boolean isSelectAll = false;
 
     public CartItemAdapter(Context context, List<CartItem> array) {
@@ -69,7 +72,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.MyView
         CartItem cartItem = array.get(position);
         holder.checkBox.setChecked(selectedCartItems.contains(cartItem));
         holder.ProductName.setText(cartItem.getProduct().getName());
-        holder.ProductPrice.setText(String.valueOf(cartItem.getProduct().getPromotionalPrice()) + "đ");
+        holder.ProductPrice.setText(formatter.format(cartItem.getProduct().getPromotionalPrice()) + "đ");
         holder.txtQuantity.setText(String.valueOf(cartItem.getQuantity()));
         Glide.with(context).load(cartItem.getProduct().getProductImages().get(0).getImage()).into(holder.ProductImage);
         holder.txtSize.setText(cartItem.getSize());

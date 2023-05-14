@@ -100,7 +100,6 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Bạn đang nhấn vào " + product.getName(), Toast.LENGTH_SHORT).show();
                 Intent chitiet = new Intent(context, ChiTietSanPhamActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("product", product);

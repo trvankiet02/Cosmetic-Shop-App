@@ -14,8 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.Cart;
@@ -27,6 +29,7 @@ public class XacNhanShopAdapter extends RecyclerView.Adapter<XacNhanShopAdapter.
     int totalAmount;
     int giaoHangAmount;
     int baoHoAmount;
+    NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
     private HashMap<Integer, Boolean> baoHoMap = new HashMap<>();
     private HashMap<Integer, Boolean> giaoHangMap = new HashMap<>();
     public XacNhanShopAdapter(Context context, List<Cart> array) {
@@ -122,7 +125,7 @@ public class XacNhanShopAdapter extends RecyclerView.Adapter<XacNhanShopAdapter.
             if (holder.baoHo) {
                 holder.total += 25000;
             }
-            holder.tvtongcong1.setText(String.valueOf(holder.total));
+            holder.tvtongcong1.setText(formatter.format(holder.total));
 
             holder.rgGiaoHang.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override

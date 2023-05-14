@@ -54,7 +54,6 @@ public class StyleOfStyleAdapter extends RecyclerView.Adapter<StyleOfStyleAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Ban dang nhan vao " + style.getName(), Toast.LENGTH_SHORT).show();
                 if (listener != null) {
                     listener.onItemClick(style);
                 }

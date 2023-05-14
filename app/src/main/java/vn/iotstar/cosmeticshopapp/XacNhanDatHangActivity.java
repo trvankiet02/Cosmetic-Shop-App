@@ -46,7 +46,7 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
     LinearLayout ln_chondiachi, ln_themdiachi;
     TextView tvHoTen, tvSoDienThoai, tvDiaChi;
     TextView tvsophieugiamgia, tvtamtinh, tvchietkhau, tvtongcongtienthanhtoan, tvPhiVanChuyen, tvDamBaoVanChuyen, tvpgg;
-    TextView tvtieptucthanhtoan, tvDeliveryName, tvPayMethodName, tv_themdiachi;
+    TextView tvtieptucthanhtoan, tvDeliveryName, tvPayMethodName;
     RadioButton rb_giaohangtieuchuan;
     Switch switchdambaovanchuyen;
     XacNhanShopAdapter xacNhanShopAdapter;
@@ -83,17 +83,6 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
         setDeliverySpinner();
         setPayMethodSpinner();
         setBtnThanhToan();
-        setBtnAddAddress();
-    }
-
-    private void setBtnAddAddress() {
-        tv_themdiachi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(XacNhanDatHangActivity.this, DiaChiCuaToiActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void setBtnThanhToan() {
@@ -311,7 +300,6 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
 
 
     private void anhXa() {
-        tv_themdiachi = findViewById(R.id.tv_themdiachi);
         addressSpinner = findViewById(R.id.address_spinner);
         ln_chondiachi = findViewById(R.id.ln_chondiachi);
         ln_themdiachi = findViewById(R.id.ln_themdiachi);
@@ -377,10 +365,6 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
                         Toast.makeText(XacNhanDatHangActivity.this, "Số dư ví không đủ", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                }
-                if (tvDiaChi.getText().toString().equals("") || tvHoTen.getText().toString().equals("") || tvSoDienThoai.getText().toString().equals("")){
-                    Toast.makeText(XacNhanDatHangActivity.this, "Thông tin người nhận không hợp lệ", Toast.LENGTH_SHORT).show();
-                    return;
                 }
                 progressDialog.show();
                 apiService.addOrder(cartItemIdList,

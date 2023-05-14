@@ -29,6 +29,7 @@ import vn.iotstar.cosmeticshopapp.model.Category;
 import vn.iotstar.cosmeticshopapp.model.CategoryAndStyleResponse;
 import vn.iotstar.cosmeticshopapp.model.DeliveryListResponse;
 import vn.iotstar.cosmeticshopapp.model.FollowProductResponse;
+import vn.iotstar.cosmeticshopapp.model.FollowStoreResponse;
 import vn.iotstar.cosmeticshopapp.model.ListAddressResponse;
 import vn.iotstar.cosmeticshopapp.model.LoginSignupResponse;
 import vn.iotstar.cosmeticshopapp.model.NullBodyResponse;
@@ -214,5 +215,13 @@ public interface APIService {
     @POST("order/getOrderByStore")
     @FormUrlEncoded
     Call<OrderResponse> getOrderByStore(@Field("storeId") Integer storeId, @Field("status") Integer status);
+
+    @POST("userFollowStore/getFollowStore")
+    @FormUrlEncoded
+    Call<FollowStoreResponse> getFollowStore(@Field("userId") Integer userId, @Field("storeId") Integer storeId);
+
+    @POST("userFollowStore/followOrUnfollow")
+    @FormUrlEncoded
+    Call<FollowStoreResponse> followStore(@Field("userId") Integer userId, @Field("storeId") Integer storeId);
 }
 

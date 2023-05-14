@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.CartItem;
@@ -22,6 +24,7 @@ public class XacNhanShopItemAdapter extends RecyclerView.Adapter<XacNhanShopItem
     Context context;
     List<CartItem> array;
     Integer total = 0;
+    NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
 
     public XacNhanShopItemAdapter(Context context, List<CartItem> array) {
         this.context = context;
@@ -47,7 +50,7 @@ public class XacNhanShopItemAdapter extends RecyclerView.Adapter<XacNhanShopItem
         holder.txtNameProduct.setText(cartItem.getProduct().getName());
         holder.tvSizeProduct.setText(cartItem.getSize());
         holder.tvSoluong.setText(String.valueOf(cartItem.getQuantity()));
-        holder.tvPrice.setText(cartItem.getProduct().getPromotionalPrice() + "đ");
+        holder.tvPrice.setText(formatter.format(cartItem.getProduct().getPromotionalPrice()) + "đ");
         Glide.with(context).load(cartItem.getProduct().getProductImages().get(0).getImage()).into(holder.imgProduct);
     }
 

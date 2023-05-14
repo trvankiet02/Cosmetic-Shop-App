@@ -78,7 +78,6 @@ public class ProductFlashSaleAdapter extends RecyclerView.Adapter<ProductFlashSa
             @Override
             public void onClick(View view) {
                 //chuyen sang activity chi tiet san pham
-                Toast.makeText(view.getContext(), "Ban dang nhan vao " + product.getName(), Toast.LENGTH_SHORT).show();
                 Intent chitiet = new Intent(context, ChiTietSanPhamActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("product", product);

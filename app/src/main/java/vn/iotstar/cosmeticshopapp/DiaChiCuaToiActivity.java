@@ -64,6 +64,7 @@ public class DiaChiCuaToiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(DiaChiCuaToiActivity.this, ThemSuaDiaChiActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

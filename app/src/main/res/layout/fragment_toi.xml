@@ -411,7 +411,7 @@
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/vpProduct"
                     android:layout_width="match_parent"
-                    android:layout_height="670dp" />
+                    android:layout_height="400dp" />
 
             </LinearLayout>
 

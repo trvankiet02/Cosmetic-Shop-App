@@ -10,10 +10,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.Category;
+import vn.iotstar.cosmeticshopapp.model.Style;
 
 public class CategorySideBarAdapter extends RecyclerView.Adapter<CategorySideBarAdapter.MyViewHolder>{
 
@@ -30,6 +32,13 @@ public class CategorySideBarAdapter extends RecyclerView.Adapter<CategorySideBar
     public CategorySideBarAdapter(Context context, List<Category> array) {
         this.context = context;
         this.array = array;
+    }
+    public List<Style> getAllStyle(){
+        List<Style> styleList = new ArrayList<>();
+        for (int i = 0; i < array.size(); i++) {
+            styleList.addAll(array.get(i).getStyles());
+        }
+        return styleList;
     }
 
 
@@ -49,7 +58,6 @@ public class CategorySideBarAdapter extends RecyclerView.Adapter<CategorySideBar
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Ban dang nhan vao " + category.getName(), Toast.LENGTH_SHORT).show();
                 if (listener != null) {
                     listener.onItemClick(category);
                 }

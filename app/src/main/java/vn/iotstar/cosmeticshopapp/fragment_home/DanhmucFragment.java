@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,6 +32,7 @@ import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 public class DanhmucFragment extends Fragment {
     View view;
+    SearchView searchView;
     RecyclerView rvCategory;
     RecyclerView rvStyle;
     List<Category> categoryList;
@@ -99,6 +101,7 @@ public class DanhmucFragment extends Fragment {
         sharedPrefManager = new SharedPrefManager(getContext());
         ivCart = (ImageView) view.findViewById(R.id.ivCart);
         ivFavouriteProduct = (ImageView) view.findViewById(R.id.ivFavouriteProduct);
+        searchView = view.findViewById(R.id.searchView);
         ivFavouriteProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
