@@ -43,7 +43,7 @@ public class Store implements Serializable
     @SerializedName("ewallet")
     @Expose
     private Integer ewallet;
-    private final static long serialVersionUID = 2002024235378252062L;
+    private final static long serialVersionUID = 3083049112563328250L;
 
     public Integer getId() {
         return id;

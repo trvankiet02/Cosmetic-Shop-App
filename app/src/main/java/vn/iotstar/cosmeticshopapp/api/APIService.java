@@ -164,6 +164,14 @@ public interface APIService {
     @FormUrlEncoded
     Call<SingleOrderResponse> cancelOrder(@Field("orderId") Integer orderId);
 
+    @POST("order/confirmOrder")
+    @FormUrlEncoded
+    Call<SingleOrderResponse> confirmOrder(@Field("orderId") Integer orderId);
+
+    @POST("order/shipOrder")
+    @FormUrlEncoded
+    Call<SingleOrderResponse> shipOrder(@Field("orderId") Integer orderId);
+
     @POST("order/receiveOrder")
     @FormUrlEncoded
     Call<SingleOrderResponse> receiveOrder(@Field("orderId") Integer orderId);
@@ -193,6 +201,9 @@ public interface APIService {
     @FormUrlEncoded
     Call<ProductResponse> getNewProduct(@Field("storeId") Integer storeId);
 
+    @POST("store/getStoreByUser")
+    @FormUrlEncoded
+    Call<StoreResponse> getStoreByUserId(@Field("userId") Integer userId);
 
 }
 

@@ -1,12 +1,11 @@
 package vn.iotstar.cosmeticshopapp.model;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class StoreResponse implements Serializable
-{
-
+public class StoreResponse implements Serializable {
     @SerializedName("status")
     @Expose
     private Boolean status;
