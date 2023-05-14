@@ -455,7 +455,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
 
     private void setRvProductGoiY(){
-        apiService.getRandomProduct(5).enqueue(new Callback<ProductResponse>() {
+        apiService.getRandomProduct(6).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()){
@@ -465,7 +465,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                     }
                     productHomeAdapter = new ProductHomeAdapter(ChiTietSanPhamActivity.this, products);
                     rvProducGoiY.setHasFixedSize(true);
-                    GridLayoutManager layoutManager = new GridLayoutManager(ChiTietSanPhamActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+                    GridLayoutManager layoutManager = new GridLayoutManager(ChiTietSanPhamActivity.this, 2, GridLayoutManager.VERTICAL, false);
 
                     rvProducGoiY.setLayoutManager(layoutManager);
                     rvProducGoiY.setAdapter(productHomeAdapter);
