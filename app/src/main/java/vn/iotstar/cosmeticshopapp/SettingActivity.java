@@ -48,6 +48,7 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 sharedPrefManager.deleteUser();
                 sharedPrefManager.deletePassword();
+                sharedPrefManager.deleteStoreId();
                 Intent homeIntent = new Intent(SettingActivity.this, MainActivity.class);
                 startActivity(homeIntent);
             }
@@ -77,6 +78,19 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SettingActivity.this, QuanLyTaiKhoanCuaToiActivity.class);
                 startActivity(intent);
+            }
+        });
+        lnTuyChonLienHe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent;
+                if (sharedPrefManager.getStoreId() == -1){
+                    intent = new Intent(SettingActivity.this, SellerSignUpActivity.class);
+                } else {
+                    intent = new Intent(SettingActivity.this, SellerHomeActivity.class);
+                }
+                startActivity(intent);
+                finish();
             }
         });
     }

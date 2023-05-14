@@ -37,6 +37,7 @@ import vn.iotstar.cosmeticshopapp.model.ProductDetailResponse;
 import vn.iotstar.cosmeticshopapp.model.ProductResponse;
 import vn.iotstar.cosmeticshopapp.model.ReviewResponse;
 import vn.iotstar.cosmeticshopapp.model.SingleOrderResponse;
+import vn.iotstar.cosmeticshopapp.model.StoreResponse;
 import vn.iotstar.cosmeticshopapp.model.StyleByCategoryResponse;
 import vn.iotstar.cosmeticshopapp.model.VoucherResponse;
 
@@ -135,6 +136,14 @@ public interface APIService {
     @Multipart
     Call<SingleOrderResponse> addReview(@Part("orderId") RequestBody orderId, @Part("rating") RequestBody rating,
                                         @Part("content") RequestBody content, @Part List<MultipartBody.Part> reviewImages);
+
+    @POST("store/signup")
+    @Multipart
+    Call<StoreResponse> storeSignup(@Part("userId") RequestBody userId,
+                                    @Part("storeName") RequestBody storeName,
+                                    @Part("storeAddress") RequestBody storeAddress,
+                                    @Part("storePhone") RequestBody storePhone,
+                                    @Part MultipartBody.Part image);
 
     @POST("user/updatePhone")
     @FormUrlEncoded

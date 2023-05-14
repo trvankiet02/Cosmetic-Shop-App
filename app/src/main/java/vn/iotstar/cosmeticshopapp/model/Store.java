@@ -140,4 +140,6 @@ public class Store implements Serializable
     public void setEwallet(Integer ewallet) {
         this.ewallet = ewallet;
     }
+
+
 }

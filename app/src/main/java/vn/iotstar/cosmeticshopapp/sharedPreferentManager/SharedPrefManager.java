@@ -10,6 +10,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import vn.iotstar.cosmeticshopapp.model.Address;
+import vn.iotstar.cosmeticshopapp.model.Store;
 import vn.iotstar.cosmeticshopapp.model.User;
 
 public class SharedPrefManager {
@@ -27,6 +28,9 @@ public class SharedPrefManager {
     private static String KEY_USER_LAST_LOGIN = "lastLogin";
     private static String KEY_USER_ADDRESSES = "addresses";
     private static String KEY_USER_EWALLET = "ewallet";
+
+    //store
+    private static String KEY_STORE_ID = "id";
     Context context;
 
     public SharedPrefManager(Context ctx) {
@@ -36,6 +40,12 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_USER_PASSWORD, password);
+        editor.commit();
+    }
+    public void setStoreId(Integer id) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(KEY_STORE_ID, id);
         editor.commit();
     }
 
@@ -57,12 +67,20 @@ public class SharedPrefManager {
         editor.commit();
     }
 
+
     public void deletePassword() {
         SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(KEY_USER_PASSWORD);
         editor.apply();
     }
+    public void deleteStoreId() {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(KEY_STORE_ID);
+        editor.apply();
+    }
+
 
     public void deleteUser() {
         SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -94,6 +112,12 @@ public class SharedPrefManager {
         String password = sharedPreferences.getString(KEY_USER_PASSWORD, null);
         return password;
     }
+    public Integer getStoreId(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        Integer storeId = sharedPreferences.getInt(KEY_STORE_ID, -1);
+        return storeId;
+    }
+
 
     public void updateUser(String key, String data) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
