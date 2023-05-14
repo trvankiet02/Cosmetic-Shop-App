@@ -34,6 +34,8 @@ import vn.iotstar.cosmeticshopapp.model.Cart;
 import vn.iotstar.cosmeticshopapp.model.ListAddressResponse;
 import vn.iotstar.cosmeticshopapp.model.Product;
 import vn.iotstar.cosmeticshopapp.model.User;
+import vn.iotstar.cosmeticshopapp.model.Voucher;
+import vn.iotstar.cosmeticshopapp.model.VoucherResponse;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
@@ -54,6 +56,7 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
     Spinner addressSpinner, voucher_spinner;
     Integer discount;
     Integer chietKhau;
+    List<Voucher> voucherList;
 
     private int totalAmount;
 
@@ -105,6 +108,49 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
 
     }
     private void selectVoucher(){
+        apiService.getAllVoucher().enqueue(new Callback<VoucherResponse>() {
+            @Override
+            public void onResponse(Call<VoucherResponse> call, Response<VoucherResponse> response) {
+                if (response.isSuccessful()){
+                    voucherList = response.body().getBody();
+                    List<String> stringVoucher = new ArrayList<>();
+                    for (Voucher voucher: voucherList) {
+                        stringVoucher.add("Mã giảm giá: " + voucher.getCode()
+                                + "\nGiảm giá: " + voucher.getDiscount()*100 + "%"
+                                + "\nSố lượng: " + voucher.getQuantity()
+                                + "\n Giảm tối đa: " + voucher.getMaxDiscount() + "đ"
+                                + "\nNgày hết hạn: " + voucher.getExpireAt());
+                    }
+                    tvsophieugiamgia.setText(String.valueOf(stringVoucher.size()));
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(XacNhanDatHangActivity.this, android.R.layout.simple_spinner_item, stringVoucher);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    voucher_spinner.setAdapter(adapter);
+                    voucher_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String discount = (String) parent.getItemAtPosition(position);
+                            int pos = stringVoucher.indexOf(discount);
+                            int chietKhau = (int) (xacNhanShopAdapter.getTotal() * voucherList.get(pos).getDiscount());
+                            if (chietKhau > voucherList.get(pos).getMaxDiscount()){
+                                chietKhau = voucherList.get(pos).getMaxDiscount();
+                            }
+                            tv.setText(String.valueOf(chietKhau));
+                            tvtongcongtienthanhtoan.setText(String.valueOf(xacNhanShopAdapter.getTotal() + Integer.parseInt(tvDamBaoVanChuyen.getText().toString()) + chietKhau));
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VoucherResponse> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -184,6 +230,7 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
         tvDamBaoVanChuyen = findViewById(R.id.tvDamBaoVanChuyen);
         tvpgg = findViewById(R.id.tvpgg);
         voucher_spinner = findViewById(R.id.voucher_spinner);
+        voucherList = new ArrayList<>();
     }
 
     @Override
