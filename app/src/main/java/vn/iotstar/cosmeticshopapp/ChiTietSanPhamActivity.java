@@ -337,8 +337,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         product = (Product) bundle.getSerializable("product");
         Log.d("TAG", "getProductFromAdapter: " + product.getId());
-
-
     }
 
     private void addToCart(){
