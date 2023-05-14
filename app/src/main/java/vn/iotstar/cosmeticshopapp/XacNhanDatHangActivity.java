@@ -46,7 +46,7 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
     LinearLayout ln_chondiachi, ln_themdiachi;
     TextView tvHoTen, tvSoDienThoai, tvDiaChi;
     TextView tvsophieugiamgia, tvtamtinh, tvchietkhau, tvtongcongtienthanhtoan, tvPhiVanChuyen, tvDamBaoVanChuyen, tvpgg;
-    TextView tvtieptucthanhtoan, tvDeliveryName, tvPayMethodName;
+    TextView tvtieptucthanhtoan, tvDeliveryName, tvPayMethodName, tv_themdiachi;
     RadioButton rb_giaohangtieuchuan;
     Switch switchdambaovanchuyen;
     XacNhanShopAdapter xacNhanShopAdapter;
@@ -83,6 +83,17 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
         setDeliverySpinner();
         setPayMethodSpinner();
         setBtnThanhToan();
+        setBtnAddAddress();
+    }
+
+    private void setBtnAddAddress() {
+        tv_themdiachi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(XacNhanDatHangActivity.this, DiaChiCuaToiActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setBtnThanhToan() {
@@ -209,37 +220,8 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
 
             }
         });
-/*=======
-                    tvsophieugiamgia.setText(String.valueOf(response.body().getBody().size()));
-                    List<Voucher> vouchers = response.body().getBody();
-                    List<String> voucherNames = new ArrayList<>();
-                    for (Voucher voucher : vouchers){
-                        voucherNames.add(String.valueOf(voucher.getDescription()));
-                    }
-                    ArrayAdapter<String> voucherArrayAdapter = new ArrayAdapter<>(XacNhanDatHangActivity.this, R.layout.my_custom_spinner_dropdown_item, voucherNames);
-                    voucher_spinner.setAdapter(voucherArrayAdapter);
-                    voucher_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            String selectedVoucher = (String) parent.getItemAtPosition(position);
-                            int pos = voucherNames.indexOf(selectedVoucher);
-                            tvpgg.setText(String.valueOf(vouchers.get(pos).getDiscount()*Double.parseDouble(tvtamtinh.getText().toString())));
->>>>>>> 0d175ec414a9f6c875f0b7b7a76a92cb47d8c3d9*/
 
     }
-/*
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });
-                }
-            }
-            @Override
-            public void onFailure(Call<VoucherResponse> call, Throwable t) {
-
-            }
-        });*/
 
     private void setSpinner() {
 
@@ -329,6 +311,7 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
 
 
     private void anhXa() {
+        tv_themdiachi = findViewById(R.id.tv_themdiachi);
         addressSpinner = findViewById(R.id.address_spinner);
         ln_chondiachi = findViewById(R.id.ln_chondiachi);
         ln_themdiachi = findViewById(R.id.ln_themdiachi);
@@ -395,6 +378,10 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
                         return;
                     }
                 }
+                if (tvDiaChi.getText().toString().equals("") || tvHoTen.getText().toString().equals("") || tvSoDienThoai.getText().toString().equals("")){
+                    Toast.makeText(XacNhanDatHangActivity.this, "Thông tin người nhận không hợp lệ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 progressDialog.show();
                 apiService.addOrder(cartItemIdList,
                         sharedPrefManager.getUser().getId(),
@@ -410,6 +397,7 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
                         progressDialog.dismiss();
                         if (response.isSuccessful()){
                             Toast.makeText(XacNhanDatHangActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                            sharedPrefManager.updateEwallet(sharedPrefManager.getUser().getEwallet() - totalPrice);
                             Intent intent = new Intent(getApplicationContext(), XuLyDonHangActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("fragment", 1);

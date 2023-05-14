@@ -22,11 +22,11 @@ import vn.iotstar.cosmeticshopapp.adapter.DonHangSellerAdapter;
 import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.Order;
 import vn.iotstar.cosmeticshopapp.model.OrderResponse;
-import vn.iotstar.cosmeticshopapp.model.Store;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
-public class ChuyenChoShipperFragment extends Fragment {
+
+public class DonDaHuyFragment extends Fragment {
     LinearLayout ln_empty;
     RecyclerView rvTatCaDonHang;
     View view;
@@ -38,17 +38,17 @@ public class ChuyenChoShipperFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_chuyen_cho_shipper, container, false);
+        view = inflater.inflate(R.layout.fragment_don_da_huy, container, false);
         anhXa();
         Bundle bundle = getArguments();
-            setRvTatCaDonHang();
+        setRvTatCaDonHang();
 
         return view;
     }
 
     private void setRvTatCaDonHang() {
         //
-        apiService.getOrderByStore(sharedPrefManager.getStoreId(),2).enqueue(new Callback<OrderResponse>() {
+        apiService.getOrderByStore(sharedPrefManager.getStoreId(),0).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if (response.isSuccessful()){

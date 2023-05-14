@@ -1,5 +1,6 @@
 package vn.iotstar.cosmeticshopapp.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -96,6 +97,7 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 bundle.putSerializable("product", product);
                 chitiet.putExtras(bundle);
                 context.startActivity(chitiet);
+                ((Activity) context).finish();
             }
         });
     }

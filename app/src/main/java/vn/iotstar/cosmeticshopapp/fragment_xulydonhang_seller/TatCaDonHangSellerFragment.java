@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,11 +69,14 @@ public class TatCaDonHangSellerFragment extends Fragment {
                         donHangSellerAdapter.notifyDataSetChanged();
                     }
                 }
+                else {
+                    Toast.makeText(getContext(), "Lỗi", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<OrderResponse> call, Throwable t) {
-
+                Log.e("TAG", "onFailure: " + t.getMessage() );
             }
         });
     }

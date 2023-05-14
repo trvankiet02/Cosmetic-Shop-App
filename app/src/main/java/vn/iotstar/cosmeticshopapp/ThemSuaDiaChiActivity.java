@@ -127,6 +127,7 @@ public class ThemSuaDiaChiActivity extends AppCompatActivity {
                         if (response.isSuccessful()){
                             Intent intent = new Intent(ThemSuaDiaChiActivity.this, DiaChiCuaToiActivity.class);
                             startActivity(intent);
+                            finish();
                         } else {
                             Log.e("TAG", "Loi response: " + response.code());
                         }

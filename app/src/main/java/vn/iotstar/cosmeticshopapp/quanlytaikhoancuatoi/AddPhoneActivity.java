@@ -92,6 +92,7 @@ public class AddPhoneActivity extends AppCompatActivity {
                                 Toast.makeText(AddPhoneActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 Intent profilePage = new Intent(AddPhoneActivity.this, QuanLyTaiKhoanCuaToiActivity.class);
                                 startActivity(profilePage);
+                                finish();
                             } else {
                                 Log.e("TAG", "onResponse: " + response.code());
                             }

@@ -18,6 +18,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
 
@@ -33,6 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.Order;
+import vn.iotstar.cosmeticshopapp.model.Review;
 import vn.iotstar.cosmeticshopapp.model.SingleOrderResponse;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
@@ -115,6 +117,13 @@ public class DanhGiaDonHangActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             if (response.isSuccessful()) {
                                 Toast.makeText(DanhGiaDonHangActivity.this, "Đánh giá thành công", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), XuLyDonHangActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("fragment", 4);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                                startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(DanhGiaDonHangActivity.this, "Đánh giá thất bại", Toast.LENGTH_SHORT).show();
                             }
@@ -151,7 +160,7 @@ public class DanhGiaDonHangActivity extends AppCompatActivity {
                             .start(REQUEST_CODE_IMAGE_PICKER);
                 } else {
                     ActivityCompat.requestPermissions(DanhGiaDonHangActivity.this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_IMAGE_PICKER);
                 }
             }
         });
@@ -181,6 +190,9 @@ public class DanhGiaDonHangActivity extends AppCompatActivity {
                 File file = new File(image.getPath());
                 fileList.add(file);
             }
+            imgDanhGia.setVisibility(View.VISIBLE);
+            Glide.with(this).load(images.get(0).getPath()).into(imgDanhGia);
+            tv_soluonghinhanh.setText(String.valueOf(images.size()));
 
             // Your code for handling the selected images
         }

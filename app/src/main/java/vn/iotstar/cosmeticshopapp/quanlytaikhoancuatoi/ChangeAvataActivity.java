@@ -116,6 +116,7 @@ public class ChangeAvataActivity extends AppCompatActivity {
                     Toast.makeText(ChangeAvataActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     Intent profilePage = new Intent(ChangeAvataActivity.this, QuanLyTaiKhoanCuaToiActivity.class);
                     startActivity(profilePage);
+                    finish();
                 } else {
                     Log.e("TAG", "onResponse: " + response.code());
                 }

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".Seller.XuLyDonHangSellerActivity"
+    tools:context=".seller.XuLyDonHangSellerActivity"
     android:id="@+id/xuLyDonHangContainer">
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,7 +66,11 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đã nhận    " />
+            android:text="Đã nhận" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đã huỷ    " />
 
     </com.google.android.material.tabs.TabLayout>
 

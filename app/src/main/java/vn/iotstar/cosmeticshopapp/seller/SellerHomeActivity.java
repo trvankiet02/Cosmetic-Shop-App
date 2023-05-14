@@ -1,4 +1,4 @@
-package vn.iotstar.cosmeticshopapp.Seller;
+package vn.iotstar.cosmeticshopapp.seller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import vn.iotstar.cosmeticshopapp.R;
-import vn.iotstar.cosmeticshopapp.XuLyDonHangActivity;
 import vn.iotstar.cosmeticshopapp.model.Store;
 
 public class SellerHomeActivity extends AppCompatActivity {

@@ -71,6 +71,7 @@ public class ChangeUsernameActivity extends AppCompatActivity {
                                 sharedPrefManager.setUser(response.body().getBody());
                                 Intent intent = new Intent(ChangeUsernameActivity.this, QuanLyTaiKhoanCuaToiActivity.class);
                                 startActivity(intent);
+                                finish();
                                 Toast.makeText(ChangeUsernameActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(ChangeUsernameActivity.this, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();

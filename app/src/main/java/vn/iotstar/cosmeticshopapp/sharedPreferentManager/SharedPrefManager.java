@@ -30,7 +30,7 @@ public class SharedPrefManager {
     private static String KEY_USER_EWALLET = "ewallet";
 
     //store
-    private static String KEY_STORE_ID = "id";
+    private static String KEY_STORE_ID = "storeId";
     Context context;
 
     public SharedPrefManager(Context ctx) {
@@ -40,6 +40,12 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_USER_PASSWORD, password);
+        editor.commit();
+    }
+    public void updateEwallet(Integer ewallet) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(KEY_USER_EWALLET, ewallet);
         editor.commit();
     }
     public void setStoreId(Integer id) {

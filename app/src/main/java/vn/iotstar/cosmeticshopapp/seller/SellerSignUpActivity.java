@@ -1,4 +1,4 @@
-package vn.iotstar.cosmeticshopapp.Seller;
+package vn.iotstar.cosmeticshopapp.seller;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

@@ -49,7 +49,7 @@ public class DonHangDaBanFragment extends Fragment {
 
     private void setRvTatCaDonHang() {
         //
-        apiService.getOrderByStore(sharedPrefManager.getStoreId(),null).enqueue(new Callback<OrderResponse>() {
+        apiService.getOrderByStore(sharedPrefManager.getStoreId(),4).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if (response.isSuccessful()){

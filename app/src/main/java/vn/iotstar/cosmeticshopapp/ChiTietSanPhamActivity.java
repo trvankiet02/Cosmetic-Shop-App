@@ -544,7 +544,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                         lnReview.setVisibility(View.GONE);
                     }
                     else {
-                        //LỖI Ở ĐÂY
                         setRatingTable(feedbacks, progressBar_nho, progressBar_vua, progressBar_lon,
                                 tv_nho, tv_vua, tv_lon);
                         tv_rate_num.setText(df.format(avgRating(feedbacks)));

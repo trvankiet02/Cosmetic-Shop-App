@@ -12,12 +12,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import vn.iotstar.cosmeticshopapp.Seller.SellerHomeActivity;
-import vn.iotstar.cosmeticshopapp.Seller.SellerSignUpActivity;
+import vn.iotstar.cosmeticshopapp.seller.SellerHomeActivity;
+import vn.iotstar.cosmeticshopapp.seller.SellerSignUpActivity;
 import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.StoreResponse;
 import vn.iotstar.cosmeticshopapp.model.User;
@@ -77,6 +78,7 @@ public class SettingActivity extends AppCompatActivity {
         } else {
             tvTenUser.setText(user.getFirstName() + " " + user.getLastName());
         }
+        Log.d("TAG", "getUserFromShared: "    + user.getId());
         setClick();
     }
 
@@ -100,6 +102,7 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 progressDialog.setMessage("Đang kiểm tra...");
                 progressDialog.show();
+
                 apiService.getStoreByUserId(sharedPrefManager.getUser().getId()).enqueue(new Callback<StoreResponse>() {
                     @Override
                     public void onResponse(Call<StoreResponse> call, Response<StoreResponse> response) {
@@ -111,6 +114,7 @@ public class SettingActivity extends AppCompatActivity {
                             intent.putExtras(bundle);
                             sharedPrefManager.setStoreId(response.body().getBody().getId());
                             startActivity(intent);
+                            finish();
                         } else {
                             dialog.show();
                         }

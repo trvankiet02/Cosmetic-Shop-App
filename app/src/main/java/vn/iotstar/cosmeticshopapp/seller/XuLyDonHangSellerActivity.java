@@ -1,4 +1,4 @@
-package vn.iotstar.cosmeticshopapp.Seller;
+package vn.iotstar.cosmeticshopapp.seller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -12,16 +12,11 @@ import com.google.android.material.tabs.TabLayout;
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.adapter.ViewPagerAdapter;
 import vn.iotstar.cosmeticshopapp.fragment_xulydonhang_seller.ChuyenChoShipperFragment;
+import vn.iotstar.cosmeticshopapp.fragment_xulydonhang_seller.DonDaHuyFragment;
 import vn.iotstar.cosmeticshopapp.fragment_xulydonhang_seller.DonHangDaBanFragment;
 import vn.iotstar.cosmeticshopapp.fragment_xulydonhang_seller.TatCaDonHangSellerFragment;
 import vn.iotstar.cosmeticshopapp.fragment_xulydonhang_seller.XacNhanDonHangFragment;
 import vn.iotstar.cosmeticshopapp.fragment_xulydonhang_seller.XacNhanHoanTatFragment;
-import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.ChoXacNhanFragment;
-import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DaHuyFragment;
-import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DaNhanFragment;
-import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DaXacNhanFragment;
-import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.DangGiaoFragment;
-import vn.iotstar.cosmeticshopapp.fragment_xylydonhang.TatCaDonHangFragment;
 import vn.iotstar.cosmeticshopapp.model.Store;
 
 public class XuLyDonHangSellerActivity extends AppCompatActivity {
@@ -64,6 +59,7 @@ public class XuLyDonHangSellerActivity extends AppCompatActivity {
         xulydonhangAdapter.addFragment(new ChuyenChoShipperFragment(), "Đã xác nhận");
         xulydonhangAdapter.addFragment(new XacNhanHoanTatFragment(), "Đang giao");
         xulydonhangAdapter.addFragment(new DonHangDaBanFragment(), "Đã bán");
+        xulydonhangAdapter.addFragment(new DonDaHuyFragment(), "Đã huỷ");
 
     }
     private void setTabLayout() {

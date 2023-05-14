@@ -99,6 +99,7 @@ public class GioHangActivity extends AppCompatActivity {
                 bundle.putSerializable("cartList", (Serializable) cartList);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                finish();
             }
         });
     }

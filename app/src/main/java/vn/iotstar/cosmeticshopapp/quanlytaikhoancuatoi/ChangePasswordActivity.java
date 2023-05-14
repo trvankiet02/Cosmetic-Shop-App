@@ -71,6 +71,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                 Intent intent = new Intent(ChangePasswordActivity.this, QuanLyTaiKhoanCuaToiActivity.class);
                                 Toast.makeText(ChangePasswordActivity.this, "Cập nhật mật khẩu thành công", Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
+                                finish();
                             }
                         }
 
