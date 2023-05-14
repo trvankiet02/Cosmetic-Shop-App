@@ -2,6 +2,7 @@ package vn.iotstar.cosmeticshopapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -464,7 +465,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                     }
                     productHomeAdapter = new ProductHomeAdapter(ChiTietSanPhamActivity.this, products);
                     rvProducGoiY.setHasFixedSize(true);
-                    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, RecyclerView.HORIZONTAL);
+                    GridLayoutManager layoutManager = new GridLayoutManager(ChiTietSanPhamActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
 
                     rvProducGoiY.setLayoutManager(layoutManager);
                     rvProducGoiY.setAdapter(productHomeAdapter);

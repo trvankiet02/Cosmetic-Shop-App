@@ -3,33 +3,23 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <ImageView
-        android:layout_width="5dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@color/background_muasam"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_gravity="center"
         android:orientation="vertical"
-        android:background="@color/white">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@color/background_muasam"/>
-<!--        <ImageView-->
-<!--            android:id="@+id/imgProduct"-->
-<!--            android:layout_width="185dp"-->
-<!--            android:layout_height="247dp"-->
-<!--            android:background="@color/bottom_nav_color_3"/>-->
+        android:layout_margin="4dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="@drawable/background_boder_white">
+
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/slider"
-            android:layout_width="185dp"
-            android:layout_height="247dp"
+            android:layout_width="wrap_content"
+            android:layout_height="220dp"
+            android:layout_marginTop="5dp"
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
             app:sliderIndicatorAnimationDuration="600"
@@ -41,9 +31,62 @@
             app:sliderIndicatorRadius="2dp"
             app:sliderIndicatorSelectedColor="#5A5A5A"
             app:sliderIndicatorUnselectedColor="#FFF"
-            app:sliderScrollTimeInSec="1" />
+            app:sliderScrollTimeInSec="1"
+            android:background="@drawable/background_boder_white"/>
         <LinearLayout
-            android:padding="10px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="10dp">
+            <ImageView
+                android:id="@+id/storeImage"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:src="@drawable/img_icon_shop" />
+            <TextView
+                android:id="@+id/storeName"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:text="DAZY"
+                android:textSize="12dp"
+                android:textColor="#000"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="Đã bán: "
+                android:textSize="12dp"
+                android:textColor="#000"/>
+            <TextView
+                android:id="@+id/tv_soluongdaban"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text=""
+                android:textSize="12dp"
+                android:textColor="#000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:padding="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -70,13 +113,8 @@
             android:layout_marginStart="10dp"
             android:textSize="13dp"
             android:text="Quần jean nữ"
-            android:padding="5px"
+            android:padding="3dp"
             android:ellipsize="end"
             android:maxLines="1"/>
     </LinearLayout>
-    <ImageView
-        android:layout_width="5dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@color/background_muasam"/>
 </LinearLayout>

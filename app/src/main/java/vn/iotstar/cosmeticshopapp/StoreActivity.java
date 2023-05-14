@@ -39,7 +39,7 @@ import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 public class StoreActivity extends AppCompatActivity {
-    ImageView ivStoreImage, ivFavouriteProduct, ivCart;
+    ImageView ivStoreImage, ivFavouriteProduct, ivCart, img_background;
     SearchView search_view;
     TextView tvStoreName, tvEmail, tvStar, tvFollowCount;
     Button btnFollow;
@@ -137,6 +137,9 @@ public class StoreActivity extends AppCompatActivity {
         tvStar.setText(String.valueOf(Math.round(store.getRating()*10.0) /10.0));
         tvFollowCount.setText(String.valueOf(store.getUserFollowStores().size() + " Người theo dõi"));
         Glide.with(this).load(store.getStoreImage()).into(ivStoreImage);
+        if(store.getFeatureImage() != null){
+            Glide.with(this).load(store.getFeatureImage()).into(img_background);
+        }
     }
 
     private void getProductList() {
@@ -162,6 +165,7 @@ public class StoreActivity extends AppCompatActivity {
 
     private void anhXa() {
         ivStoreImage = findViewById(R.id.ivStoreImage);
+        img_background = findViewById(R.id.img_background);
         tvStoreName = findViewById(R.id.tvStoreName);
         tvEmail = findViewById(R.id.tvEmail);
         tvStar = findViewById(R.id.tvStar);

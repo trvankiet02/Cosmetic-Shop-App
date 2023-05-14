@@ -201,7 +201,7 @@
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 android:textStyle="bold"
-                android:background="@drawable/backbackground_boder"/>
+                android:background="@drawable/background_boder"/>
             <TextView
                 android:id="@+id/tv_NewProduct"
                 android:layout_width="wrap_content"
@@ -214,7 +214,7 @@
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 android:textStyle="bold"
-                android:background="@drawable/backbackground_boder"/>
+                android:background="@drawable/background_boder"/>
             <TextView
                 android:id="@+id/tv_AllProduct"
                 android:layout_width="wrap_content"
@@ -227,7 +227,7 @@
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 android:textStyle="bold"
-                android:background="@drawable/backbackground_boder"/>
+                android:background="@drawable/background_boder"/>
         </LinearLayout>
 
         <LinearLayout

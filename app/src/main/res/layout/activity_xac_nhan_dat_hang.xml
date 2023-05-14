@@ -462,7 +462,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
-                android:background="@drawable/backbackground_boder"
+                android:background="@drawable/background_boder"
                 android:text="Đặt hàng"
                 android:textColor="#fff"
                 android:textSize="19dp"

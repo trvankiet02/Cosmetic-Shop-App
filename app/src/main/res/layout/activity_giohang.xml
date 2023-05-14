@@ -107,7 +107,7 @@
             android:id="@+id/btnThanhToan"
             android:layout_width="130dp"
             android:layout_height="40dp"
-            android:background="@drawable/backbackground_boder"
+            android:background="@drawable/background_boder"
             android:gravity="center"
             android:text="Thanh toán"
             android:textColor="#fff"

@@ -24,6 +24,9 @@
             android:name=".seller.XuLyDonHangSellerActivity"
             android:exported="false" />
         <activity
+            android:name=".seller.QuanLySanPhamActivity"
+            android:exported="false" />
+        <activity
             android:name=".seller.SellerHomeActivity"
             android:exported="false" />
         <activity
