@@ -74,16 +74,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             Glide.with(context).load(cart.getStore().getStoreImage()).into(holder.storeImage);
             holder.cartItemAdapter = new CartItemAdapter(context, cart.getCartItems());
             holder.rvCart_item.setAdapter(holder.cartItemAdapter);
-            holder.rvCart_item.setHasFixedSize(true);
+            //holder.rvCart_item.setHasFixedSize(true);
             holder.rvCart_item.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
             holder.cartItemAdapter.notifyDataSetChanged();
-            cartItemList = holder.cartItemAdapter.getSelectedCartItemList();
+
 
             Cart newCart = cart;
             newCart.setCartItems(cartItemList);
             returnCart.add(newCart);
 
-            holder.swipeHelper = new SwipeHelper(context, holder.rvCart_item, false) {
+            holder.swipeHelper = new SwipeHelper(context.getApplicationContext(), holder.rvCart_item, false) {
                 @Override
                 public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
                     Typeface typeface = Typeface.create("sans-serif", Typeface.SANS_SERIF.getStyle());
@@ -126,6 +126,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
                     ));
                 }
             };
+            cartItemList = holder.cartItemAdapter.getSelectedCartItemList();
+
         } else {
             holder.itemView.setVisibility(View.GONE);
         }

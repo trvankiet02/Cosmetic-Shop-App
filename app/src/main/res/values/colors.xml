@@ -23,4 +23,10 @@
     <color name="grey_dark">#9E9E9E</color>
     <color name="f2d680">#f2d680</color>
     <color name="d8c8b8">#d8c8b8</color>
+    <color name="tabSelectedColor">#4F5E4F</color>
+
+    <color name="tabUnselectedColor">#D3CCB9B3</color>
+    <color name="tabIndicatorColor">#3E3838</color>
+    <color name="tabSelectedTextColor">#FFFFFF</color>
+    <color name="tabUnselectedTextColor">#000000</color>
 </resources>

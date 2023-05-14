@@ -60,6 +60,7 @@ import vn.iotstar.cosmeticshopapp.model.ProductQuantity;
 import vn.iotstar.cosmeticshopapp.model.ProductResponse;
 import vn.iotstar.cosmeticshopapp.model.Review;
 import vn.iotstar.cosmeticshopapp.model.ReviewResponse;
+import vn.iotstar.cosmeticshopapp.model.Store;
 import vn.iotstar.cosmeticshopapp.model.UserFollowProduct;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.room.dao.CartDAO;
@@ -106,6 +107,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     CartDAO cartDao;
     CartItemDAO cartItemDao;
     int quantityMaxOfSize;
+    TextView tvTest;
 
     //@SuppressLint("MissingInflatedId")
     @Override
@@ -126,6 +128,15 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent gioHang = new Intent(getApplicationContext(), GioHangActivity.class);
                 startActivity(gioHang);
+            }
+        });
+
+        //test
+        tvTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChiTietSanPhamActivity.this, StoreActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -227,6 +238,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
         cartDao = CartDatabase.getInstance(this).cartDao();
         cartItemDao = CartItemDatabase.getInstance(this).cartItemDao();
+
+        tvTest = findViewById(R.id.tvTest);
 
     }
 

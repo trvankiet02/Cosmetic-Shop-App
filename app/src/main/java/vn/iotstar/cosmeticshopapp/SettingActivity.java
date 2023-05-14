@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class SettingActivity extends AppCompatActivity {
     LinearLayout lnDangXuat;
     TextView tvPhienBan, tvTenUser;
     SharedPrefManager sharedPrefManager;
+    ImageView btnBack;
     User user;
 
     @Override
@@ -27,6 +29,17 @@ public class SettingActivity extends AppCompatActivity {
         anhXa();
         getUserFromShared();
         setBtnDangXuat();
+        setBtnBack();
+    }
+
+    private void setBtnBack() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+                finish();
+            }
+        });
     }
 
     private void setBtnDangXuat() {
@@ -86,5 +99,6 @@ public class SettingActivity extends AppCompatActivity {
         lnDangXuat = findViewById(R.id.lnDangXuat);
         sharedPrefManager = new SharedPrefManager(this);
         user = new User();
+        btnBack = findViewById(R.id.btnBack);
     }
 }

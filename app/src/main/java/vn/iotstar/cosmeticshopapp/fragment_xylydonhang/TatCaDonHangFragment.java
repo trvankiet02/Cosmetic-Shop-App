@@ -61,7 +61,7 @@ public class TatCaDonHangFragment extends Fragment {
 
                         donHangAdapter = new DonHangAdapter(getContext(), orders);
                         rvTatCaDonHang.setHasFixedSize(true);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, true);
                         rvTatCaDonHang.setLayoutManager(layoutManager);
                         rvTatCaDonHang.setAdapter(donHangAdapter);
                         donHangAdapter.notifyDataSetChanged();

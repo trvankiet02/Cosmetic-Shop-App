@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Delivery implements Serializable
 {
-
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -25,7 +24,7 @@ public class Delivery implements Serializable
     @SerializedName("updateAt")
     @Expose
     private String updateAt;
-    private final static long serialVersionUID = -1879322306586557496L;
+    private final static long serialVersionUID = 2535560814956113127L;
 
     public Integer getId() {
         return id;
@@ -74,5 +73,4 @@ public class Delivery implements Serializable
     public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
     }
-
 }
