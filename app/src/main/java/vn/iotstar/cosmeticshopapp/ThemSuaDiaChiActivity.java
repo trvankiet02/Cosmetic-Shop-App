@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 public class ThemSuaDiaChiActivity extends AppCompatActivity {
     Switch switchMacDinh;
+    ImageView btnBack;
     EditText edtHo, edtTen, edtSoDienThoai, edtDiaChi;
     boolean isMacDinh = false;
     TextView tvLuu;
@@ -36,6 +38,17 @@ public class ThemSuaDiaChiActivity extends AppCompatActivity {
         setClick();
         getAddressFromAdapter();
         setData();
+        setBtnBack();
+    }
+    private void setBtnBack() {
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+                finish();
+            }
+        });
     }
 
     private void setData() {

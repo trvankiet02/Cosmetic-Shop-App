@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 public class DiaChiCuaToiActivity extends AppCompatActivity {
     RecyclerView rvDiaChi;
     TextView tvThemDiaChi;
+    ImageView btnBack;
     DiaChiAdapter diaChiAdapter;
     APIService apiService;
     SharedPrefManager sharedPrefManager;
@@ -42,6 +44,18 @@ public class DiaChiCuaToiActivity extends AppCompatActivity {
         anhXa();
         setRvDiaChi();
         setBtnThemDiaChi();
+        setBtnBack();
+    }
+
+    private void setBtnBack() {
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+                finish();
+            }
+        });
     }
 
     private void setBtnThemDiaChi() {

@@ -27,6 +27,7 @@ import vn.iotstar.cosmeticshopapp.model.CartItem;
 import vn.iotstar.cosmeticshopapp.model.CartResponse;
 import vn.iotstar.cosmeticshopapp.model.Category;
 import vn.iotstar.cosmeticshopapp.model.CategoryAndStyleResponse;
+import vn.iotstar.cosmeticshopapp.model.DeliveryListResponse;
 import vn.iotstar.cosmeticshopapp.model.FollowProductResponse;
 import vn.iotstar.cosmeticshopapp.model.ListAddressResponse;
 import vn.iotstar.cosmeticshopapp.model.LoginSignupResponse;
@@ -157,5 +158,22 @@ public interface APIService {
     @POST("order/receiveOrder")
     @FormUrlEncoded
     Call<SingleOrderResponse> receiveOrder(@Field("orderId") Integer orderId);
+
+    @GET("delivery")
+    Call<DeliveryListResponse> getAllDelivery();
+
+    @POST("order/addOrder")
+    @FormUrlEncoded
+    Call<OrderResponse> addOrder(
+            @Field("cartItemIdList") List<Integer> cartItemIdList,
+            @Field("userId") Integer userId,
+            @Field("name") String name,
+            @Field("deliveryId") Integer deliveryId,
+            @Field("address") String address,
+            @Field("phone") String phone,
+            @Field("voucherId") Integer voucherId,
+            @Field("totalPrice") Integer totalPrice,
+            @Field("payMethod") Integer payMethod
+    );
 }
 

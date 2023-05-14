@@ -49,7 +49,7 @@ public class GioHangActivity extends AppCompatActivity {
     APIService apiService;
     ProgressDialog progressDialog;
     SharedPrefManager sharedPrefManager;
-    ImageView ivFavouriteProduct;
+    ImageView ivFavouriteProduct, btnBack;
     TextView tvTotalPrice, btnThanhToan;
     CheckBox cbSelectAll;
 
@@ -62,6 +62,15 @@ public class GioHangActivity extends AppCompatActivity {
         setRvProductGioHang();
         setBtnThanhToan();
         //btnXoa();
+
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+                finish();
+            }
+        });
     }
 
     private void setBtnThanhToan() {
@@ -90,7 +99,6 @@ public class GioHangActivity extends AppCompatActivity {
                 bundle.putSerializable("cartList", (Serializable) cartList);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                tvTotalPrice.setText(total.toString() + "đ");
             }
         });
     }
@@ -103,7 +111,7 @@ public class GioHangActivity extends AppCompatActivity {
                     carts = response.body().getBody();
                     productGioHangAdapter = new CartAdapter(GioHangActivity.this, carts);
                     rvProductGioHang.setHasFixedSize(true);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GioHangActivity.this, RecyclerView.VERTICAL, false);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GioHangActivity.this, RecyclerView.VERTICAL, true);
                     rvProductGioHang.setLayoutManager(layoutManager);
                     rvProductGioHang.setAdapter(productGioHangAdapter);
                     productGioHangAdapter.notifyDataSetChanged();
@@ -127,9 +135,9 @@ public class GioHangActivity extends AppCompatActivity {
         sharedPrefManager = new SharedPrefManager(this);
         carts = new ArrayList<>();
         ivFavouriteProduct = (ImageView) findViewById(R.id.ivFavouriteProduct);
-        tvTotalPrice = (TextView) findViewById(R.id.tvTongTien);
         cbSelectAll = (CheckBox) findViewById(R.id.cbAll);
         btnThanhToan = (TextView) findViewById(R.id.btnThanhToan);
+        btnBack = (ImageView) findViewById(R.id.btnBack);
     }
 
     private void setProgressDialog() {

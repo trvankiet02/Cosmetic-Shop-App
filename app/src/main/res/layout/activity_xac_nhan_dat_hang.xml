@@ -188,7 +188,7 @@
                         android:layout_weight="1"
                         android:text="Áp dụng phiếu giảm giá"
                         android:textColor="#000"
-                        android:textSize="16dp" />
+                        android:textSize="14dp" />
                     <TextView
                         android:id="@+id/tvsophieugiamgia"
                         android:layout_width="wrap_content"
@@ -200,9 +200,40 @@
                         android:layout_height="wrap_content"
                         android:text=" phiếu giảm giá có sẵn"
                         android:layout_marginEnd="10dp"
-                        android:textSize="14dp"/>
+                        android:textSize="12dp"/>
                     <Spinner
                         android:id="@+id/voucher_spinner"
+                        android:layout_width="50dp"
+                        android:layout_height="25dp"
+                        android:spinnerMode="dropdown" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/black" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="Đơn vị vận chuyển"
+                        android:textColor="#000"
+                        android:textSize="16dp" />
+                    <TextView
+                        android:id="@+id/tvDeliveryName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Tên đơn vị"
+                        android:textSize="16dp"
+                        android:gravity="center"/>
+                    <Spinner
+                        android:id="@+id/delivery_spinner"
                         android:layout_width="50dp"
                         android:layout_height="25dp"
                         android:spinnerMode="dropdown" />
@@ -220,51 +251,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Ví"
+                        android:text="Phương thức thanh toán"
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hiện có: "
-                        android:textSize="14dp"/>
-                    <TextView
-                        android:id="@+id/tvEwallet"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="16dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="₫"
-                        android:layout_marginEnd="10dp"
-                        android:textSize="13dp"/>
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@drawable/next" />
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/black" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-                    <TextView
+                        android:id="@+id/tvPayMethodName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Thẻ quà tặng"
-                        android:textColor="#000"
+                        android:text="Thanh toán khi nhận hàng"
                         android:textSize="16dp" />
-                    <ImageView
-                        android:layout_width="25dp"
+
+                    <Spinner
+                        android:id="@+id/payMethodSpinner"
+                        android:layout_width="50dp"
                         android:layout_height="25dp"
-                        android:background="@drawable/next" />
+                        android:spinnerMode="dropdown" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -358,10 +360,16 @@
                         android:textColor="#000"
                         android:textSize="16dp" />
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textSize="16dp"
+                        android:textColor="@color/text_voucher"/>
+                    <TextView
                         android:id="@+id/tvpgg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="-0"
+                        android:text="0"
                         android:textSize="16dp"
                         android:textColor="@color/text_voucher"/>
                 </LinearLayout>
@@ -376,14 +384,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Chiết khấu:"
+                        android:text="Chiết khấu(10%):"
                         android:textColor="#000"
                         android:textSize="16dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+"
+                        android:textSize="16dp"
+                        android:textColor="@color/text_voucher"/>
                     <TextView
                         android:id="@+id/tvchietkhau"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="-0"
+                        android:text="0"
                         android:textSize="16dp"
                         android:textColor="@color/text_voucher"/>
                 </LinearLayout>
@@ -447,7 +461,7 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:background="@drawable/backbackground_boder"
-                android:text="Tiếp tục thanh toán"
+                android:text="Đặt hàng"
                 android:textColor="#fff"
                 android:textSize="19dp"
                 android:textStyle="bold" />

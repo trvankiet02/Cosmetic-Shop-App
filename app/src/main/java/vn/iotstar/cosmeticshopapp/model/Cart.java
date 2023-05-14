@@ -61,8 +61,10 @@ public class Cart implements Serializable
         return cartItems;
     }
 
+    List<CartItem> cartItemList;
+
     public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems = cartItems;
+        this.cartItemList = cartItems;
     }
     public void addCartItem(CartItem cartItem) {
         cartItem.setCart(this); // Gán cart cho cartItem

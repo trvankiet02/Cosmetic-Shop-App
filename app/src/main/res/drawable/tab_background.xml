@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- tab_background.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Tab selected state -->
+    <item android:state_selected="true">
+        <shape>
+            <solid android:color="@color/tabSelectedColor" />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+    <!-- Tab unselected state -->
+    <item>
+        <shape>
+            <solid android:color="@color/tabUnselectedColor" />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+</selector>
