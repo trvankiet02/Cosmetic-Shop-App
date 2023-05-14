@@ -1,4 +1,4 @@
-package vn.iotstar.cosmeticshopapp;
+package vn.iotstar.cosmeticshopapp.Seller;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,12 +22,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
-import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -35,10 +33,10 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.Store;
 import vn.iotstar.cosmeticshopapp.model.StoreResponse;
-import vn.iotstar.cosmeticshopapp.quanlytaikhoancuatoi.ChangeAvataActivity;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 import vn.iotstar.cosmeticshopapp.util.RealPathUtil;

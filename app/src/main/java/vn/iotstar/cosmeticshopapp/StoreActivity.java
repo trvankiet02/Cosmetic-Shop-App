@@ -31,7 +31,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import vn.iotstar.cosmeticshopapp.adapter.ProductHomeAdapter;
 import vn.iotstar.cosmeticshopapp.api.APIService;
-import vn.iotstar.cosmeticshopapp.fragment_home.MoiFragment;
 import vn.iotstar.cosmeticshopapp.model.Product;
 import vn.iotstar.cosmeticshopapp.model.ProductResponse;
 import vn.iotstar.cosmeticshopapp.model.Store;

@@ -17,7 +17,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Field;
 import vn.iotstar.cosmeticshopapp.R;
+import vn.iotstar.cosmeticshopapp.adapter.DonHangAdapter;
 import vn.iotstar.cosmeticshopapp.adapter.DonHangSellerAdapter;
 import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.Order;
@@ -26,8 +28,7 @@ import vn.iotstar.cosmeticshopapp.model.Store;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
-public class XacNhanDonHangFragment extends Fragment {
-
+public class TatCaDonHangSellerFragment extends Fragment {
     LinearLayout ln_empty;
     RecyclerView rvTatCaDonHang;
     View view;
@@ -39,7 +40,7 @@ public class XacNhanDonHangFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_xac_nhan_don_hang, container, false);
+        view = inflater.inflate(R.layout.fragment_tat_ca_don_hang_seller, container, false);
         anhXa();
         Bundle bundle = getArguments();
             setRvTatCaDonHang();
@@ -49,7 +50,7 @@ public class XacNhanDonHangFragment extends Fragment {
 
     private void setRvTatCaDonHang() {
         //
-        apiService.getOrderByStore(sharedPrefManager.getStoreId(),1).enqueue(new Callback<OrderResponse>() {
+        apiService.getOrderByStore(sharedPrefManager.getStoreId(),null).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if (response.isSuccessful()){

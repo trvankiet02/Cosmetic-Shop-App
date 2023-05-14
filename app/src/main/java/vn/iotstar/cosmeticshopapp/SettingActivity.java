@@ -12,17 +12,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.iotstar.cosmeticshopapp.Seller.SellerHomeActivity;
+import vn.iotstar.cosmeticshopapp.Seller.SellerSignUpActivity;
 import vn.iotstar.cosmeticshopapp.api.APIService;
-import vn.iotstar.cosmeticshopapp.fragment_home.DanhmucFragment;
-import vn.iotstar.cosmeticshopapp.model.Store;
 import vn.iotstar.cosmeticshopapp.model.StoreResponse;
 import vn.iotstar.cosmeticshopapp.model.User;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
@@ -67,6 +63,7 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 sharedPrefManager.deleteUser();
                 sharedPrefManager.deletePassword();
+                sharedPrefManager.deleteStoreId();
                 Intent homeIntent = new Intent(SettingActivity.this, MainActivity.class);
                 startActivity(homeIntent);
             }
@@ -112,6 +109,7 @@ public class SettingActivity extends AppCompatActivity {
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("store", response.body().getBody());
                             intent.putExtras(bundle);
+                            sharedPrefManager.setStoreId(response.body().getBody().getId());
                             startActivity(intent);
                         } else {
                             dialog.show();

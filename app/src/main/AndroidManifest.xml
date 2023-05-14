@@ -21,10 +21,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".SellerHomeActivity"
+            android:name=".Seller.XuLyDonHangSellerActivity"
             android:exported="false" />
         <activity
-            android:name=".SellerSignUpActivity"
+            android:name=".Seller.SellerHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Seller.SellerSignUpActivity"
             android:exported="false" />
         <activity
             android:name=".VoucherActivity"
