@@ -7,113 +7,123 @@
     tools:context=".StoreActivity"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@color/grey_dark">
-
+        android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/ivStoreImage"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="16dp"
+            android:id="@+id/img_background"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.464"
-            tools:src="@drawable/img_sanpham" />
-
-        <TextView
-            android:id="@+id/tvStoreName"
-            android:layout_width="250dp"
+            android:alpha="0.2"
+            tools:src="@drawable/background_xam" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivStoreImage"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.294" />
+            android:padding="10dp">
 
-        <TextView
-            android:id="@+id/tvStar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textSize="12dp"
-            app:layout_constraintStart_toEndOf="@+id/imgStar"
-            app:layout_constraintTop_toBottomOf="@+id/tvStoreName" />
+            <ImageView
+                android:id="@+id/ivStoreImage"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_marginStart="16dp"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.464"
+                tools:src="@drawable/img_sanpham" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:text="|"
-            android:textColor="@color/white"
-            android:textSize="12dp"
-            app:layout_constraintStart_toEndOf="@+id/tvStar"
-            app:layout_constraintTop_toBottomOf="@+id/tvStoreName" />
+            <TextView
+                android:id="@+id/tvStoreName"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivStoreImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.294" />
 
-        <TextView
-            android:id="@+id/tvUserFollow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:text="10 Người theo dõi"
-            android:textColor="@color/white"
-            android:textSize="12dp"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/tvStoreName" />
+            <TextView
+                android:id="@+id/tvStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@+id/imgStar"
+                app:layout_constraintTop_toBottomOf="@+id/tvStoreName" />
 
-        <ImageView
-            android:id="@+id/imgStar"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintStart_toEndOf="@+id/ivStoreImage"
-            app:layout_constraintTop_toBottomOf="@+id/tvStoreName"
-            app:srcCompat="@drawable/start" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:text="|"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@+id/tvStar"
+                app:layout_constraintTop_toBottomOf="@+id/tvStoreName" />
 
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:text="Email: "
-            android:textColor="@color/white"
-            android:textSize="12dp"
-            app:layout_constraintStart_toEndOf="@+id/ivStoreImage"
-            app:layout_constraintTop_toBottomOf="@+id/tvStar" />
+            <TextView
+                android:id="@+id/tvUserFollow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:text="10 Người theo dõi"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/tvStoreName" />
 
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:textSize="12dp"
-            android:textColor="@color/white"
-            android:text="trvankiet02@gmail.com"
-            app:layout_constraintStart_toEndOf="@+id/textView7"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserFollow" />
+            <ImageView
+                android:id="@+id/imgStar"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toEndOf="@+id/ivStoreImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvStoreName"
+                app:srcCompat="@drawable/start" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:text="Email: "
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@+id/ivStoreImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvStar" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:text="trvankiet02@gmail.com"
+                app:layout_constraintStart_toEndOf="@+id/textView7"
+                app:layout_constraintTop_toBottomOf="@+id/tvUserFollow" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
 
     <LinearLayout
