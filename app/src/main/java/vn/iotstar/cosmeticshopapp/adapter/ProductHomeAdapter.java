@@ -97,18 +97,18 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         holder.storeName.setText(product.getStore().getName());
         holder.tv_soluongdaban.setText(String.valueOf(product.getSold()));
         Glide.with(context).load(product.getStore().getStoreImage()).into(holder.storeImage);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Bạn đang nhấn vào " + product.getName(), Toast.LENGTH_SHORT).show();
-                Intent chitiet = new Intent(context, ChiTietSanPhamActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("product", product);
-                chitiet.putExtras(bundle);
-                context.startActivity(chitiet);
-                ((Activity) context).finish();
-            }
-        });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(view.getContext(), "Bạn đang nhấn vào " + product.getName(), Toast.LENGTH_SHORT).show();
+//                Intent chitiet = new Intent(context, ChiTietSanPhamActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("product", product);
+//                chitiet.putExtras(bundle);
+//                context.startActivity(chitiet);
+//                ((Activity) context).finish();
+//            }
+//        });
     }
     public void setLoaded() {
         isLoading = false;

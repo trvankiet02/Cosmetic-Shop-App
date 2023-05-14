@@ -30,6 +30,16 @@ public class SellerHomeActivity extends AppCompatActivity {
             getStoreInfo();
         }
         setBtnXyLyDonHang();
+        tv_QuanLySanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), QuanLySanPhamActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("store", store);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
     private void toFragment(Integer fragmentId){
         Intent intent = new Intent(getApplicationContext(), XuLyDonHangSellerActivity.class);
