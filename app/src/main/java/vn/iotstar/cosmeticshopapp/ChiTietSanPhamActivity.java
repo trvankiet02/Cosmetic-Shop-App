@@ -76,13 +76,14 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 123;
     public static final String TAG = "ChiTietSanPhamActivity";
 
-    ImageView viewAnimation;
+    ImageView viewAnimation, img_shopimage;
+    TextView tv_name_of_shop, tv_start_of_shop;
     ImageButton imageButtonTru, imageButtonCong;
     SearchView searchView;
     ImageView GioHang, imgFavorite;
-    LinearLayout lnReview, lnXemThem, lnXemTatCa;
+    LinearLayout lnReview, lnXemThem, lnXemTatCa, ln_shop;
     TextView txtSize, tv_name_product, tvPriceSale, tvPrice, tvPrice_d, txtsoluong, tv_rate_sanpham_tren, tvAddress, tv_rate_sanpham_duoi;
-    TextView count_product, tv_rate_num, tv_themVaoGio;
+    TextView count_product, tv_rate_num;
     RatingBar rate_sanpham_tren, rate_sanpham_duoi;
     ProgressBar progressBar_nho, progressBar_vua, progressBar_lon;
     TextView tv_nho, tv_vua, tv_lon;
@@ -107,7 +108,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     CartDAO cartDao;
     CartItemDAO cartItemDao;
     int quantityMaxOfSize;
-    TextView tvTest;
 
     //@SuppressLint("MissingInflatedId")
     @Override
@@ -120,6 +120,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         getProductDetail();
         setSoldProduct();
         setFollowProduct();
+        setShopInfo();
         addToCart();
         set2Feedback();
         setOnClick();
@@ -130,12 +131,19 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 startActivity(gioHang);
             }
         });
+    }
 
-        //test
-        tvTest.setOnClickListener(new View.OnClickListener() {
+    private void setShopInfo() {
+        tv_name_of_shop.setText(String.valueOf(product.getStore().getName()));
+        tv_start_of_shop.setText(String.valueOf(Math.round(product.getStore().getRating()*10.0) /10.0));
+        Glide.with(getApplicationContext()).load(product.getStore().getStoreImage()).into(img_shopimage);
+        ln_shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ChiTietSanPhamActivity.this, StoreActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("store", product.getStore());
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -189,6 +197,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
 
     private void AnhXa() {
+        //linearlayout shop của sản phẩm
+        ln_shop = findViewById(R.id.ln_shop);
+        img_shopimage = findViewById(R.id.img_shopimage);
+        tv_name_of_shop = findViewById(R.id.tv_name_of_shop);
+        tv_start_of_shop = findViewById(R.id.tv_start_of_shop);
         //       searchView = (SearchView) findViewById(R.id.search_view);
         sizeSpinner = (Spinner) findViewById(R.id.size_spinner);
         txtSize = findViewById(R.id.txtsize);
@@ -239,7 +252,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         cartDao = CartDatabase.getInstance(this).cartDao();
         cartItemDao = CartItemDatabase.getInstance(this).cartItemDao();
 
-        tvTest = findViewById(R.id.tvTest);
 
     }
 

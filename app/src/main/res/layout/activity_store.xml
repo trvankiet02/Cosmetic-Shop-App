@@ -5,8 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StoreActivity"
-    android:orientation="vertical"
-    android:weightSum="10">
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+
+        <RelativeLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:background="@color/in_search_color"
+                android:iconifiedByDefault="true"
+                app:queryHint="Nhập từ khoá đề tìm kiếm">
+
+
+            </androidx.appcompat.widget.SearchView>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ivFavouriteProduct"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:background="@color/white"
+            android:src="@drawable/img_icon_favorite" />
+
+        <ImageView
+            android:id="@+id/ivCart"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:background="@color/white"
+            android:src="@drawable/img_icon_bag" />
+
+
+    </LinearLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +80,7 @@
             android:layout_marginStart="12dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Unilever Việt Nam ABCASDASDASDASDASDASDASDASD"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="25dp"
             android:textStyle="bold"
@@ -47,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="4.5"
+            android:text="0"
             android:textColor="@color/white"
             android:textSize="12dp"
             app:layout_constraintStart_toEndOf="@+id/ímStar"
@@ -133,35 +180,74 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:orientation="vertical"
-        android:weightSum="10">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="28">
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnSoldProduct"
+            <TextView
+                android:id="@+id/tv_SoldProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
-            <Button
-                android:id="@+id/btnNewProduct"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Bán chạy"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:background="@drawable/backbackground_boder"/>
+            <TextView
+                android:id="@+id/tv_NewProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Mới"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:background="@drawable/backbackground_boder"/>
+            <TextView
+                android:id="@+id/tv_AllProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Tất cả"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:background="@drawable/backbackground_boder"/>
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProduct"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="bottom"/>
+            android:weightSum="2"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:background="@color/background_muasam">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

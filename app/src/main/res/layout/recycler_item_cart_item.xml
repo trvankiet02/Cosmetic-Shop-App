@@ -119,6 +119,7 @@
                     android:id="@+id/txtPriceProduct"
                     android:layout_width="200dp"
                     android:layout_height="25dp"
+                    android:layout_weight="1"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:ellipsize="end"
@@ -132,16 +133,19 @@
                     android:id="@+id/btnGiam"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:background="@color/white"
+                    android:background="#f8f1e9"
                     app:srcCompat="@drawable/icon_tru" />
 
                 <TextView
                     android:id="@+id/count_product"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:text="1"
                     android:textColor="#000"
                     android:textStyle="bold"
+                    android:background="#e2ddd9"
                     android:textAlignment="center"
                     android:textSize="17dp" />
 
@@ -149,7 +153,8 @@
                     android:id="@+id/btnTang"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:background="@color/white"
+                    android:layout_marginEnd="25dp"
+                    android:background="#f8f1e9"
                     app:srcCompat="@drawable/icon_cong" />
             </LinearLayout>
         </LinearLayout>
