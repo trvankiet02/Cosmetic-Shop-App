@@ -101,13 +101,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     SliderView sliderView;
     SliderProductImageAdapter sliderProductImageAdapter;
     TextView addToCart;
-    ImageView img_icon_bag, imgLike;
+    ImageView img_icon_bag, imgLike, img_back;
     SharedPrefManager sharedPrefManager;
     ProgressDialog progressDialog;
     boolean isLiked;
     DecimalFormat df = new DecimalFormat("#.#");
-    CartDAO cartDao;
-    CartItemDAO cartItemDao;
     int quantityMaxOfSize;
 
     //@SuppressLint("MissingInflatedId")
@@ -125,6 +123,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         addToCart();
         set2Feedback();
         setOnClick();
+        setBtnBack();
         GioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,6 +198,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
     private void AnhXa() {
         //linearlayout shop của sản phẩm
+        img_back = findViewById(R.id.img_back);
         ln_shop = findViewById(R.id.ln_shop);
         img_shopimage = findViewById(R.id.img_shopimage);
         tv_name_of_shop = findViewById(R.id.tv_name_of_shop);
@@ -250,10 +250,15 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         setProgressDialog();
 
-        cartDao = CartDatabase.getInstance(this).cartDao();
-        cartItemDao = CartItemDatabase.getInstance(this).cartItemDao();
 
-
+    }
+    private void setBtnBack(){
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void setProgressDialog() {

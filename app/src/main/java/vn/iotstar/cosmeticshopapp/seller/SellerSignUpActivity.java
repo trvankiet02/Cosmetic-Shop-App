@@ -118,6 +118,9 @@ public class SellerSignUpActivity extends AppCompatActivity {
                                 store = response.body().getBody();
                                 Toast.makeText(SellerSignUpActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SellerSignUpActivity.this, SellerHomeActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("store", response.body().getBody());
+                                intent.putExtras(bundle);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(SellerSignUpActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();

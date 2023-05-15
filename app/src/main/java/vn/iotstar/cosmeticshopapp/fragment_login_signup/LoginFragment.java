@@ -2,6 +2,7 @@ package vn.iotstar.cosmeticshopapp.fragment_login_signup;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -88,6 +89,7 @@ public class LoginFragment extends Fragment {
                             Intent mainActivity = new Intent(getContext(), MainActivity.class);
                             progressDialog.dismiss();
                             startActivity(mainActivity);
+                            ((Activity) getContext()).finish();
                         } else {
                             progressDialog.dismiss();
                             Toast.makeText(getContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();

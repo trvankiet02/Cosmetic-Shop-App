@@ -60,15 +60,12 @@ public class MoiFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if (query.equals("")){
-                    productHomeAdapter.updateProduct(products);
-                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterListener(newText);
+                productHomeAdapter.getFilter().filter(newText);
                 return true;
             }
         });

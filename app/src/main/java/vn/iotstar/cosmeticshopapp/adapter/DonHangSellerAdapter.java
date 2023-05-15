@@ -122,6 +122,8 @@ public class DonHangSellerAdapter extends RecyclerView.Adapter<DonHangSellerAdap
                                     Toast.makeText(context, "Xác nhận đơn hàng thành công", Toast.LENGTH_SHORT).show();
                                     o.setStatus(2);
                                     notifyItemChanged(holder.getAdapterPosition());
+                                    array.remove(o);
+                                    notifyDataSetChanged();
                                 } else {
                                     Toast.makeText(context, "Xác nhận đơn hàng thất bại", Toast.LENGTH_SHORT).show();
                                 }
@@ -152,6 +154,8 @@ public class DonHangSellerAdapter extends RecyclerView.Adapter<DonHangSellerAdap
                                     Toast.makeText(context, "Chuyển hàng cho đơn vị vận chuyển", Toast.LENGTH_SHORT).show();
                                     o.setStatus(3);
                                     notifyItemChanged(holder.getAdapterPosition());
+                                    array.remove(o);
+                                    notifyDataSetChanged();
                                 } else {
                                     Toast.makeText(context, "Chuyển đơn hàng thất bại", Toast.LENGTH_SHORT).show();
                                 }

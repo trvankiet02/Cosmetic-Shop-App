@@ -30,13 +30,16 @@ import vn.iotstar.cosmeticshopapp.model.Address;
 import vn.iotstar.cosmeticshopapp.model.AddressResponse;
 import vn.iotstar.cosmeticshopapp.model.Category;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
+import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 public class DiaChiAdapter extends RecyclerView.Adapter<DiaChiAdapter.MyViewHolder>{
     Context context;
     List<Address> array;
+    SharedPrefManager sharedPrefManager;
     public DiaChiAdapter(Context context, List<Address> array) {
         this.context = context;
         this.array = array;
+        sharedPrefManager = new SharedPrefManager(context);
     }
     @NonNull
     @Override
@@ -69,6 +72,7 @@ public class DiaChiAdapter extends RecyclerView.Adapter<DiaChiAdapter.MyViewHold
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()){
+                            sharedPrefManager.deleteAddress(address);
                             holder.progressDialog.dismiss();
                             array.remove(position);
                             notifyItemRemoved(position);

@@ -46,7 +46,7 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
     LinearLayout ln_chondiachi, ln_themdiachi;
     TextView tvHoTen, tvSoDienThoai, tvDiaChi;
     TextView tvsophieugiamgia, tvtamtinh, tvchietkhau, tvtongcongtienthanhtoan, tvPhiVanChuyen, tvDamBaoVanChuyen, tvpgg;
-    TextView tvtieptucthanhtoan, tvDeliveryName, tvPayMethodName;
+    TextView tvtieptucthanhtoan, tvDeliveryName, tvPayMethodName, tv_themdiachi;
     RadioButton rb_giaohangtieuchuan;
     Switch switchdambaovanchuyen;
     XacNhanShopAdapter xacNhanShopAdapter;
@@ -214,7 +214,7 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
 
     private void setSpinner() {
 
-        apiService.getAddressByUserId(sharedPrefManager.getUser().getId()).enqueue(new Callback<ListAddressResponse>() {
+        /*apiService.getAddressByUserId(sharedPrefManager.getUser().getId()).enqueue(new Callback<ListAddressResponse>() {
 
             @Override
             public void onResponse(Call<ListAddressResponse> call, Response<ListAddressResponse> response) {
@@ -258,7 +258,40 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
             public void onFailure(Call<ListAddressResponse> call, Throwable t) {
 
             }
+        });*/
+        addressList = sharedPrefManager.getUser().getAddresses();
+        List<String> addresses = new ArrayList<>();
+
+        for (Address address : addressList) {
+            addresses.add("Tên người nhận: " + address.getFirstName() + " " + address.getLastName()
+                    + "\nSố điện thoại: " + address.getPhone()
+                    + "\nĐịa chỉ: " + address.getAddress());
+            if (address.getIsDefault()) {
+                tvHoTen.setText(address.getFirstName() + " " + address.getLastName());
+                tvSoDienThoai.setText(address.getPhone());
+                tvDiaChi.setText(address.getAddress());
+            }
+        }
+        ArrayAdapter<String> addressArrayAdapter = new ArrayAdapter<>(XacNhanDatHangActivity.this, R.layout.my_custom_spinner_dropdown_item, addresses);
+        addressSpinner.setAdapter(addressArrayAdapter);
+
+
+        addressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedAddress = (String) parent.getItemAtPosition(position);
+                addressId = addresses.indexOf(selectedAddress);
+                tvHoTen.setText(addressList.get(voucherId).getFirstName() + " " + addressList.get(voucherId).getLastName());
+                tvSoDienThoai.setText(addressList.get(voucherId).getPhone());
+                tvDiaChi.setText(addressList.get(voucherId).getAddress());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
+
     }
     private void setDeliverySpinner(){
         apiService.getAllDelivery().enqueue(new Callback<DeliveryListResponse>() {
@@ -297,9 +330,19 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
             }
         });
     }
+    private void setBtnThemDiaChi(){
+        tv_themdiachi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(XacNhanDatHangActivity.this, ThemSuaDiaChiActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 
 
     private void anhXa() {
+        tv_themdiachi = findViewById(R.id.tv_themdiachi);
         addressSpinner = findViewById(R.id.address_spinner);
         ln_chondiachi = findViewById(R.id.ln_chondiachi);
         ln_themdiachi = findViewById(R.id.ln_themdiachi);
@@ -348,14 +391,18 @@ public class XacNhanDatHangActivity extends AppCompatActivity implements XacNhan
                     }
                 }
                 Integer totalPrice = Integer.parseInt(tvtongcongtienthanhtoan.getText().toString());
-                Log.d("TAG", sharedPrefManager.getUser().getId()
+                /*Log.d("TAG", sharedPrefManager.getUser().getId()
                         + "\n" + addressList.get(addressId).getFirstName() + " " + addressList.get(addressId).getLastName()
                         + "\n" + deliveryId
                         + "\n" + addressList.get(addressId).getAddress()
                         + "\n" + addressList.get(addressId).getPhone()
                         + "\n" + voucherId
                         + "\n" + tvtongcongtienthanhtoan.getText().toString()
-                        + "\n" + payMethodId);
+                        + "\n" + payMethodId);*/
+                if (tvDiaChi.getText().toString().equals("") || tvHoTen.getText().toString().equals("") || tvSoDienThoai.getText().toString().equals("")) {
+                    Toast.makeText(XacNhanDatHangActivity.this, "Vui lòng tạo địa chỉ nhận hàng", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if (deliveryId == 0) { deliveryId = deliveryList.get(0).getId(); }
                 Log.d("TAG", "onClick: "  + voucherId);
                 if (voucherId == 0) { voucherId = voucherList.get(0).getId();}

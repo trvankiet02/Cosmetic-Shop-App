@@ -55,6 +55,7 @@ public class QuanLyTaiKhoanCuaToiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(QuanLyTaiKhoanCuaToiActivity.this, ChangePasswordActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         img_change_avata.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +63,7 @@ public class QuanLyTaiKhoanCuaToiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(QuanLyTaiKhoanCuaToiActivity.this, ChangeAvataActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         lnSoDienThoai.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +71,7 @@ public class QuanLyTaiKhoanCuaToiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(QuanLyTaiKhoanCuaToiActivity.this, AddPhoneActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         /*lnEmail.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +86,7 @@ public class QuanLyTaiKhoanCuaToiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(QuanLyTaiKhoanCuaToiActivity.this, ChangeUsernameActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

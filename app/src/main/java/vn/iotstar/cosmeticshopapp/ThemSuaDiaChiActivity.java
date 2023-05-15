@@ -11,12 +11,16 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import vn.iotstar.cosmeticshopapp.api.APIService;
 import vn.iotstar.cosmeticshopapp.model.Address;
 import vn.iotstar.cosmeticshopapp.model.AddressResponse;
+import vn.iotstar.cosmeticshopapp.model.LoginSignupResponse;
+import vn.iotstar.cosmeticshopapp.model.User;
 import vn.iotstar.cosmeticshopapp.retrofit.RetrofitCosmeticShop;
 import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
@@ -121,11 +125,13 @@ public class ThemSuaDiaChiActivity extends AppCompatActivity {
                 String diaChi = edtDiaChi.getText().toString();
                 boolean isDefault = isMacDinh;
                 Address newAddress = new Address(address.getId(), ho, ten, sdt, diaChi, isDefault, "", "");
-                apiService.addOrUpdateAddress(newAddress, sharedPrefManager.getUser().getId()).enqueue(new Callback<AddressResponse>() {
+                apiService.addOrUpdateAddress(newAddress, sharedPrefManager.getUser().getId()).enqueue(new Callback<LoginSignupResponse>() {
                     @Override
-                    public void onResponse(Call<AddressResponse> call, Response<AddressResponse> response) {
+                    public void onResponse(Call<LoginSignupResponse> call, Response<LoginSignupResponse> response) {
                         if (response.isSuccessful()){
                             Intent intent = new Intent(ThemSuaDiaChiActivity.this, DiaChiCuaToiActivity.class);
+                            sharedPrefManager.deleteUser();
+                            sharedPrefManager.setUser(response.body().getBody());
                             startActivity(intent);
                             finish();
                         } else {
@@ -134,7 +140,7 @@ public class ThemSuaDiaChiActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<AddressResponse> call, Throwable t) {
+                    public void onFailure(Call<LoginSignupResponse> call, Throwable t) {
                         Log.e("TAG", "onFailure: " + t.getMessage());
                     }
                 });

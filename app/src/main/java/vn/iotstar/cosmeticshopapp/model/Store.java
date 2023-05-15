@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Store implements Serializable
 {
+
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -43,7 +44,7 @@ public class Store implements Serializable
     @SerializedName("ewallet")
     @Expose
     private Integer ewallet;
-    private final static long serialVersionUID = 3083049112563328250L;
+    private final static long serialVersionUID = 2002024235378252062L;
 
     public Integer getId() {
         return id;

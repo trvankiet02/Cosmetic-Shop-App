@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -27,11 +30,12 @@ import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.Product;
 import vn.iotstar.cosmeticshopapp.model.Style;
 
-public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
     Context context;
     List<Product> array;
+    List<Product> defaultArray;
     private boolean isLoading = false;
     private LoadMoreListener loadMoreListener;
     public interface LoadMoreListener {
@@ -40,6 +44,7 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public ProductHomeAdapter(Context context, List<Product> array) {
         this.context = context;
         this.array = array;
+        defaultArray = array;
     }
     public void updateProduct(List<Product> productList) {
         this.array = productList;
@@ -47,6 +52,37 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
     public void setLoadMoreListener(LoadMoreListener loadMoreListener) {
         this.loadMoreListener = loadMoreListener;
+    }
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                FilterResults results = new FilterResults();
+                List<Product> filterArray = new ArrayList<>();
+
+                if (charSequence == null || charSequence.length() == 0) {
+                    results.count = defaultArray.size();
+                    results.values = defaultArray;
+                } else {
+                    for (Product product : array) {
+                        if (product.getName().toLowerCase().contains(charSequence.toString().toLowerCase())) {
+                            filterArray.add(product);
+                        }
+                    }
+                    results.count = filterArray.size();
+                    results.values = filterArray;
+                }
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                array = (List<Product>) filterResults.values;
+                notifyDataSetChanged();
+            }
+
+        };
     }
     @NonNull
     @Override
@@ -105,7 +141,7 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 bundle.putSerializable("product", product);
                 chitiet.putExtras(bundle);
                 context.startActivity(chitiet);
-                ((Activity) context).finish();
+                ((Activity)context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }

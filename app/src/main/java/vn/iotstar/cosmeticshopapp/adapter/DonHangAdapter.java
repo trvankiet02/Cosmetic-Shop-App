@@ -101,6 +101,10 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                     public void onResponse(Call<SingleOrderResponse> call, Response<SingleOrderResponse> response) {
                         holder.progressDialog.dismiss();
                         if (response.isSuccessful()) {
+                            order.setStatus(0);
+                            notifyItemChanged(holder.getAdapterPosition());
+                            array.remove(order);
+                            notifyDataSetChanged();
                             Toast.makeText(context.getApplicationContext(), "Hủy đơn hàng thành công", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(context.getApplicationContext(), ChiTietDonHangActivity.class);
                             intent.putExtra("order", response.body().getBody());
@@ -180,6 +184,10 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                             public void onResponse(Call<SingleOrderResponse> call, Response<SingleOrderResponse> response) {
                                 holder.progressDialog.dismiss();
                                 if (response.isSuccessful() && response.code() == 200){
+                                    o.setStatus(4);
+                                    notifyItemChanged(holder.getAdapterPosition());
+                                    array.remove(o);
+                                    notifyDataSetChanged();
                                     Toast.makeText(context, "Đã nhận đơn hàng", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(context.getApplicationContext(), ChiTietDonHangActivity.class);
                                     intent.putExtra("order", response.body().getBody());

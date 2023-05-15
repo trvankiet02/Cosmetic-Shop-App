@@ -70,7 +70,7 @@ public class DiaChiCuaToiActivity extends AppCompatActivity {
     }
 
     private void setRvDiaChi() {
-        apiService.getAddressByUserId(sharedPrefManager.getUser().getId()).enqueue(new Callback<ListAddressResponse>() {
+        /*apiService.getAddressByUserId(sharedPrefManager.getUser().getId()).enqueue(new Callback<ListAddressResponse>() {
             @Override
             public void onResponse(Call<ListAddressResponse> call, Response<ListAddressResponse> response) {
                 if (response.isSuccessful()){
@@ -87,7 +87,11 @@ public class DiaChiCuaToiActivity extends AppCompatActivity {
             public void onFailure(Call<ListAddressResponse> call, Throwable t) {
                 Log.e("TAG", "onFailure: " + t.getMessage() );
             }
-        });
+        });*/
+        addressList = sharedPrefManager.getUser().getAddresses();
+        diaChiAdapter = new DiaChiAdapter(getApplicationContext(), addressList);
+        rvDiaChi.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, true));
+        rvDiaChi.setAdapter(diaChiAdapter);
     }
 
     private void anhXa() {

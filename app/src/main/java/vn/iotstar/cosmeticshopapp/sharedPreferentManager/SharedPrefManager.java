@@ -95,6 +95,27 @@ public class SharedPrefManager {
         editor.apply();
         editor.commit();
     }
+    public void deleteAddress(Address address) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        User user = getUser();
+        for (Address add: user.getAddresses()) {
+            if (add.getId() == address.getId()) {
+                user.getAddresses().remove(add);
+                break;
+            }
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_USER_ADDRESSES, toAddressesJson(user.getAddresses()));
+        editor.commit();
+    }
+    public void addAddress(Address address){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        User user = getUser();
+        user.getAddresses().add(address);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_USER_ADDRESSES, toAddressesJson(user.getAddresses()));
+        editor.commit();
+    }
 
     public User getUser() {
 

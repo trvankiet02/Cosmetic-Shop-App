@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,12 +14,14 @@ import com.bumptech.glide.Glide;
 
 import vn.iotstar.cosmeticshopapp.R;
 import vn.iotstar.cosmeticshopapp.model.Store;
+import vn.iotstar.cosmeticshopapp.sharedPreferentManager.SharedPrefManager;
 
 public class SellerHomeActivity extends AppCompatActivity {
     LinearLayout lnChuaXacNhan, lnDaXacNhan, lnDangVanChuyen, lnDaNhan, lnAllOrder;
     ImageView ivStoreImage;
     TextView tvStoreName, tvStar,tvUserFollow, tvEmail, tv_QuanLySanPham;
     Store store;
+    SharedPrefManager sharedPrefManager = new SharedPrefManager(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +30,21 @@ public class SellerHomeActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             store = (Store) bundle.getSerializable("store");
+            sharedPrefManager.setStoreId(store.getId());
+            Log.e("TAG", "onCreate: " + sharedPrefManager.getStoreId());
             getStoreInfo();
         }
         setBtnXyLyDonHang();
+        tv_QuanLySanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), QuanLySanPhamActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("store", store);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
     private void toFragment(Integer fragmentId){
         Intent intent = new Intent(getApplicationContext(), XuLyDonHangSellerActivity.class);
